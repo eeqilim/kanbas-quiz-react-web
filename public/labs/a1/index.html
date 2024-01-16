@@ -6,11 +6,60 @@
     <title>Lab 1</title>
 </head>
 <body>
-    <a href="../index.html">Back to home</a>
+    <a href="../../index.html">Back to home</a>
 
     <h1>Lab1</h1>
     <br>
 
+    <h2> - Forms</h2>
+
+    <form>
+      <br />
+      Username:
+      <input
+        type="text"
+        readonly
+        value="jane"
+        title="Please enter your username"
+        placeholder="john"
+      />
+      <label>
+        Password:
+        <input type="password" />
+      </label>
+      <br />
+      Salary:
+      <input min="100000" max="200000" type="number" />
+      <br />
+      Date of Birth:
+      <input min="2023-01-05" max="2023-01-23" value="2023-01-13" type="date" />
+      <input type="" <br />
+      Color: <input type="color" />
+      <br />
+      <input name="fav-color" id="color-yellow" type="radio" />
+      <label for="color-yellow">Yellow</label>
+      <label> <input name="fav-color" type="radio" />Blue </label>
+      <input name="fav-color" type="radio" />Red
+      <br />
+      Favorite Genre:
+      <input name="fav-genre" value="HORROR" type="checkbox" />Horror
+      <input name="fav-genre" value="COMEDY" type="checkbox" />Comedy
+      <input name="fav-genre" value="SCIFI" type="checkbox" />SciFi
+      <br />
+      Favorite Books:
+      <select>
+        <option value="BOOK1">Dune</option>
+        <option value="BOOK2">LTR</option>
+        <option value="BOOK3">Book 3</option>
+      </select>
+      <select multiple>
+        <option value="BOOK1">Dune</option>
+        <option value="BOOK2">LTR</option>
+        <option value="BOOK3">Book 3</option>
+      </select>
+    </form>
+
+    <br>
     <h2> - Headings</h2>
     Text documents are often broken up into several sections and subsections. 
     Each section is usually prefaced with a short title or heading that attempts to summarize the topic of the section it precedes.

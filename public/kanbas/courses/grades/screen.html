@@ -73,35 +73,62 @@
                 </td>
 
                 <td>
-
-                    <select>
-                        <option value="gradebook">Gradebook</option>
-                    </select>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select>
+                                        <option value="gradebook">Gradebook</option>
+                                        <option>Change Gradebook View</option>
+                                        <option>Traditional Gradebook</option>
+                                        <option>Individual View</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="button">Shortcuts</button>
+                                    <button type="button">Import</button>
                 
-                    <button type="button">Import</button>
+                                    <select>
+                                        <option value="export">Export</option>
+                                    </select>
                 
-                    <select>
-                        <option value="export">Export</option>
-                    </select>
+                                    <button type="button">Configure</button>
+                                </td>
+                            </tr>
                 
-                    <button type="button">Configure</button>
-                    
-                    <form>
-                        <label for="search-student-name"><h3>Student Names</h3></label>
-                        <input typ="text" id="search-student-name" placeholder="Search Students" title="Search by student name">
-                        
-                        <label for="search-assignment-name"><h3>Assignment Names</h3></label>
-                        <input type="text" id="search-assignment-name" placeholder="Search Assignments" title="Search by assignment name">
+                            <tr>
+                                <td>
+                                    <label for="search-student-name"><h3>Student Names</h3></label>
+                                    <input typ="text" id="search-student-name" placeholder="Search Students" title="Search by student name"/>
+                                    <br/>
+                                    <select>
+                                        <option>John Doe</option>
+                                        <option>Jane Doe</option>
+                                        <option>Alice Doe</option>
+                                        <option>Charlie Doe</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <label for="search-assignment-name"><h3>Assignment Names</h3></label>
+                                    <input type="text" id="search-assignment-name" placeholder="Search Assignments" title="Search by assignment name"/>
+                                    <br/>
+                                    <select>
+                                        <option>A1</option>
+                                        <option>A2</option>
+                                        <option>A3</option>
+                                        <option>A4</option>
+                                    </select>
+                                </td>
+                            </tr>
                 
-                        <br><br>
+                        </tbody>
+                    </table>
+                    <button type="button">Apply Filters</button>
                 
-                        <button type="button">Apply Filters</button>
-                    </form>
-                    <br>
-                    
+                    <br/><br/>
                 
                     <table border="1" width="100%">
-                
+                                
                         <thead>
                             <tr>
                                 <th>Student Name</th>
@@ -302,9 +329,7 @@
                         </thead>
                 
                     </table>
-
-
-
+                
                 </td>
             </tr>
 
