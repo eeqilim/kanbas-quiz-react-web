@@ -1,0 +1,20 @@
+.wd-kanbas-dashboard-card-col {
+    width: 270px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.wd-kanbas-dashboard-card-img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.wd-kanbas-dashboard-card-col .card-text {
+    margin-bottom: 0px;
+}
+
+.wd-kanbas-dashboard-card-col .card-title {
+    text-decoration: none; 
+    color: navy; 
+    font-weight: bold;
+}

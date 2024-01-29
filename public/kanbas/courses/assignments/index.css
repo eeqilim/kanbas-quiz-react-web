@@ -1,0 +1,81 @@
+.red-button {
+    background-color: red !important;
+    color: white !important;
+}
+
+.top-row-buttons .btn {
+    background-color: gainsboro;
+    border: 1px solid gray;
+
+}
+.top-row-buttons i {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.top-row-buttons {
+    padding-top: 16px;
+}
+
+.wd-courses-assignments,
+.wd-courses-assignments * {
+  border-radius: 0%;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.wd-courses-assignments {
+  margin: 5px;
+}
+
+.wd-courses-assignments > li {
+  background-color: lightgray;
+  border: 1px solid gray !important;
+  border-left: none !important;
+}
+
+.wd-courses-assignments > li > div {
+  padding: 6px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-left: 1px solid gray !important;
+
+}
+
+.wd-courses-assignments > li > .collapse > ul > li {
+  padding: 5px;
+  border-top: 1px solid gray !important;
+  border-left: 3px solid green;
+}
+
+.wd-courses-assignments > li {
+  margin-bottom: 20px;
+}
+
+.wd-courses-assignments-grade-percentage {
+    border: 1px solid gray;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+i {
+    vertical-align: middle;
+}
+
+.text-success {
+    color: green;
+}
+
+.wd-courses-assignments-minor-text {
+    font-size: 14px;
+    color: gray;
+}
+
+
+.wd-courses-assignments-icon-link {
+    color: black;
+    text-decoration: none;
+}

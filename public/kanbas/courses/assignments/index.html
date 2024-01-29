@@ -4,143 +4,393 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css"/>
+    <script src="/libs/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="/kanbas/styles.css"/>
+    <link rel="stylesheet" href="/kanbas/courses/assignments/index.css"/>
+
+
 </head>
 <body>
+    <div>
+        
+        <div class="d-flex flex-row justify-content-between ps-3 pe-3 top-row-buttons">
+            <div class="w-25">
+                <input class="form-control" type="text" placeholder="Search for Assignments" title="Search by assignment name">
+            </div>
+            <div>
+                <a class="btn"><i class="fa fa-plus" aria-hidden="true"></i>Group</a>
+                <a class="btn red-button"><i class="fa fa-plus" aria-hidden="true"></i>Assignment</a>
+                <a class="btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+            </div>
+            
+        </div>
+        <hr/>
 
-    <input type="text" placeholder="Search for Assignments" title="Search by assignment name">
+        <ul class="list-group wd-courses-assignments">
 
-    <button type="button">+ Group</button>
-    <button type="button">+ Assignment</button>
+            <li class="list-group-item">
+                <div>
+                    <i class="fa fa-ellipsis-v me-3 ms-2"></i>
+                    <a class="btn me-3" data-bs-toggle="collapse" href="#collapse-assignments-list" role="button" aria-expanded="false" aria-controls="collapse-assignments-list">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </a>
+                    <span class="fw-bold">ASSIGNMENTS</span>
+                    <span class="float-end me-3 ms-2">
+                        <div class="rounded-pill wd-courses-assignments-grade-percentage d-inline">40% of Total</div>
+                        <a href="#" class="btn wd-courses-assignments-icon-link"><i class="fa fa-plus ms-2"></i></a>
+                        <a href="#" class="btn wd-courses-assignments-icon-link"><i class="fa fa-ellipsis-v ms-2" aria-hidden="true"></i></a>
+                    </span>
+                </div>
+                <div class="collapse show p-0" id="collapse-assignments-list">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">A1 SETUP</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Week 0 - SETUP - Week starting on Monday September 5th (9/5/2022) Module |</div>
+                                    <div class="wd-courses-assignments-minor-text"><b>Due</b> Sep 18, 2022, at 11:59 pm | 100 pts</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
 
-    <select id="edit-assignment-dates">
-        <option value="edit-assignment-dates">Edit Assignment Dates</option>
-        <option value="assignment-group-weight">Assignment Groups Weight</option>
-        <option value="gradescope-1.3">Gradescope 1.3</option>
-        <option value="commons-favorites">Commons Favorites</option>
-    </select>
+                            </div>
+                        </li>
 
-    <hr>
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">A2 HTML</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Week 1 - HTML - Week starting on Monday September 12th (9/12/2022) Module |</div>
+                                    <div class="wd-courses-assignments-minor-text"><b>Due</b> Sep 25, 2022, at 11:59 pm | 100 pts</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">A3 CSS</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Week 2 - CSS - Week starting on Monday September 19th (9/19/2022) Module |</div>
+                                    <div class="wd-courses-assignments-minor-text"><b>Due</b> Oct 2, 2022, at 11:59 pm | 100 pts</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">A4 BOOTSTRAP</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Week 3 - Bootstrap - Week starting on Monday September 26th (9/26/2022) Module |</div>
+                                    <div class="wd-courses-assignments-minor-text"><b>Due</b> Oct 10, 2022, at 11:59 pm | 100 pts</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">A5 JAVASCRIPT</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Week 4 - Javascript - Week starting on Monday October 3rd (10/3/2022) Module |</div>
+                                    <div class="wd-courses-assignments-minor-text"><b>Due</b> Oct 16, 2022, at 11:59 pm | 100 pts</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">A6 REACT</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Week 5 - React & Routing - Week starting on Monday October 10th (10/10/2022) Module |</div>
+                                    <div class="wd-courses-assignments-minor-text"><b>Due</b> Oct 23, 2022, at 11:59 pm | 100 pts</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div>
+                    <i class="fa fa-ellipsis-v me-3 ms-2"></i>
+                    <a class="btn me-3" data-bs-toggle="collapse" href="#collapse-quizzes-list" role="button" aria-expanded="false" aria-controls="collapse-quizzes-list">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </a>
+                    <span class="fw-bold">QUIZZES</span>
+                    <span class="float-end me-3 ms-2">
+                        <div class="rounded-pill wd-courses-assignments-grade-percentage d-inline">10% of Total</div>
+                        <a href="#" class="wd-courses-assignments-icon-link"><i class="fa fa-plus ms-2"></i></a>
+                        <a href="#" class="wd-courses-assignments-icon-link"><i class="fa fa-ellipsis-v ms-2" aria-hidden="true"></i></a>
+                    </span>
+                </div>
+                <div class="collapse show p-0" id="collapse-quizzes-list">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Q1 - HTML</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Q2 - CSS</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Q3 - JS, ES6</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Q4 - NODE</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Q5 - MONGO</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+                    </ul>   
+                </div>  
+            </li>   
+            
+            <li class="list-group-item">
+                <div>
+                    <i class="fa fa-ellipsis-v me-3 ms-2"></i>
+                    <a class="btn me-3" data-bs-toggle="collapse" href="#collapse-exams-list" role="button" aria-expanded="false" aria-controls="collapse-exams-list">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </a>
+                    <span class="fw-bold">EXAMS</span>
+                    <span class="float-end me-3 ms-2">
+                        <div class="rounded-pill wd-courses-assignments-grade-percentage d-inline">20% of Total</div>
+                        <a href="#" class="wd-courses-assignments-icon-link"><i class="fa fa-plus ms-2"></i></a>
+                        <a href="#" class="wd-courses-assignments-icon-link"><i class="fa fa-ellipsis-v ms-2" aria-hidden="true"></i></a>
+                    </span>
+                </div>
+                <div class="collapse show p-0" id="collapse-exams-list">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Midterm</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Final</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
+
+                            </div>
+                        </li>
 
 
-    <h2 style="display: inline">ASSIGNMENTS 40% of Total</h2>
-    <select>
-        <option value="edit">Edit</option>
-        <option value="speed-grader">Speed Grader</option>
-        <option value="duplicate">Duplicate</option>
-        <option value="delete">Delete</option>
-        <option value="move-to">Move To...</option>
-        <option value="send-to">Send To...</option>
-        <option value="copy-to">Copy To...</option>
-        <option value="share-to-commons">Share to Commons</option>
-    </select>
-
-    <ul>
-        <li>    
-            <a href="/kanbas/courses/assignments/edit/screen.html">A1 - ENV + HTML</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="/kanbas/courses/assignments/edit/screen.html">A2 - CSS + BOOTSTRAP</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="/kanbas/courses/assignments/edit/screen.html">A3 - JS + REACT</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="/kanbas/courses/assignments/edit/screen.html">A4 - STATE + REDUX</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="/kanbas/courses/assignments/edit/screen.html">A5 - NODE + SESSION</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="/kanbas/courses/assignments/edit/screen.html">A6 - MONGO + MONGOOSE</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-    </ul>
+                    </ul>
+                </div>
+            </li>   
 
 
-    <h2 style="display: inline">QUIZZES 10% of Total</h2>
-    <select>
-        <option value="edit">Edit</option>
-        <option value="speed-grader">Speed Grader</option>
-        <option value="duplicate">Duplicate</option>
-        <option value="delete">Delete</option>
-        <option value="move-to">Move To...</option>
-        <option value="send-to">Send To...</option>
-        <option value="copy-to">Copy To...</option>
-        <option value="share-to-commons">Share to Commons</option>
-    </select>
+            <li class="list-group-item">
+                <div>
+                    <i class="fa fa-ellipsis-v me-3 ms-2"></i>
+                    <a class="btn me-3" data-bs-toggle="collapse" href="#collapse-projects-list" role="button" aria-expanded="false" aria-controls="collapse-projects-list">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </a>
+                    <span class="fw-bold">PROJECTS</span>
+                    <span class="float-end me-3 ms-2">
+                        <div class="rounded-pill wd-courses-assignments-grade-percentage d-inline">30% of Total</div>
+                        <a href="#" class="wd-courses-assignments-icon-link"><i class="fa fa-plus ms-2"></i></a>
+                        <a href="#" class="wd-courses-assignments-icon-link"><i class="fa fa-ellipsis-v ms-2" aria-hidden="true"></i></a>
+                        
+                    </span>
+                </div>
+                <div class="collapse show p-0" id="collapse-projects-list">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                
+                                <i class="fa fa-ellipsis-v me-2 ms-2"></i>
+                                <i class="fa fa-pencil-square-o me-3 ms-2 text-success"></i>
+                                <div class="flex-fill">
+                                    <a href="/kanbas/courses/assignments/edit/screen.html" class="wd-courses-assignments-icon-link">
+                                        <div class="fw-bold">Project</div>
+                                    </a>
+                                    <div class="wd-courses-assignments-minor-text">Multiple Modules |</div>
+                                    <div class="wd-courses-assignments-minor-text">Not available yet</div>
+                                </div>
+                                <span class="ms-auto">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <a href="#" class="btn"><i class="fa fa-ellipsis-v ms-2 me-2"></i></a>
+                                </span> 
 
-    <ul>
-        <li>    
-            <a href="#">Q1 - HTML</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="#">Q2 - CSS</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="#">Q3 - JS, ES6</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="#">Q4 - NODE</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="#">Q5 - MONGO</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-    </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
+        </ul>
 
-    <h2 style="display: inline">EXAMS 20% of Total</h2>
-    <select>
-        <option value="edit">Edit</option>
-        <option value="speed-grader">Speed Grader</option>
-        <option value="duplicate">Duplicate</option>
-        <option value="delete">Delete</option>
-        <option value="move-to">Move To...</option>
-        <option value="send-to">Send To...</option>
-        <option value="copy-to">Copy To...</option>
-        <option value="share-to-commons">Share to Commons</option>
-    </select>
-
-    <ul>
-        <li>    
-            <a href="#">Midterm</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-        <li>    
-            <a href="#">Final</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-    </ul>
-
-
-
-    <h2 style="display: inline">PROJECTS 30% of Total</h2>
-    <select>
-        <option value="edit">Edit</option>
-        <option value="speed-grader">Speed Grader</option>
-        <option value="duplicate">Duplicate</option>
-        <option value="delete">Delete</option>
-        <option value="move-to">Move To...</option>
-        <option value="send-to">Send To...</option>
-        <option value="copy-to">Copy To...</option>
-        <option value="share-to-commons">Share to Commons</option>
-    </select>
-
-    <ul>
-        <li>    
-            <a href="#">Project</a><br>
-            <a href="#">Multiple Modules</a> | Not available yet
-        </li>
-    </ul>
-
+    </div>
 </body>
 </html>

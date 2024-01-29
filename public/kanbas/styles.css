@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body * {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.gray-buttons {
+    background-color: gainsboro;
+    color: black;
+    border: 1px solid black;
+}
+.red-links {
+    color: red;
+    text-decoration: none;
+}
+
+.top-hidden-nav-container {
+    background-color: black;
+    color: white;
+}
+
+.top-hidden-nav-container a {
+    color: white;
+    text-decoration: none;
+}

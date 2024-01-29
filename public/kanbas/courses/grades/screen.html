@@ -3,339 +3,734 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kanbas Courses Grades</title>
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css"/>
+    <script src="/libs/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="/kanbas/styles.css" />
+    <link rel="stylesheet" href="/kanbas/navigation/index.css" />
+    <link rel="stylesheet" href="/kanbas/courses/navigation/index.css">
+    <link rel="stylesheet" href="/kanbas/courses/grades/index.css">
+
 </head>
 <body>
     
-    <table>
-        <tbody>
+    <!-- LeftMost main navigation float -->
+    <div class="d-none d-md-block">
+        <ul class="nav wd-kanbas-navigation">
 
-            <tr valign="top">
-                <td>
-                    <ul>
-                        <li><a href="/kanbas/account/profile/screen.html">Account</a></li>
-                
-                        <li><a href="#">Dashboard</a></li>
-                
-                        <li><a href="/kanbas/courses/home/screen.html">Courses</a></li>
-                
-                        <li><a href="#">Calendar</a></li>
-                
-                        <li><a href="#">Inbox</a></li>
-                
-                        <li><a href="#">History</a></li>
-                
-                        <li><a href="#">Studio</a></li>
-                
-                        <li><a href="#">Commons</a></li>
-                        
-                        <li><a href="#">Help</a></li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li><a href="/kanbas/courses/home/screen.html">Home</a></li>
-                
-                        <li><a href="#">Modules</a></li>
-                        
-                        <li><a href="#">Piazza</a></li>
-                        
-                        <li><a href="#">Zoom Meetings</a></li>
-                        
-                        <li><a href="/kanbas/courses/assignments/screen.html">Assignments</a></li>
-                        
-                        <li><a href="#">Quizzes</a></li>
-                        
-                        <li><a href="/kanbas/courses/grades/screen.html">Grades</a></li>
-                        
-                        <li><a href="#">People</a></li>
-                        
-                        <li><a href="#">Panopto Video</a></li>
-                        
-                        <li><a href="#">Discussions</a></li>
-                        
-                        <li><a href="#">Announcements</a></li>
-                        
-                        <li><a href="#">Pages</a></li>
-                        
-                        <li><a href="#">Files</a></li>
-                        
-                        <li><a href="#">Rubrics</a></li>
-                        
-                        <li><a href="#">Outcomes</a></li>
-                        
-                        <li><a href="#">Colleborations</a></li>
-                        
-                        <li><a href="#">Syllabus</a></li>
-                        
-                        <li><a href="/kanbas/courses/settings/course-details/screen.html">Settings</a></li>
-                    </ul>
-                </td>
+            <li>
+                <a href="http://northeastern.edu">
+                    N
+                </a>
+            </li>
+    
+            <li>
+                <a href="/kanbas/account/profile/screen.html">
+                <div><i class="fa fa-user-circle-o" id="wd-kanbas-navigation-account-icon"></i></div>Account
+                </a>
+            </li>
+    
+            <li>
+                <a href="/kanbas/dashboard/screen.html">
+                    <div><i class="fa fa-tachometer"></i></div>Dashboard
+                </a>
+            </li>
+    
+            <li class="wd-active">
+                <a href="/kanbas/courses/home/screen.html">
+                    <div><i class="fa fa-book"></i></div>Courses
+                </a>
+            </li>
+    
+            <li>
+                <a href="#">
+                    <div><i class="fa fa-calendar"></i></div>Calendar
+                </a>
+            </li>
+    
+            <li>
+                <a href="#">
+                    <div><i class="fa fa-inbox"></i></div>Inbox
+                </a>
+            </li>
+    
+            <li>
+                <a href="#">
+                    <div><i class="fa fa-clock-o"></i></div>History
+                </a>
+            </li>
+    
+            <li>
+                <a href="#">
+                    <div><i class="fa fa-television"></i></div>Studio
+                </a>
+            </li>
+    
+            <li>
+                <a href="#">
+                    <div><i class="fa fa-arrow-circle-o-right"></i></div>Commons
+                </a>
+            </li>
+            
+            <li>
+                <a href="#">
+                    <div><i class="fa fa-question-circle-o"></i></div>Help
+                </a>
+            </li>
+        </ul>
+    </div>
 
-                <td>
-                    <table width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <select>
-                                        <option value="gradebook">Gradebook</option>
-                                        <option>Change Gradebook View</option>
-                                        <option>Traditional Gradebook</option>
-                                        <option>Individual View</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button type="button">Shortcuts</button>
-                                    <button type="button">Import</button>
-                
-                                    <select>
-                                        <option value="export">Export</option>
-                                    </select>
-                
-                                    <button type="button">Configure</button>
-                                </td>
-                            </tr>
-                
-                            <tr>
-                                <td>
-                                    <label for="search-student-name"><h3>Student Names</h3></label>
-                                    <input typ="text" id="search-student-name" placeholder="Search Students" title="Search by student name"/>
-                                    <br/>
-                                    <select>
-                                        <option>John Doe</option>
-                                        <option>Jane Doe</option>
-                                        <option>Alice Doe</option>
-                                        <option>Charlie Doe</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <label for="search-assignment-name"><h3>Assignment Names</h3></label>
-                                    <input type="text" id="search-assignment-name" placeholder="Search Assignments" title="Search by assignment name"/>
-                                    <br/>
-                                    <select>
-                                        <option>A1</option>
-                                        <option>A2</option>
-                                        <option>A3</option>
-                                        <option>A4</option>
-                                    </select>
-                                </td>
-                            </tr>
-                
-                        </tbody>
-                    </table>
-                    <button type="button">Apply Filters</button>
-                
-                    <br/><br/>
-                
-                    <table border="1" width="100%">
-                                
-                        <thead>
-                            <tr>
-                                <th>Student Name</th>
-                                <th>
-                                    <div>A1 SETUP</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A2 HTML</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A3 CSS</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A4 BOOTSTRAP</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A5 JAVASCRIPT</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A6 REACT</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A7 REDUX</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A8 NODE</div>
-                                    <div>Out of 100</div>
-                                </th>
-                                <th>
-                                    <div>A9 MANGO</div>
-                                    <div>Out of 100</div>
-                                </th>
-                            </tr>
-                
-                            <tr>
-                                <td>Alice Wonderland</td>
-                                <td>98</td>
-                                <td>89</td>
-                                <td>87</td>
-                                <td>90</td>
-                                <td>89</td>
-                                <td>94</td>
-                                <td>88</td>
-                                <td>87</td>
-                                <td>100</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Princes Leia</td>
-                                <td>98</td>
-                                <td>80</td>
-                                <td>87</td>
-                                <td>86</td>
-                                <td>100</td>
-                                <td>94</td>
-                                <td><input type="number" value="85"></td>
-                                <td>84</td>
-                                <td>92</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Luke Skywalker</td>
-                                <td><input type="number" value="99"></td>
-                                <td>88</td>
-                                <td>97</td>
-                                <td>82</td>
-                                <td>96</td>
-                                <td>93</td>
-                                <td>95</td>
-                                <td>100</td>
-                                <td>93</td>
-                            </tr>
+    <div class="d-flex">
+
+        <!-- Left main navigation spacer -->
+        <div class="d-none d-md-block" style="width: 80px;"></div>
+
+        <!-- Main container for everything on the right side -->
+        <div class="flex-fill">
+
+            <!-- Top hidden navbar -->
+            <div class="container-fluid d-block d-md-none top-hidden-nav-container m-0 pb-3 pt-3">
+                <div class="row align-items-center">
+                    <div class="col text-start">
+                        <a class="btn" data-bs-toggle="collapse" href="#wd-kanbas-navigation-top-hidden-collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="col text-center">
+                        <p class="m-0">CS4550.12631.202410</p>
+                        <p class="m-0">Modules</p>
+                    </div>
+                    <div class="col text-end">
+                        <a class="btn" href="#">
+                            <i class="fa fa-graduation-cap me-1" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn" data-bs-toggle="collapse" href="#wd-kanbas-course-navigation-top-hidden-collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top main navigation sidebar collapse -->
+            <div class="collapse" id="wd-kanbas-navigation-top-hidden-collapse">
+                <div class="container-fluid d-block d-md-none fs-4 ms-2 me-2">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="/kanbas/dashboard/screen.html" class="red-links">
+                                <div><i class="fa fa-tachometer me-2"></i>Dashboard</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="/kanbas/account/profile/screen.html" class="red-links">
+                                <div><i class="fa fa-user-circle-o me-2"></i>Account</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="/kanbas/courses/home/screen.html" class="red-links">
+                                <div><i class="fa fa-book me-2"></i>Courses</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <div><i class="fa fa-calendar me-2"></i>Calendar</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <div><i class="fa fa-inbox me-2"></i>Inbox</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <div><i class="fa fa-television me-2"></i>Studio</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <div><i class="fa fa-arrow-circle-o-right me-2"></i>Commons</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <div><i class="fa fa-clock-o me-2"></i>History</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <div><i class="fa fa-question-circle-o me-2"></i></i>Help</div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Top course navigation sidebar collapse-->
+            <div class="collapse" id="wd-kanbas-course-navigation-top-hidden-collapse">
+                <div class="container-fluid d-block d-md-none fs-6 me-2">
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="/kanbas/courses/home/screen.html" class="red-links">
+                                <i class="fa fa-home me-2"></i>Home
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-puzzle-piece me-2" aria-hidden="true"></i>Modules
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="/kanbas/courses/home/screen.html" class="red-links">
+                                <i class="fa fa-plug me-2" aria-hidden="true"></i>Piazza
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-plug me-2" aria-hidden="true"></i>Zoom Meetings
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="/kanbas/courses/assignments/screen.html" class="red-links">
+                                <i class="fa fa-pencil-square-o me-2" aria-hidden="true"></i>Asssignments
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-rocket me-2" aria-hidden="true"></i>Quizzes
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="/kanbas/courses/grades/screen.html" class="red-links">
+                                <i class="fa fa-book me-2" aria-hidden="true"></i>Grades
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-users me-2" aria-hidden="true"></i>People
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-plug me-2" aria-hidden="true"></i>Panopto Video
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-comments-o me-2" aria-hidden="true"></i>Discussions
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-bullhorn me-2" aria-hidden="true"></i>Announcements
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-file-text-o me-2" aria-hidden="true"></i>Pages
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-folder-o me-2" aria-hidden="true"></i>Files
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-sticky-note-o me-2" aria-hidden="true"></i>Rubrics
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-bullseye me-2" aria-hidden="true"></i>Outcomes
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-circle-thin me-2" aria-hidden="true"></i>Collaborations
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-newspaper-o me-2" aria-hidden="true"></i>Syllabus
+                            </a>
+                            <i class="fa fa-eye-slash ms-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-plug me-2" aria-hidden="true"></i>Progress Reports (EAB Navigate)
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <a href="#" class="red-links">
+                                <i class="fa fa-cog me-2" aria-hidden="true"></i>Settings
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                  
+                </div>
+            </div>
+
+            
+            <!-- Breadcrumb Top bar -->
+            <div class="container-fluid flex-fill d-none d-md-flex m-0 justify-content-between pt-3 align-items-center">
+                <div>
+                    <button href="#" class="btn red-links" type="button" data-bs-toggle="collapse" data-bs-target="#wd-courses-navigation-side-bar" aria-expanded="false" aria-controls="collapseWidthExample">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="pt-2 d-inline-block">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/kanbas/courses/home/screen.html" class="red-links">CS4550.12631.202410</a></li>
+                            <li class="breadcrumb-item active">Grades</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="float-end">
+                    <a href="#" class="btn gray-buttons"><i class="fa fa-graduation-cap me-1" aria-hidden="true"></i>Student View</a>
+                </div>
+            </div>
+
+            <hr class="d-none d-md-block mt-1"/>
+
+
+            <div class="d-flex">
+                <div class="collapse collapse-horizontal show" id="wd-courses-navigation-side-bar">
+                    <!-- course navigation side bar -->
+                    <div class="d-none d-md-block ps-2">
+                        <ul class="wd-courses-navigation">
+                            <li><a href="/kanbas/courses/home/screen.html">Home</a></li>
+                    
+                            <li><a href="#">Modules</a></li>
                             
-                            <tr>
-                                <td>Han Solo</td>
-                                <td>83</td>
-                                <td>99</td>
-                                <td>94</td>
-                                <td>98</td>
-                                <td>86</td>
-                                <td>85</td>
-                                <td><input type="number" value="86"></td>
-                                <td>80</td>
-                                <td>84</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Lando Calresian</td>
-                                <td>83</td>
-                                <td><input type="number" value="92"></td>
-                                <td>80</td>
-                                <td>80</td>
-                                <td>92</td>
-                                <td>92</td>
-                                <td>94</td>
-                                <td>87</td>
-                                <td>95</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Boba Fet</td>
-                                <td>85</td>
-                                <td>89</td>
-                                <td>94</td>
-                                <td>83</td>
-                                <td>83</td>
-                                <td>84</td>
-                                <td>91</td>
-                                <td>87</td>
-                                <td>96</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Darth Vader</td>
-                                <td>81</td>
-                                <td>81</td>
-                                <td><input type="number" value="96"></td>
-                                <td>80</td>
-                                <td>89</td>
-                                <td>88</td>
-                                <td>82</td>
-                                <td>80</td>
-                                <td>82</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Obi-Wan Kenobi</td>
-                                <td><input type="number" value="85"></td>
-                                <td>99</td>
-                                <td>87</td>
-                                <td>82</td>
-                                <td>88</td>
-                                <td>83</td>
-                                <td>88</td>
-                                <td>92</td>
-                                <td>80</td>
-                            </tr>
-                
-                            <tr>
-                                <td>R2-D2</td>
-                                <td>81</td>
-                                <td><input type="number" value="92"></td>
-                                <td><input type="number" value="82"></td>
-                                <td>86</td>
-                                <td>83</td>
-                                <td><input type="number" value="84"></td>
-                                <td>98</td>
-                                <td>85</td>
-                                <td>96</td>
-                            </tr>
-                
-                            <tr>
-                                <td>C-3PO</td>
-                                <td>94</td>
-                                <td>98</td>
-                                <td>83</td>
-                                <td>83</td>
-                                <td>100</td>
-                                <td>96</td>
-                                <td>96</td>
-                                <td>85</td>
-                                <td>87</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Yoda</td>
-                                <td>80</td>
-                                <td>89</td>
-                                <td>99</td>
-                                <td>89</td>
-                                <td>96</td>
-                                <td>85</td>
-                                <td>96</td>
-                                <td>92</td>
-                                <td>85</td>
-                            </tr>
-                
-                            <tr>
-                                <td>Admiral Ackbar</td>
-                                <td>82</td>
-                                <td>88</td>
-                                <td>95</td>
-                                <td>100</td>
-                                <td><input type="text" value="93"></td>
-                                <td>98</td>
-                                <td>85</td>
-                                <td>87</td>
-                                <td>99</td>
-                            </tr>
-                
-                        </thead>
-                
-                    </table>
-                
-                </td>
-            </tr>
+                            <li><a href="http://piazza.com">Piazza</a></li>
+                            
+                            <li><a href="#">Zoom Meetings</a></li>
+                            
+                            <li><a href="/kanbas/courses/assignments/screen.html">Assignments</a></li>
+                            
+                            <li><a href="#">Quizzes</a></li>
+                            
+                            <li class="wd-active"><a href="/kanbas/courses/grades/screen.html">Grades</a></li>
+                            
+                            <li><a href="#">People</a></li>
+                            
+                            <li><a href="#">Panopto Video</a></li>
+                            
+                            <li><a href="#">Discussions</a></li>
+                            
+                            <li><a href="#">Announcements</a></li>
+                            
+                            <li><a href="#">Pages</a></li>
+                            
+                            <li><a href="#">Files</a></li>
+                            
+                            <li><a href="#">Rubrics</a></li>
+                            
+                            <li><a href="#">Outcomes</a></li>
+                            
+                            <li><a href="#">Colleborations</a></li>
+                            
+                            <li><a href="#">Syllabus</a></li>
+                            
+                            <li><a href="/kanbas/courses/settings/course-details/screen.html">Settings</a></li>
+                    
+                        </ul>
+                    </div>
+                </div>
 
+                <!-- Main content div -->
+                <div class="flex-fill me-2 ms-2">
 
-        </tbody>
-    </table>
+                    <div class="container-fluid">
 
+                        <div class="row mt-3">
+                            <div class="col text-end">
+                                <div class="d-inline ms-2">
+                                    <a class="btn top-row-buttons"><i class="fa fa-upload me-1" aria-hidden="true"></i>Import</a>
+                                </div>
+                
+                                <div class="dropdown d-inline ms-2">
+                                        <button class="btn top-row-buttons dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                                            <i class="fa fa-download me-1" aria-hidden="true"></i></i>Export
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                </div>
+                                
+                                <div class="d-inline ms-2">
+                                    <a class="btn top-row-buttons"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="search-student-name" class="form-label"><h3>Student Names</h3></label>
+                    
+                                            <div class="input-group">
+                                                
+                                                <span class="input-group-text search-prepend-magnifying-glass border-end-0">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                </span>
+                    
+                                                <input class="form-control border-start-0 border-end-0" type="text" id="search-student-name" placeholder="Search Students" title="Search by student name"/>
+                                            
+                                                <button class="btn btn-outline-secondary dropdown-toggle border-secondary-subtle border-start-0" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                </ul>
+                                            </div>
+                    
+                                        </div>
+                    
+                                        <div class="col">
+                                            <label for="search-assignment-name" class="form-label"><h3>Assignment Names</h3></label>
+                    
+                                            <div class="input-group">
+                                                
+                                                <span class="input-group-text search-prepend-magnifying-glass border-end-0">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                </span>
+                    
+                                                <input class="form-control border-start-0 border-end-0" type="text" id="search-assignment-name" placeholder="Search Assignments" title="Search by student name"/>
+                                            
+                                                <button class="btn btn-outline-secondary dropdown-toggle border-secondary-subtle border-start-0" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <button class="btn top-row-buttons"><i class="fa fa-filter me-1" aria-hidden="true"></i>Apply Filters</button>
+                            </div> 
+                        </div>
+                        
+                        <div class="row mt-3">
+                            
+                            <div class="col">
+                                
+                                <div class="table-responsive" style="overflow-x: auto; margin: auto;">
+                                    <table class="table table-bordered grading-table table-striped">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col" class="text-start student-name-col">
+                                                    <div>Student Name</div>
+                                                </th>
+                                                <th scope="col" class="text-center grade-data-column">
+                                                    <div>A1 SETUP</div>
+                                                    <div class="minor-table-text">Out of 100</div>
+                                                </th>
+                                                <th scope="col" class="text-center grade-data-column">
+                                                    <div>A2 HTML</div>
+                                                    <div class="minor-table-text">Out of 100</div>
+                                                </th>
+                                                <th scope="col" class="text-center grade-data-column">
+                                                    <div>A3 CSS</div>
+                                                    <div class="minor-table-text">Out of 100</div>
+                                                </th>
+                                                <th scope="col" class="text-center grade-data-column">
+                                                    <div>A4 BOOTSTRAP</div>
+                                                    <div class="minor-table-text">Out of 100</div>
+                                                </th>
+                                                <th scope="col" class="text-center grade-data-column">
+                                                    <div>A5 JAVASCRIPT</div>
+                                                    <div class="minor-table-text">Out of 100</div>
+                                                </th>
+                                                <th scope="col" class="text-center grade-data-column">
+                                                    <div>A6 REACT</div>
+                                                    <div class="minor-table-text">Out of 100</div>
+                                                </th>
+                                                
+                                            </tr>
+                                        </thead>
+                        
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="#" class="red-link">Doxa Asibey</a></td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+
+                                                <!-- INPUT CELL -->
+                                                <td class="text-center pt-0 pb-0">
+                                                    <div class="container m-0 p-0">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="d-flex align-items-center">
+                                                                    <input type="text" class="form-control w-auto text-center" id="assignment-name" value="89.59%">
+                                                                    <button class="btn top-row-buttons p-1"><i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                        
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        98.65%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                        
+                                            <tr>
+                                                <td><a href="#" class="red-link">Thuy Tien Bui</a></td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        89.59%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        98.65%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                                            <tr>
+                                                <td><a href="#" class="red-link">Yetong Chen</a></td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        89.59%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        98.65%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                                            <tr>
+                                                <td><a href="#" class="red-link">Zhenyu Chen</a></td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        89.59%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        98.65%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                                            <tr>
+                                                <td><a href="#" class="red-link">Yung-Shin Chien</a></td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        89.59%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        98.65%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="col-auto">
+                                                        100%
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                        
+                                        </tbody>
+                            
+                                    </table>
+                                </div>
+                            </div>
+                
+                        </div>
+                
+                    </div>
+                
+
+                </div>     
+
+            </div>
+
+        </div>
+
+    </div>
+    
 </body>
 </html>
