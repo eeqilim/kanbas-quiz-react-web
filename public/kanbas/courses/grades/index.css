@@ -11,7 +11,7 @@
 .grading-table th {
     vertical-align: middle;
 }
-/* 
+
 .grading-table .minor-table-text {
     font-weight: lighter;
     color: gray;
@@ -23,7 +23,7 @@
 
 .grading-table .grade-data-column {
     width: 200px;
-} */
+}
 
 .red-link {
     text-decoration: none;
