@@ -1,0 +1,14 @@
+.grading-table th {
+    vertical-align: middle;
+}
+.grading-table .minor-table-text {
+    font-weight: lighter;
+    color: gray;
+}
+
+.grading-table .student-name-col {
+    width: 300px;
+}
+.grading-table .grade-data-column {
+    width: 200px;
+}

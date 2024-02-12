@@ -1,0 +1,81 @@
+.wd-home-sameline-button-container > .btn {
+    display: inline-block;
+    border-radius: 0;
+    border: 1px solid gray;
+    background-color: gainsboro;
+}
+.wd-home-sameline-button-container {
+    margin-bottom: 15px;
+}
+
+#green-button {
+    background-color: green;
+    color: white;
+}
+
+.wd-home-long-button-container > .btn {
+    display: inline-block;
+    border: 1px solid gray;
+    background-color: gainsboro;
+    text-align: start;
+}
+
+.wd-home-long-button-container {
+    margin-bottom: 5px;
+}
+
+.course-status-section {
+    margin-bottom: 25px;
+}
+
+.coming-up-section {
+    margin-bottom: 25px;
+}
+.to-do-section {
+    margin-bottom: 25px;
+}
+
+.wd-home-course-status-icon-right-margin {
+    margin-right: 5px;
+}
+
+.link-red {
+    color: red;
+    text-decoration: none;
+}
+.link-red > i {
+    color: gray;
+}
+
+.coming-up-section-icon-container {
+    margin-right: 10px;
+    color: gray;
+}
+
+.coming-up-section-text-container > p {
+    margin-bottom: 0;
+    color: gray;
+    font-size: 14px;
+}
+
+.coming-up-element-container {
+    margin-bottom: 20px;
+}
+
+.coming-up-section-bottom-link {
+    font-size: 14px;
+}
+
+.to-do-section-icon-container {
+    margin-right: 10px;
+    color: red;
+    font-size: 20px;
+}
+.to-do-section-text-container > p {
+    margin-bottom: 0;
+    color: gray;
+    font-size: 14px;
+}
+.x-button {
+    color: gray;
+}

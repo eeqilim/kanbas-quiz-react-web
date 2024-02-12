@@ -1,0 +1,43 @@
+.text-success {
+    color: green;
+}
+
+.top-row-buttons {
+    background-color: gainsboro;
+    border: 1px solid black;
+    
+}
+
+
+
+.wd-courses-assignments-edit-assign-card-footer-button {
+    padding: 0px;
+    background-color: gainsboro;
+    border: 0px;
+    text-decoration: none;
+    color: black;
+}
+
+.wd-courses-assignments-edit-assign-card-input-container {
+    margin-bottom: 16px;
+}
+.wd-courses-assignments-edit-date-button {
+    background-color: gainsboro;
+    border: 1px solid gainsboro;
+    color: black;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.wd-courses-assignments-edit-cancel-button {
+    background-color: gainsboro;
+    border: 1px solid gainsboro;
+    color: black;
+}
+
+
+
+
+
+
+

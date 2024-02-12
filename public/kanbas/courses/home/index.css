@@ -68,9 +68,6 @@
 .wd-modules-float-right {
   float: right;
 }
-.text-success {
-  color: green !important;
-}
 .wd-modules-text-indent {
     text-indent: 30px;
     display: inline-block;

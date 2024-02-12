@@ -1,0 +1,573 @@
+[
+    {
+        "_id": "M101",
+        "name": "Week 0 - INTRO",
+        "course": "CS5610.35159.202430",
+        "lessons": [
+            {
+                "_id": "L101", 
+                "name": "LEARNING OBJECTIVES", 
+                "indent": 0,
+                "url": "",
+                "module": "M101"
+            }, 
+            {
+                "_id": "L102",
+                "name": "Learn what is Web Development",
+                "indent": 1,
+                "url": "",
+                "module": "M101"
+            },
+            {
+                "_id": "L103",
+                "name": "Creating a development environment",
+                "indent": 1,
+                "url": "",
+                "module": "M101"
+            },
+            {
+                "_id": "L104",
+                "name": "Creating a Web Application",
+                "indent": 1,
+                "url": "",
+                "module": "M101"
+            }, 
+            {
+                "_id": "L105",
+                "name": "Getting started with the 1st assignment",
+                "indent": 1,
+                "url": "",
+                "module": "M101"
+            }, 
+            {
+                "_id": "L106",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M101"
+            },
+            {
+                "_id": "L107",
+                "name": "Full Stack Developer - Chapter1 - Introduction",
+                "indent": 1,
+                "url": "",
+                "module": "M101"
+            },
+            {
+                "_id": "L108",
+                "name": "Full Stack Developer - Chapter2 - Creating User Interfaces With HTML",
+                "indent": 1,
+                "url": "",
+                "module": "M101"
+            }, 
+            {
+                "_id": "L109",
+                "name": "SLIDES",
+                "indent": 0,
+                "url": "",
+                "module": "M101"
+            },
+            {
+                "_id": "L110",
+                "name": "Introduction to Web Development",
+                "indent": 1,
+                "url": "https://www.google.com/",
+                "module": "M101"
+            },
+            {
+                "_id": "L111",
+                "name": "Creating a HTTP server with Node.js",
+                "indent": 1,
+                "url": "https://www.google.com/",
+                "module": "M101"
+            },
+            {
+                "_id": "L112",
+                "name": "Creating a React Application",
+                "indent": 1,
+                "url": "https://www.google.com/",
+                "module": "M101"
+            }
+
+        ]
+    },
+
+    {
+        "_id": "M102",
+        "name": "Week 1 - REACT",
+        "course": "CS5610.35159.202430",
+        "lessons": [
+            {
+                "_id": "L201",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M102"
+            },
+            {
+                "_id": "L202",
+                "name": "Learn how to create user interface with HTML",
+                "indent": 1,
+                "url": "",
+                "module": "M102"
+            },
+            {
+                "_id": "L203",
+                "name": "Keep working on assignment 1",
+                "indent": 1,
+                "url": "",
+                "module": "M102"
+            }, 
+            {
+                "_id": "L204",
+                "name": "Deploy the assignment to Netlify", 
+                "indent": 1,
+                "url": "",
+                "module": "M102"
+            },
+            {
+                "_id": "L205",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M102"
+            },
+            {
+                "_id": "L206",
+                "name": "Full Stack Developer - Chapter1 - Introduction",
+                "indent": 1,
+                "url": "",
+                "module": "M102"
+            },
+            {
+                "_id": "L207",
+                "name": "Full Stack Developer - Chapter2 - Creating User Interfaces With HTML",
+                "indent": 1,
+                "url": "",
+                "module": "M102"
+            }
+        ]
+    },
+
+    {
+        "_id": "M103",
+        "name": " Week 2 - Styling User Interfaces with CSS",
+        "course": "CS5610.35159.202430",
+        "lessons": [
+            {
+                "_id": "L301",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M103"
+            },
+            {
+                "_id": "L302",
+                "name": "Learn how to style user interfaces with CSS",
+                "indent": 1,
+                "url": "",
+                "module": "M103"
+            },
+            {
+                "_id": "L303",
+                "name": "Keep working on assignment 2",
+                "indent": 1,
+                "url": "",
+                "module": "M103"
+            },
+            {
+                "_id": "L304",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M103"
+            },
+            {
+                "_id": "L305",
+                "name": "Full Stack Developer - Chapter1 - Introduction",
+                "indent": 1,
+                "url": "",
+                "module": "M103"
+            },
+            {
+                "_id": "L306",
+                "name": "Full Stack Developer - Chapter2 - Creating User Interfaces With HTML",
+                "indent": 1,
+                "url": "",
+                "module": "M103"
+            }
+        ]
+    }, 
+
+    {
+        "_id": "M104",
+        "name": "Week 3 - React Router",
+        "course": "CS5610.35159.202430",
+        "lessons": [
+            {
+                "_id": "L401",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M104"
+            },
+            {
+                "_id": "L402",
+                "name": "Learn how to use React Router",
+                "indent": 1,
+                "url": "",
+                "module": "M104"
+            },
+            {
+                "_id": "L403",
+                "name": "Keep working on assignment 3",
+                "indent": 1,
+                "url": "",
+                "module": "M104"
+            },
+            {
+                "_id": "L404",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M104"
+            },
+            {
+                "_id": "L405",
+                "name": "Full Stack Developer - Chapter1 - Introduction",
+                "indent": 1,
+                "url": "",
+                "module": "M104"
+            },
+            {
+                "_id": "L406",
+                "name": "Full Stack Developer - Chapter2 - Creating User Interfaces With HTML",
+                "indent": 1,
+                "url": "",
+                "module": "M104"
+            }
+        ]
+    },
+    {
+        "_id": "M105",
+        "name": "Week 4 - Redux",
+        "course": "CS5610.35159.202430",
+        "lessons": [
+            {
+                "_id": "L501",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M105"
+            },
+            {
+                "_id": "L502",
+                "name": "Learn how to use Redux",
+                "indent": 1,
+                "url": "",
+                "module": "M105"
+            },
+            {
+                "_id": "L503",
+                "name": "Keep working on assignment 4",
+                "indent": 1,
+                "url": "",
+                "module": "M105"
+            },
+            {
+                "_id": "L504",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M105"
+            },
+            {
+                "_id": "L505",
+                "name": "Full Stack Developer - Chapter1 - Introduction",
+                "indent": 1,
+                "url": "",
+                "module": "M105"
+            },
+            {
+                "_id": "L506",
+                "name": "Full Stack Developer - Chapter2 - Creating User Interfaces With HTML",
+                "indent": 1,
+                "url": "",
+                "module": "M105"
+            }
+        ]
+    },
+    {
+        "_id": "M106",
+        "name": "Week 1 - Recursion",
+        "course": "CS5800.40214.202430",
+        "lessons": [
+            {
+                "_id": "L601",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M106"
+            },
+            {
+                "_id": "L602",
+                "name": "Learn how to use recursion",
+                "indent": 1,
+                "url": "",
+                "module": "M106"
+            },
+            {
+                "_id": "L603",
+                "name": "Keep working on assignment 1",
+                "indent": 1,
+                "url": "",
+                "module": "M106"
+            },
+            {
+                "_id": "L604",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M106"
+            },
+            {
+                "_id": "L605",
+                "name": "Chapter1 - Solving Recursion",
+                "indent": 1,
+                "url": "",
+                "module": "M106"
+            },
+            {
+                "_id": "L606",
+                "name": "Chapter2 - Divide and Conquer",
+                "indent": 1,
+                "url": "",
+                "module": "M106"
+            }
+        ]
+    },
+    {
+        "_id": "M107",
+        "name": "Week 2 - Divide and Conquer",
+        "course": "CS5800.40214.202430",
+        "lessons": [
+            {
+                "_id": "L701",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M107"
+            },
+            {
+                "_id": "L702",
+                "name": "Learn how to use divide and conquer",
+                "indent": 1,
+                "url": "",
+                "module": "M107"
+            },
+            {
+                "_id": "L703",
+                "name": "Keep working on assignment 2",
+                "indent": 1,
+                "url": "",
+                "module": "M107"
+            },
+            {
+                "_id": "L704",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M107"
+            },
+            {
+                "_id": "L705",
+                "name": "Chapter1 - Solving Recursion",
+                "indent": 1,
+                "url": "",
+                "module": "M107"
+            },
+            {
+                "_id": "L706",
+                "name": "Chapter2 - Divide and Conquer",
+                "indent": 1,
+                "url": "",
+                "module": "M107"
+            }
+        ]
+    },
+    {
+        "_id": "M108",
+        "name": "Week 3 - Dynamic Programming",
+        "course": "CS5800.40214.202430",
+        "lessons": [
+            {
+                "_id": "L801",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M108"
+            },
+            {
+                "_id": "L802",
+                "name": "Learn how to use dynamic programming",
+                "indent": 1,
+                "url": "",
+                "module": "M108"
+            },
+            {
+                "_id": "L803",
+                "name": "Keep working on assignment 3",
+                "indent": 1,
+                "url": "",
+                "module": "M108"
+            },
+            {
+                "_id": "L804",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M108"
+            },
+            {
+                "_id": "L805",
+                "name": "Chapter3 - Dynamic Programming",
+                "indent": 1,
+                "url": "",
+                "module": "M108"
+            }
+        ]
+    },
+    {
+        "_id": "M109",
+        "name": "Foundation of Network",
+        "course": "CS5700.21301.202410",
+        "lessons": [
+            {
+                "_id": "L901",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M109"
+            },
+            {
+                "_id": "L902",
+                "name": "Learn the foundation of network",
+                "indent": 1,
+                "url": "",
+                "module": "M109"
+            },
+            {
+                "_id": "L903",
+                "name": "Keep working on assignment 1",
+                "indent": 1,
+                "url": "",
+                "module": "M109"
+            },
+            {
+                "_id": "L904",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M109"
+            },
+            {
+                "_id": "L905",
+                "name": "Chapter1 - Introduction to Network",
+                "indent": 1,
+                "url": "",
+                "module": "M109"
+            },
+            {
+                "_id": "L906",
+                "name": "Chapter2 - Application Layer",
+                "indent": 1,
+                "url": "",
+                "module": "M109"
+            }
+        ]
+    },
+    {
+        "_id": "M110",
+        "name": "Week 2 - Transport Layer",
+        "course": "CS5700.21301.202410",
+        "lessons": [
+            {
+                "_id": "L1001",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M110"
+            },
+            {
+                "_id": "L1002",
+                "name": "Learn the transport layer",
+                "indent": 1,
+                "url": "",
+                "module": "M110"
+            },
+            {
+                "_id": "L1003",
+                "name": "Keep working on assignment 2",
+                "indent": 1,
+                "url": "",
+                "module": "M110"
+            },
+            {
+                "_id": "L1004",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M110"
+            },
+            {
+                "_id": "L1005",
+                "name": "Chapter3 - Transport Layer",
+                "indent": 1,
+                "url": "",
+                "module": "M110"
+            }
+        ]
+    },
+    {
+        "_id": "M111",
+        "name": "Week 3 - Network Layer",
+        "course": "CS5700.21301.202410",
+        "lessons": [
+            {
+                "_id": "L1101",
+                "name": "LEARNING OBJECTIVES",
+                "indent": 0,
+                "url": "",
+                "module": "M111"
+            },
+            {
+                "_id": "L1102",
+                "name": "Learn the network layer",
+                "indent": 1,
+                "url": "",
+                "module": "M111"
+            },
+            {
+                "_id": "L1103",
+                "name": "Keep working on assignment 3",
+                "indent": 1,
+                "url": "",
+                "module": "M111"
+            },
+            {
+                "_id": "L1104",
+                "name": "READING",
+                "indent": 0,
+                "url": "",
+                "module": "M111"
+            },
+            {
+                "_id": "L1105",
+                "name": "Chapter4 - Network Layer",
+                "indent": 1,
+                "url": "",
+                "module": "M111"
+            }
+        ]
+    }
+]
