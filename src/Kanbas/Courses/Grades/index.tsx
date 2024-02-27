@@ -1,4 +1,4 @@
-import { assignments, enrollments, users, grades } from '../../Database';
+import db from '../../Database';
 import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import { FaUpload, FaDownload, FaCog, FaFilter, FaSearch } from "react-icons/fa";
@@ -7,7 +7,7 @@ import './index.css';
 
 function Grades() {
     const { courseId } = useParams();
-    const assignmentGroupList = assignments.filter( (assignment) => assignment.course === courseId );
+    const assignmentGroupList = db.assignments.filter( (assignment) => assignment.course === courseId );
     const getAssignmentList = () => {
         const result = [];
         for (let i=0; i<assignmentGroupList.length; i++) {
@@ -18,7 +18,7 @@ function Grades() {
         return result;
     }
     
-    const enrollmentsList = enrollments.filter( (enrollment) => enrollment.course === courseId );
+    const enrollmentsList = db.enrollments.filter( (enrollment) => enrollment.course === courseId );
     const assignmentList = getAssignmentList();
     return (
         <div className="flex-fill me-2 ms-2 container-fluid">
@@ -113,12 +113,12 @@ function Grades() {
 
                             <tbody>
                                 { enrollmentsList.map( (enrollment, index) => {
-                                    const user = users.find( (user) => user._id === enrollment.user );
+                                    const user = db.users.find( (user) => user._id === enrollment.user );
                                     return (
                                         <tr key={index}>
                                             <td className="text-nowrap">{user?.firstName} {user?.lastName}</td>
                                             {assignmentList.map( (assignment, index) => {
-                                                const grade = grades.find( (grade) => grade.student === enrollment.user && grade.assignment === assignment.item_id);
+                                                const grade = db.grades.find( (grade) => grade.student === enrollment.user && grade.assignment === assignment.item_id);
                                                 return (<td key={index} className="text-center">
                                                             {grade?.grade || ""}
                                                         </td>);})}

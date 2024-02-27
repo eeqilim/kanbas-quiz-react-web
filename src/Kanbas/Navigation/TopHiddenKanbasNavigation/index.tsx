@@ -1,6 +1,5 @@
 import { useParams } from "react-router";
 import { Link, useLocation } from "react-router-dom";
-import { courses } from "../../Database";
 import { FaGraduationCap, FaCaretDown, FaRegUserCircle, FaTachometerAlt, FaBook, FaRegCalendarAlt, FaInbox, FaRegClock, FaTv, FaRegArrowAltCircleRight, FaRegQuestionCircle, FaHome, FaPuzzlePiece, FaBullhorn, FaRegComments, FaBookOpen, FaUsers, FaRegFolder, FaRegNewspaper, FaRocket } from "react-icons/fa";
 import { FaBars, FaPenToSquare } from "react-icons/fa6";
 

@@ -1,7 +1,7 @@
 [
     {
         "_id": "A101", 
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "category": "ASSIGNMENTS",
         "total_grade_percentage": 40,
         "items": [
@@ -11,7 +11,9 @@
                 "module": "M101",
                 "points": 100,
                 "due_date": "2022-09-18",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-11",
+                "available_to_date": "2022-09-18"
             },
             {
                 "item_id": "A101.2",
@@ -19,7 +21,9 @@
                 "module": "M102",
                 "points": 100,
                 "due_date": "2022-09-25",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-18",
+                "available_to_date": "2022-09-25"
             },
             {
                 "item_id": "A101.3",
@@ -27,7 +31,9 @@
                 "module": "M103",
                 "points": 100,
                 "due_date": "2022-10-02",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-25",
+                "available_to_date": "2022-10-02"
             },
             {
                 "item_id": "A101.4",
@@ -35,7 +41,9 @@
                 "module": "M103",
                 "points": 100,
                 "due_date": "2022-10-09",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-02",
+                "available_to_date": "2022-10-09"
             },
             {
                 "item_id": "A101.5",
@@ -43,7 +51,9 @@
                 "module": "M104",
                 "points": 100,
                 "due_date": "2022-10-16",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-09",
+                "available_to_date": "2022-10-16"
             }, 
             {
                 "item_id": "A101.6",
@@ -51,13 +61,15 @@
                 "module": "M104",
                 "points": 100,
                 "due_date": "2022-10-23",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-16",
+                "available_to_date": "2022-10-23"
             }
         ]
     },
     {
         "_id": "A102",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "category": "QUIZZES",
         "total_grade_percentage": 10,
         "items": [
@@ -67,7 +79,9 @@
                 "module": "M102",
                 "points": 20,
                 "due_date": "2022-09-25",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-18",
+                "available_to_date": "2022-09-25"
             },
             {
                 "item_id": "A102.2",
@@ -75,7 +89,9 @@
                 "module": "M103",
                 "points": 20,
                 "due_date": "2022-10-02",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-25",
+                "available_to_date": "2022-10-02"
             },
             {
                 "item_id": "A102.3",
@@ -83,7 +99,9 @@
                 "module": "M103",
                 "points": 20,
                 "due_date": "2022-10-09",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-02",
+                "available_to_date": "2022-10-09"
             },
             {
                 "item_id": "A102.4",
@@ -91,7 +109,9 @@
                 "module": "M104",
                 "points": 20,
                 "due_date": "2022-10-16",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-09",
+                "available_to_date": "2022-10-16"
             },
             {
                 "item_id": "A102.5",
@@ -99,13 +119,15 @@
                 "module": "M104",
                 "points": 20,
                 "due_date": "2022-10-23",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-16",
+                "available_to_date": "2022-10-23"
             }
         ]
     },
     {
         "_id": "A103",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "category": "EXAMS",
         "total_grade_percentage": 20,
         "items": [
@@ -115,7 +137,9 @@
                 "module": "", 
                 "points": 100,
                 "due_date": "2022-10-30",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-23",
+                "available_to_date": "2022-10-30"
             },
             {
                 "item_id": "A103.2",
@@ -123,13 +147,15 @@
                 "module": "",
                 "points": 100,
                 "due_date": "2022-12-11",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-12-04",
+                "available_to_date": "2022-12-11"
             }
         ]
     },
     {
         "_id": "A104",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "category": "PROJECTS",
         "total_grade_percentage": 30,
         "items": [
@@ -139,13 +165,15 @@
                 "module": "",
                 "points": 100,
                 "due_date": "2022-12-11",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-12-04",
+                "available_to_date": "2022-12-11"
             }
         ]
     },
     {
         "_id": "A105",
-        "course": "CS5800.40214.202430",
+        "course": "2",
         "category": "ASSIGNMENTS",
         "total_grade_percentage": 70,
         "items": [
@@ -155,7 +183,9 @@
                 "module": "M106",
                 "points": 100,
                 "due_date": "2022-09-18",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-11",
+                "available_to_date": "2022-09-18"
             },
             {
                 "item_id": "A105.2",
@@ -163,7 +193,9 @@
                 "module": "",
                 "points": 100,
                 "due_date": "2022-09-25",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-18",
+                "available_to_date": "2022-09-25"
             },
             {
                 "item_id": "A105.3",
@@ -171,7 +203,9 @@
                 "module": "M108",
                 "points": 100,
                 "due_date": "2022-10-02",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-25",
+                "available_to_date": "2022-10-02"
             },
             {
                 "item_id": "A105.4",
@@ -179,7 +213,9 @@
                 "module": "",
                 "points": 100,
                 "due_date": "2022-10-09",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-02",
+                "available_to_date": "2022-10-09"
             },
             {
                 "item_id": "A105.5",
@@ -187,13 +223,15 @@
                 "module": "M107",
                 "points": 100,
                 "due_date": "2022-10-16",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-09",
+                "available_to_date": "2022-10-16"
             }
         ]
     },
     {
         "_id": "A106",
-        "course": "CS5700.21301.202410",
+        "course": "2",
         "category": "QUIZZES",
         "total_grade_percentage": 10,
         "items": [
@@ -203,7 +241,9 @@
                 "module": "M109",
                 "points": 20,
                 "due_date": "2022-09-25",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-18",
+                "available_to_date": "2022-09-25"
             },
             {
                 "item_id": "A106.2",
@@ -211,7 +251,9 @@
                 "module": "M110",
                 "points": 20,
                 "due_date": "2022-10-02",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-25",
+                "available_to_date": "2022-10-02"
             },
             {
                 "item_id": "A106.3",
@@ -219,13 +261,15 @@
                 "module": "M111",
                 "points": 20,
                 "due_date": "2022-10-09",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-02",
+                "available_to_date": "2022-10-09"
             }
         ]
     },
     {
         "_id": "A107",
-        "course": "CS5700.21301.202410",
+        "course": "3",
         "category": "HOMEWORKS",
         "total_grade_percentage": 40,
         "items": [
@@ -235,7 +279,9 @@
                 "module": "M109",
                 "points": 100,
                 "due_date": "2022-09-18",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-11",
+                "available_to_date": "2022-09-18"
             },
             {
                 "item_id": "A107.2",
@@ -243,7 +289,9 @@
                 "module": "M110",
                 "points": 100,
                 "due_date": "2022-09-25",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-18",
+                "available_to_date": "2022-09-25"
             },
             {
                 "item_id": "A107.3",
@@ -251,7 +299,9 @@
                 "module": "M111",
                 "points": 100,
                 "due_date": "2022-10-02",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-09-25",
+                "available_to_date": "2022-10-02"
             },
             {
                 "item_id": "A107.4",
@@ -259,7 +309,9 @@
                 "module": "M112",
                 "points": 100,
                 "due_date": "2022-10-09",
-                "due_time": "23:59"
+                "due_time": "23:59",
+                "available_from_date": "2022-10-02",
+                "available_to_date": "2022-10-09"
             }
         ]
     }

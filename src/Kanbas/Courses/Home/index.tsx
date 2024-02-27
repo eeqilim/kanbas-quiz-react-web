@@ -1,14 +1,14 @@
 import ModuleList from "../Modules/List";
 import { useParams, Link } from "react-router-dom";
 import "./index.css";
-import { assignments } from "../../Database";
+import db from "../../Database";
 import { FaExclamationCircle } from "react-icons/fa";
 
 function Home() {
     const { courseId } = useParams();
     const getAssignmentList = () => {
         const result = [];
-        const assignmentList = assignments.filter( (assignment) => assignment.course === courseId );
+        const assignmentList = db.assignments.filter( (assignment) => assignment.course === courseId );
         for (let i=0; i<assignmentList.length; i++) {
             for (let j=0; j<assignmentList[i].items.length; j++) {
                 result.push(assignmentList[i].items[j]);

@@ -2,7 +2,7 @@
     {
         "_id": "M101",
         "name": "Week 0 - INTRO",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "lessons": [
             {
                 "_id": "L101", 
@@ -95,7 +95,7 @@
     {
         "_id": "M102",
         "name": "Week 1 - REACT",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "lessons": [
             {
                 "_id": "L201",
@@ -152,7 +152,7 @@
     {
         "_id": "M103",
         "name": " Week 2 - Styling User Interfaces with CSS",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "lessons": [
             {
                 "_id": "L301",
@@ -202,7 +202,7 @@
     {
         "_id": "M104",
         "name": "Week 3 - React Router",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "lessons": [
             {
                 "_id": "L401",
@@ -251,7 +251,7 @@
     {
         "_id": "M105",
         "name": "Week 4 - Redux",
-        "course": "CS5610.35159.202430",
+        "course": "1",
         "lessons": [
             {
                 "_id": "L501",
@@ -300,7 +300,7 @@
     {
         "_id": "M106",
         "name": "Week 1 - Recursion",
-        "course": "CS5800.40214.202430",
+        "course": "2",
         "lessons": [
             {
                 "_id": "L601",
@@ -349,7 +349,7 @@
     {
         "_id": "M107",
         "name": "Week 2 - Divide and Conquer",
-        "course": "CS5800.40214.202430",
+        "course": "2",
         "lessons": [
             {
                 "_id": "L701",
@@ -398,7 +398,7 @@
     {
         "_id": "M108",
         "name": "Week 3 - Dynamic Programming",
-        "course": "CS5800.40214.202430",
+        "course": "2",
         "lessons": [
             {
                 "_id": "L801",
@@ -440,7 +440,7 @@
     {
         "_id": "M109",
         "name": "Foundation of Network",
-        "course": "CS5700.21301.202410",
+        "course": "3",
         "lessons": [
             {
                 "_id": "L901",
@@ -489,7 +489,7 @@
     {
         "_id": "M110",
         "name": "Week 2 - Transport Layer",
-        "course": "CS5700.21301.202410",
+        "course": "3",
         "lessons": [
             {
                 "_id": "L1001",
@@ -531,7 +531,7 @@
     {
         "_id": "M111",
         "name": "Week 3 - Network Layer",
-        "course": "CS5700.21301.202410",
+        "course": "3",
         "lessons": [
             {
                 "_id": "L1101",

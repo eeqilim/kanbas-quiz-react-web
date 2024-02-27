@@ -5,7 +5,6 @@
 .top-row-buttons .btn {
     background-color: gainsboro;
     border: 1px solid gray;
-
 }
 .top-row-buttons svg {
     margin-left: 5px;
@@ -14,24 +13,28 @@
 .top-row-buttons {
     padding-top: 16px;
 }
-.wd-courses-assignments,
-.wd-courses-assignments * {
-  border-radius: 0%;
-  border: none;
-  margin: 0px;
-  padding: 0px;
-}
+
 
 .wd-courses-assignments {
-    margin: 5px;
+    border-radius: 0%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wd-courses-assignments > li > div > ul {
+    padding: 0px;
 }
 
 .wd-courses-assignments > li {
     background-color: lightgray;
     border: 1px solid gray !important;
     border-left: none !important;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 20px;
 }
 .wd-courses-assignments > li > div {
+    border-radius: 0%;
     padding: 6px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -40,14 +43,12 @@
 }
 
 .wd-courses-assignments > li > .collapse > ul > li {
-    padding: 5px;
+    padding: 4px;
     border-top: 1px solid gray !important;
     border-left: 3px solid green;
 }
 
-.wd-courses-assignments > li {
-    margin-bottom: 20px;
-}
+
 .wd-courses-assignments-grade-percentage {
     border: 1px solid gray;
     padding-left: 10px;

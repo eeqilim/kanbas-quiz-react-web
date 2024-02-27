@@ -1,10 +1,10 @@
 [   
-    { "_id": "CS5610.35159.202430", "name": "CS5610 35159 Web Development",                   "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202430_2 Spring 2024 Semester Full Term Grad", "image": "5610-img.jpg" },
-    { "_id": "CS5800.40214.202430", "name": "CS5800 40214 Algorithms",                        "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202430_2 Spring 2024 Semester Full Term Grad", "image": "5800-img.jpg" },
-    { "_id": "CS5700.21301.202410", "name": "CS5700 21301 Fundamentals - Computer Netwkg",    "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202410_2 Fall 2023 Semester Full Term Grad",   "image": "5700-img.jpg" },
-    { "_id": "CS5001.36410.202330", "name": "CS5001 36410 Intensive Foundations of CS",       "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202330_2 Spring 2023 Semester Full Term Grad", "image": "5001-img.jpg" },
-    { "_id": "CS5002.36411.202330", "name": "CS5002 36411 Discrete Structures",               "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202330_2 Spring 2023 Semester Full Term Grad", "image": "5002-img.jpg" },
-    { "_id": "CS5004.20275.202410", "name": "CS5004 20275 Object-Oriented Design",            "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202410_2 Fall 2023 Semester Full Term Grad",   "image": "5004-img.jpg" },
-    { "_id": "CS5008.52492.202350", "name": "CS5008 52492 Data Str, Algo & App in CmpSys",    "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202350_2 Summer 2023 Semester Full Term Grad", "image": "" }
+    { "_id": "1", "number": "CS5610.35159.202430", "name": "CS5610 35159 Web Development",                   "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202430_2 Spring 2024 Semester Full Term Grad", "image": "5610-img.jpg" },
+    { "_id": "2", "number": "CS5800.40214.202430", "name": "CS5800 40214 Algorithms",                        "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202430_2 Spring 2024 Semester Full Term Grad", "image": "5800-img.jpg" },
+    { "_id": "3", "number": "CS5700.21301.202410", "name": "CS5700 21301 Fundamentals - Computer Netwkg",    "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202410_2 Fall 2023 Semester Full Term Grad",   "image": "5700-img.jpg" },
+    { "_id": "4", "number": "CS5001.36410.202330", "name": "CS5001 36410 Intensive Foundations of CS",       "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202330_2 Spring 2023 Semester Full Term Grad", "image": "5001-img.jpg" },
+    { "_id": "5", "number": "CS5002.36411.202330", "name": "CS5002 36411 Discrete Structures",               "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202330_2 Spring 2023 Semester Full Term Grad", "image": "5002-img.jpg" },
+    { "_id": "6", "number": "CS5004.20275.202410", "name": "CS5004 20275 Object-Oriented Design",            "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202410_2 Fall 2023 Semester Full Term Grad",   "image": "5004-img.jpg" },
+    { "_id": "7", "number": "CS5008.52492.202350", "name": "CS5008 52492 Data Str, Algo & App in CmpSys",    "startDate": "2023-01-10", "endDate": "2023-05-15", "term": "202350_2 Summer 2023 Semester Full Term Grad", "image": "" }
     
 ]

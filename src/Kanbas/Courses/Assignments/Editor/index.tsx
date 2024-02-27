@@ -1,26 +1,36 @@
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { assignments, modules } from "../../../Database";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
+import db from "../../../Database";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaEllipsisV } from "react-icons/fa";
 import "./index.css";
+import { useSelector, useDispatch } from "react-redux";
+import { KanbasState } from "../../../store";
+import { resetAssignmentState, updateAssignment, setAssignmentState, addAssignment } from "../assignmentsReducer";
+import { useState } from "react";
 
 function AssignmentEditor() {
-    const { assignmentGroupId, assignmentId, courseId } = useParams();
+    const { courseId } = useParams();
 
-    console.log (assignmentId)
-    const assignmentGroup = assignments.filter((assignment) => assignment.course === courseId);
-
-    const assignment = assignments.find( (assignment) => assignment._id === assignmentGroupId );
-    const item = assignment?.items.find( (item) => item.item_id === assignmentId );
-    const module = modules.filter( (module) => module.course === courseId)
+    const assignment = useSelector((state: KanbasState) => state.assignmentsReducer.assignment);
+    const modules = useSelector((state: KanbasState) => state.modulesReducer.modules.filter((module) => module.course === courseId));
+    const assignmentGroups = useSelector((state: KanbasState) => state.assignmentsReducer.assignments.filter((assignment) => assignment.course === courseId));
+    const [assignmentGroupIdState, setAssignmentGroupIdState] = useState(assignment.item_id === "" ? "" : assignment.item_id.split(".")[0]);
     const navigate = useNavigate();
-
-
-    console.log(assignment)
-    console.log(item)
+    const dispatch = useDispatch(); 
+    const { pathname } = useLocation(); 
+    console.log("assignmentGroupId:", assignmentGroupIdState);
 
     const handleSave = () => {
         console.log("Action: Save");
+        if (pathname.includes("Add")) {
+            dispatch(addAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment }));
+        } else {
+            
+            dispatch(updateAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment }));
+        }
+
+
+        dispatch(resetAssignmentState());
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
     
@@ -47,7 +57,7 @@ function AssignmentEditor() {
                         <label htmlFor="assignment-name" className="form-label">Assignment Name</label>
                     </div>
                     <div className="col-8">
-                        <input type="text" className="form-control" id="assignment-name" defaultValue={item?.item_name} />
+                        <input type="text" className="form-control" id="assignment-name" value={assignment.item_name} onChange={(e) => {dispatch(setAssignmentState({ ...assignment, item_name: e.target.value}))}} />
                     </div>
                 </div>
                 <div className="row mb-3 align-items-center"> 
@@ -55,7 +65,7 @@ function AssignmentEditor() {
                         <label htmlFor="assignment-points" className="form-label">Points</label>
                     </div>
                     <div className="col-8">
-                        <input type="number" className="form-control w-100" id="assignment-points" defaultValue={item?.points} />
+                        <input type="number" className="form-control w-100" id="assignment-points" value={assignment.points} onChange={(e) => {dispatch(setAssignmentState({ ...assignment, points: parseInt(e.target.value)}))}} />
                     </div>
                 </div>
                 <div className="row mb-3 align-items-center"> 
@@ -63,10 +73,35 @@ function AssignmentEditor() {
                         <label htmlFor="assignment-group" className="form-label mb-0">Assignment Group</label>
                     </div>
                     <div className="col-8">
-                        <select className="form-select" id="assignment-group">
+                        <select className="form-select" id="assignment-group" onChange={
+                            (e) => {
+                                setAssignmentGroupIdState(e.target.value); 
+                                console.log(assignmentGroupIdState)
+                            }}>
+                            <option value="" selected>Select an Assignment Group</option>
                             {
-                                assignmentGroup.map((group, index) => (
-                                    <option key={index} value={group._id} selected={group._id === item?.item_id.split(".")[0]}>{group.category}</option>
+                                assignmentGroups.map((group, index) => (
+                                    <option key={index} value={group._id} 
+                                    selected={assignment.item_id === "" ? false : group._id === assignment.item_id.split(".")[0]}>{group.category}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div className="row mb-3 align-items-center">
+                    <div className="col-2 wd-courses-assignments-edit-input-label text-end">
+                        <label htmlFor="assignment-description" className="form-label mb-0">Module</label>
+                    </div>
+                    <div className="col-8">
+                        <select className="form-select" id="assignment-module" onChange={
+                            (e) => {
+                                dispatch(setAssignmentState({ ...assignment, module: e.target.value}))
+                            }
+                        }>
+                            <option value="" selected={true}>Multiple Module</option>
+                            {
+                                modules.map((module, index) => (
+                                    <option key={index} value={module._id} selected={module._id === assignment.module}>{module.name}</option>
                                 ))
                             }
                         </select>
@@ -107,18 +142,42 @@ function AssignmentEditor() {
                             <div className="card-body">
                                 <div className="wd-courses-assignments-edit-assign-card-input-container">
                                     <label htmlFor="assign-to" className="form-label fw-bold fs-5">Assign to</label>
-                                    <input type="text" id="assign-to" className="form-control" aria-describedby="passwordHelpBlock"></input>
+                                    <input type="text" id="assign-to" className="form-control" aria-describedby="passwordHelpBlock" placeholder="To Be Implemented"/>
                                 </div>
-                                <div className="wd-courses-assignments-edit-assign-card-input-container">
-                                    <label htmlFor="due_date" className="form-label fw-bold fs-6">Due Date</label>
-                                    <div className="input-group">
-                                        <input type="date" id="due_date" className="form-control" aria-describedby="passwordHelpBlock" value={item?.due_date}></input>
+                                <div className="wd-courses-assignments-edit-assign-card-input-container row">
+                                    <div className="col-6">
+                                        <label htmlFor="due_date" className="form-label fw-bold fs-6">Due Date</label>
+                                        <div className="input-group">
+                                            <input type="date" id="due_date" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.due_date} onChange={
+                                                (e) => {dispatch(setAssignmentState({ ...assignment, due_date: e.target.value}))}
+                                                }/>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <label htmlFor="due_time" className="form-label fw-bold fs-6">Due Time</label>
+                                        <div className="input-group">
+                                            <input type="time" id="due_time" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.due_time} onChange={
+                                                (e) => {dispatch(setAssignmentState({ ...assignment, due_time: e.target.value}))}
+                                            }/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="wd-courses-assignments-edit-assign-card-input-container">
-                                    <label htmlFor="due_time" className="form-label fw-bold fs-6">Due Time</label>
-                                    <div className="input-group">
-                                        <input type="time" id="due_time" className="form-control" aria-describedby="passwordHelpBlock" value={item?.due_time}></input>
+                                <div className="wd-courses-assignments-edit-assign-card-input-container row">
+                                    <div className="col-6">
+                                        <label htmlFor="availableFromDate" className="form-label fw-bold fs-6">Available From</label>
+                                        <div className="input-group">
+                                            <input type="date" id="availableFromDate" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.available_from_date} onChange={
+                                                (e) => {dispatch(setAssignmentState({ ...assignment, available_from_date: e.target.value}))}
+                                            }/>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <label htmlFor="availableUntilDate" className="form-label fw-bold fs-6">Untill</label>
+                                        <div className="input-group">
+                                            <input type="date" id="availableUntilDate" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.available_to_date} onChange={
+                                                (e) => {dispatch(setAssignmentState({ ...assignment, available_to_date: e.target.value}))}
+                                            }/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

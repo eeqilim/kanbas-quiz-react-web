@@ -1,4 +1,4 @@
-import { courses, assignments } from "../../Kanbas/Database";
+import db from "../../Kanbas/Database";
 import { useParams, Navigate, Route, Routes, Link } from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { FaGraduationCap } from "react-icons/fa";
@@ -11,8 +11,9 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 
 import "../../index.css";
+import { courseType } from "../Dashboard";
 
-function Courses() {
+function Courses({ courses }: { courses: courseType[] }) {
     const { "*":tab, courseId } = useParams();   
     const course = courses.find( (course) => course._id === courseId );
     
@@ -20,7 +21,7 @@ function Courses() {
         const tabList = tab? tab.split("/"): [];
 
         if (tabList.length > 0 && tabList[0] === "Assignments" && tabList[1]?.[0] === "A" && tabList[2]?.[0] === "A") {
-            const assignmentGroup = assignments.find( (assignmentId) => assignmentId._id === tabList[1] );
+            const assignmentGroup = db.assignments.find( (assignmentId) => assignmentId._id === tabList[1] );
             const assignment = assignmentGroup?.items.find( (item) => item.item_id === tabList[2] );
             console.log("excuted")
             return (
@@ -85,6 +86,7 @@ function Courses() {
                 <Route path="Piazza" element={<h1>Piazza</h1>} />
                 <Route path="Assignments" element={<Assignments />} />
                 <Route path="Assignments/:assignmentGroupId/:assignmentId" element={<AssignmentEditor />} />
+                <Route path="Assignments/Add" element={<AssignmentEditor />} />
                 <Route path="Grades" element={<Grades />} />
             </Routes>
            

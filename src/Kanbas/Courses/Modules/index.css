@@ -1,14 +1,12 @@
-.wd-modules,
-.wd-modules * {
-  border-radius: 0%;
-  border: none;
-  margin: 0px;
-  padding: 0px;
+.wd-modules, .wd-modules * {
   list-style-type: none;
 }
 
 .wd-modules {
     margin: 5px;
+    border-radius: 0%;
+    margin: 0px;
+    padding: 0px;
 }
 
 .wd-modules-button-icon-left {
@@ -22,12 +20,19 @@
     background-color: gainsboro;
     border: 1px solid gray !important;
     border-left: none !important;
+    border-radius: 0%;
+    margin: 0px;
+    padding: 0px;
 }
 .wd-modules > li > div {
     padding: 8px;
     border-left: 1px solid gray !important;
     padding-top: 10px;
     padding-bottom: 10px;
+    border-radius: 0%;
+}
+.wd-modules > li > ul {
+    border-radius: 0%;
 }
 .wd-modules > li > ul > li {
     padding: 5px;
@@ -36,9 +41,11 @@
     background-color: white;
     padding-top: 10px;
     padding-bottom: 10px;
+    border-radius: 0%;
 }
 .wd-modules > li {
     margin-bottom: 20px;
+    border-radius: 0%;
 }
 .wd-modules i {
     margin-left: 5px;
@@ -84,10 +91,10 @@
 .wd-modules-top-buttons-row {
     padding-top: 16px;
 }
-.wd-modules-top-buttons-row .btn {
+
+.wd-modules-top-buttons {
     background-color: gainsboro;
     border: 1px solid gray;
     margin-left: 3px;
     margin-right: 3px;
 }
-

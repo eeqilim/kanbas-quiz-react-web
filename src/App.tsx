@@ -7,9 +7,12 @@ import logo from './logo.svg';
 import Labs from "./Labs";
 import HelloWorld from './Labs/a3/HelloWorld';
 import Kanbas from './Kanbas';
+import Playground from './Playground';
 
 import { HashRouter } from 'react-router-dom';
 import { Routes, Route, Navigate } from 'react-router-dom';
+
+
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
           <Route path="/Labs/*" element={<Labs/>}/>
           <Route path="/Kanbas/*" element={<Kanbas/>}/>
           <Route path="/hello" element={<HelloWorld/>}/>
+          <Route path="/Playground/*" element={<Playground/>}/>
+
         </Routes>
       </div>
     </HashRouter>
