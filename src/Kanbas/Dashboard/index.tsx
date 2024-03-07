@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaBullhorn, FaPenToSquare, FaRegComments, FaRegFolder } from "react-icons/fa6";
 import "./index.css";
-
+import { useState } from "react";
+import Collapse from 'react-bootstrap/Collapse';
+import { FaPlus } from "react-icons/fa";
+import { FaEllipsisVertical } from "react-icons/fa6";
 
 export type courseType = {
     _id: string;
@@ -17,21 +20,57 @@ export type courseType = {
 function Dashboard({ courses, course, setCourses, setCourse, addNewCourse, deleteCourse, updateCourse }: { courses: courseType[], course: courseType, setCourses: any, setCourse: any, addNewCourse: any, deleteCourse: any, updateCourse: any }) {
    
     let numberOfCourse = courses.length;
+    const [addCourseFormCollapse, setAddCourseFormCollapse] = useState(false);
 
     return (
         <div className="p-4">
             <h1>Dashboard</h1>
             <hr/>
-            <h3 className="flex-fill">Published Courses ({ numberOfCourse })</h3>  
+            <div>
+                <div className="h3 d-inline">Published Courses ({ numberOfCourse })</div>  
+                <div className="float-end">
+                    <button onClick={() => setAddCourseFormCollapse(!addCourseFormCollapse)} aria-expanded={addCourseFormCollapse} className="btn btn-danger"><FaPlus /> Course</button>
+                </div>
+            </div>
             <hr/>
-
-            <h5>Add Course</h5>
-            <input value={course.name} className="form-control" onChange={(e) => setCourse({ ...course, name: e.target.value })}/>
-            <input value={course.number} className="form-control" onChange={(e) => setCourse({ ...course, number: e.target.value })}/>
-            <input value={course.startDate} className="form-control" type="date" onChange={(e) => setCourse({ ...course, startDate: e.target.value })}/>
-            <input value={course.endDate} className="form-control" type="date" onChange={(e) => setCourse({ ...course, endDate: e.target.value })}/>
-            <button onClick={addNewCourse} className="btn btn-secondary me-2">Add</button>
-            <button onClick={updateCourse} className="btn btn-secondary me-2">Update</button>
+            
+            {/* Add Course Form Collapse */}
+            <Collapse in={addCourseFormCollapse}>
+                <div id="addCourseCollapseForm">
+                    <div className="fw-bold h4 mb-3">Add Course</div>
+                    
+                        <div className="mb-3 row">
+                            <label htmlFor="addCourseForm-name" className="col-md-2 col-12 col-form-label">Course Name</label>
+                            <div className="col-md-10 col-12">
+                                <input value={course.name} className="form-control" id="addCourseForm-name" onChange={(e) => setCourse({ ...course, name: e.target.value })} placeholder="New Course Name"/>
+                            </div>
+                        </div>
+                        <div className="mb-3 row">
+                            <label htmlFor="addCourseForm-number" className="col-md-2 col-12 col-form-label">Course Number</label>
+                            <div className="col-md-10 col-12">
+                                <input value={course.number} className="form-control" onChange={(e) => setCourse({ ...course, number: e.target.value })} placeholder="New Course Number"/>
+                            </div>
+                        </div>
+                        <div className="mb-3 row">
+                            <label htmlFor="addCourseForm-startDate" className="col-md-2 col-12 col-form-label">Start Date</label>
+                            <div className="col-md-10 col-12">
+                                <input value={course.startDate} className="form-control" type="date" onChange={(e) => setCourse({ ...course, startDate: e.target.value })}/>
+                            </div>
+                        </div>
+                        <div className="mb-3 row"> 
+                            <label htmlFor="addCourseForm-endDate" className="col-md-2 col-12 col-form-label">End Date</label>
+                            <div className="col-md-10 col-12">
+                                <input value={course.endDate} className="form-control" type="date" onChange={(e) => setCourse({ ...course, endDate: e.target.value })}/>
+                            </div>
+                        </div>
+                        
+                        <div className="col mt-2">
+                            <button onClick={addNewCourse} className="btn btn-danger me-2">Add</button>
+                            <button onClick={updateCourse} className="btn btn-secondary me-2">Update</button>
+                        </div>
+                    
+                </div>
+            </Collapse>
 
             <div className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">
@@ -41,15 +80,24 @@ function Dashboard({ courses, course, setCourses, setCourse, addNewCourse, delet
                         <div key={ course._id } className="col wd-kanbas-dashboard-card-col">
                          
                             <div className="card h-100">
-                                                        
-                                <img src={ `/images/${ course.image !== "" ? course.image : "dashboard-card-img.jpg" }` } className="card-img-top img-fluid wd-kanbas-dashboard-card-img" alt="course-card-img"/>
+                                <div style={{ position: "relative"}}>    
+                                    <img src={ `/images/${ course.image !== "" ? course.image : "dashboard-card-img.jpg" }` } className="card-img-top img-fluid wd-kanbas-dashboard-card-img" alt="course-card-img"/>
+                                   
+                                    <div className="dropstart d-inline"  style={{position:"absolute", top:"5px", right:"5px"}}>
+                                        <a type="button" className="btn btn-danger p-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <FaEllipsisVertical />
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <li><button className="dropdown-item" onClick={(e) => { e.preventDefault(); deleteCourse(course._id); }}>Delete</button></li>
+                                            <li><button className="dropdown-item" onClick={(e) => { e.preventDefault(); setCourse(course); setAddCourseFormCollapse(true)}}>Edit</button></li>
+                                        </ul>
+                                    </div>
 
+                                </div>
                                 <div className="card-body d-flex flex-column ">
                                    
                                     <Link className="card-title" to={ `/Kanbas/Courses/${ course._id }/Home` }>
                                         { course.name }
-                                        <button className="btn btn-secondary btn-sm ms-2 me-2" onClick={(e) => { e.preventDefault(); deleteCourse(course._id); }}>Delete</button>
-                                        <button className="btn btn-secondary btn-sm" onClick={(e) => { e.preventDefault(); setCourse(course); }}>Edit</button>
                                     </Link>
                                     
 

@@ -2,6 +2,8 @@ import { useParams } from "react-router";
 import { Link, useLocation } from "react-router-dom";
 import { FaGraduationCap, FaCaretDown, FaRegUserCircle, FaTachometerAlt, FaBook, FaRegCalendarAlt, FaInbox, FaRegClock, FaTv, FaRegArrowAltCircleRight, FaRegQuestionCircle, FaHome, FaPuzzlePiece, FaBullhorn, FaRegComments, FaBookOpen, FaUsers, FaRegFolder, FaRegNewspaper, FaRocket } from "react-icons/fa";
 import { FaBars, FaPenToSquare } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import db from "../../Database";
 
 function TopHiddenKanbasNavigation() {
     const links = [
@@ -31,13 +33,14 @@ function TopHiddenKanbasNavigation() {
     const { pathname } = useLocation();
     const pathList = pathname.split("/");
 
-    console.log(pathList);
+    
 
     const renderTopName = () => {
         if (pathList.length === 5) {
+            const courseName = db.courses.find( (course) => course._id === pathList[3] )?.name;
             return (
                 <>
-                    <p className="m-0">{ pathList[3] }</p>
+                    <p className="m-0">{ courseName }</p>
                     <p className="m-0">{ pathList[4] }</p>
                 </>
             );

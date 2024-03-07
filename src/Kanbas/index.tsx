@@ -12,12 +12,12 @@ import { Provider } from "react-redux";
 function Kanbas() {
     const [courses, setCourses] = useState(db.courses);
     const [course, setCourse] = useState({
-        _id: "0",
-        name: "New Course",
-        number: "New Number", 
-        startDate: "2023-09-10",
-        endDate: "2023-12-15",
-        term: "Fall 2023",
+        _id: "",
+        name: "",
+        number: "", 
+        startDate: "",
+        endDate: "",
+        term: "",
         image: ""
     });
 

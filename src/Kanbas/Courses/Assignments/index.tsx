@@ -101,6 +101,7 @@ function Assignments() {
                             <span className="float-end  ms-2">
                                 <div className="rounded-pill wd-courses-assignments-grade-percentage d-inline">{assignment.total_grade_percentage} % of Total</div>
                                 <a className="btn wd-courses-assignments-icon-link"><FaPlus /></a>
+
                                 <div className="dropleft d-inline">
                                     <a className="btn wd-courses-assignments-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
                                     <ul className="dropdown-menu">
@@ -114,6 +115,7 @@ function Assignments() {
                                         }}>Edit Assignment Group</button></li>
                                     </ul>
                                 </div>
+                                
                             </span>
                         </div>
 
@@ -152,7 +154,11 @@ function Assignments() {
                                                                 dispatch(setAssignmentGroupState(assignment));
                                                                 dispatch(setAssignmentState(item));
                                                             }}>Delete Assignment</button></li>
-                                                        <li><button className="dropdown-item" >Edit Assignment</button></li>
+                                                        <li><button className="dropdown-item" onClick={() => {dispatch(setAssignmentState(item))}}>
+                                                            <Link style={{"textDecoration": "None", "color": "black"}} to={ `/Kanbas/Courses/${courseId}/Assignments/${assignment._id}/${item.item_id}` }>
+                                                                Edit Assignment
+                                                            </Link>
+                                                        </button></li>
                                                     </ul>
                                                 </div>
                                             </span>
