@@ -8,6 +8,7 @@ import { useState } from "react";
 
 import store from "./store";
 import { Provider } from "react-redux";
+import { resolveProjectReferencePath } from "typescript";
 
 function Kanbas() {
     const [courses, setCourses] = useState(db.courses);
@@ -43,6 +44,17 @@ function Kanbas() {
         course.term = getTerm(course.startDate);
         setCourses(courses.map((c) => c._id === course._id ? course : c));
     };
+    const resetCourse = () => {
+        setCourse({
+            _id: "",
+            name: "",
+            number: "", 
+            startDate: "",
+            endDate: "",
+            term: "",
+            image: ""
+        });
+    }
 
     return(
         <Provider store={store}>
@@ -62,7 +74,7 @@ function Kanbas() {
                         <Routes>
                             <Route path="/" element={<Navigate to="Dashboard" />} />
                             <Route path="Account" element={<h1>Account</h1>} />
-                            <Route path="Dashboard" element={<Dashboard courses={courses} course={course} setCourse={setCourse} setCourses={setCourses} addNewCourse={addNewCourse} deleteCourse={deleteCourse} updateCourse={updateCourse} />} />
+                            <Route path="Dashboard" element={<Dashboard courses={courses} course={course} setCourse={setCourse} setCourses={setCourses} addNewCourse={addNewCourse} deleteCourse={deleteCourse} updateCourse={updateCourse} resetCourse={resetCourse}/>} />
                             <Route path="Courses/:courseId/*" element={<Courses courses={courses}/>} />
                         </Routes>
                     </div>

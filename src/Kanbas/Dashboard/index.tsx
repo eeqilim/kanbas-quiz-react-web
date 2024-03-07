@@ -17,7 +17,7 @@ export type courseType = {
 };
 
 
-function Dashboard({ courses, course, setCourses, setCourse, addNewCourse, deleteCourse, updateCourse }: { courses: courseType[], course: courseType, setCourses: any, setCourse: any, addNewCourse: any, deleteCourse: any, updateCourse: any }) {
+function Dashboard({ courses, course, setCourses, setCourse, addNewCourse, deleteCourse, updateCourse, resetCourse }: { courses: courseType[], course: courseType, setCourses: any, setCourse: any, addNewCourse: any, deleteCourse: any, updateCourse: any, resetCourse: any }) {
    
     let numberOfCourse = courses.length;
     const [addCourseFormCollapse, setAddCourseFormCollapse] = useState(false);
@@ -29,7 +29,7 @@ function Dashboard({ courses, course, setCourses, setCourse, addNewCourse, delet
             <div>
                 <div className="h3 d-inline">Published Courses ({ numberOfCourse })</div>  
                 <div className="float-end">
-                    <button onClick={() => setAddCourseFormCollapse(!addCourseFormCollapse)} aria-expanded={addCourseFormCollapse} className="btn btn-danger"><FaPlus /> Course</button>
+                    <button onClick={() => { resetCourse(); setAddCourseFormCollapse(!addCourseFormCollapse)}} aria-expanded={addCourseFormCollapse} className="btn btn-danger"><FaPlus /> Course</button>
                 </div>
             </div>
             <hr/>
