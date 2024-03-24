@@ -12,10 +12,36 @@ import Grades from "./Grades";
 
 import "../../index.css";
 import { courseType } from "../Dashboard";
+import { useState, useEffect } from "react";
 
-function Courses({ courses }: { courses: courseType[] }) {
+import axios from "axios";
+
+
+import * as moduleClient from "./Modules/client"
+import { setModules } from "./Modules/modulesReducer"
+import { useDispatch } from "react-redux";
+
+
+function Courses() {
     const { "*":tab, courseId } = useParams();   
-    const course = courses.find( (course) => course._id === courseId );
+    const dispatch = useDispatch();
+    
+    const COURSES_API = "https://kanbas-node-server-app-8t36.onrender.com/api/courses";
+
+    const defaultEmptyCourseType = { _id: "", number: "", name: "", startDate: "", endDate: "", term: "", image: "" }
+    const [course, setCourse] = useState<courseType>(defaultEmptyCourseType);
+
+    
+
+    const findCourseById = async (courseID?: string) => {
+        const response = await axios.get(`${COURSES_API}/${courseID}`);
+        setCourse(response.data);
+    }
+
+    useEffect(() => {
+        findCourseById(courseId);
+        moduleClient.findModulesForCourse(courseId).then((modules) => dispatch(setModules(modules)));
+    }, [courseId]);
     
     const renderBreadcrumb = (courseName: string, tab?: string) => {
         const tabList = tab? tab.split("/"): [];
@@ -70,7 +96,7 @@ function Courses({ courses }: { courses: courseType[] }) {
         </div>
 
 
-        <hr className="d-none d-md-block mt-1"></hr> 
+        <hr className="d-none d-md-block m-0 mt-1 mb-1"></hr> 
 
         <div className="d-flex">
             <div className="collapse collapse-horizontal show" id="wd-courses-navigation-side-bar">

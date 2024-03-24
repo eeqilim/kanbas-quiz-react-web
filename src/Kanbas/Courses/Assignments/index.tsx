@@ -1,13 +1,17 @@
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaPlus, FaSortDown } from "react-icons/fa";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { Link, useParams } from "react-router-dom";
-import db from "../../Database";
 import "./index.css";   
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Collapse, Button, Modal } from "react-bootstrap";
-import { addAssignmentGroup, setAssignmentGroupState, deleteAssignmentGroup, updateAssignmentGroup, setAssignmentState, deleteAssignment, resetAssignmentState } from "./assignmentsReducer";
+import { setAssignments, addAssignmentGroup, setAssignmentGroupState, deleteAssignmentGroup, updateAssignmentGroup, setAssignmentState, deleteAssignment, resetAssignmentState, resetAssignmentGroupState } from "./assignmentsReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../store";
+
+
+
+import * as client from "./client";
+
 
 function DeleteAssignmentModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void}) {
     return (
@@ -30,11 +34,18 @@ function DeleteAssignmentModal({ show, onClose, onDelete }: { show: boolean, onC
 function Assignments() {
     const { courseId } = useParams();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        client.findAssignmentsForCourse(courseId).then((assignments) => dispatch(setAssignments(assignments)));
+        
+    }, [courseId]);
+
+
     const assignmentList = useSelector((state: KanbasState) => state.assignmentsReducer.assignments);
     const assignmentGroupState = useSelector((state: KanbasState) => state.assignmentsReducer.assignmentGroup);
     const assignmentState = useSelector((state: KanbasState) => state.assignmentsReducer.assignment);
     const [assignmentGroupFormCollapse, setAssignmentGroupFormCollapse] = useState(false);
-    const modules = db.modules.filter( (module) => module.course === courseId);
+    const modules = useSelector((state: KanbasState) => state.modulesReducer.modules);
 
     function formatDate(inputDate : string) {
         const date = new Date(inputDate);
@@ -47,13 +58,47 @@ function Assignments() {
     }
 
     const [showDeleteAssignmentModal, setShowDeleteAssignmentModal] = useState(false);
+
     const handleDeleteAssignment = () => {
+        client.deleteAssignmentItem(assignmentGroupState._id, assignmentState.item_id)
         dispatch(deleteAssignment({assignmentGroupId: assignmentGroupState._id, assignmentId: assignmentState.item_id}));
         setShowDeleteAssignmentModal(false);
+        dispatch(resetAssignmentGroupState());
+        dispatch(resetAssignmentState());
     }
 
+
+    const handleAddAssignmentGroup = () => {
+        if (assignmentGroupState.category === "" || assignmentGroupState.total_grade_percentage > 100 || assignmentGroupState.total_grade_percentage < 0) {
+            return;
+        }
+        client.createAssignmentGroup(courseId, assignmentGroupState)
+        .then((newAssignmentGroup) => {
+            dispatch(addAssignmentGroup(newAssignmentGroup)); 
+            dispatch(resetAssignmentGroupState());
+        });
+    }
+    const handleDeleteAssignmentGroup = (assignmentId: string) => {
+        client.deleteAssignmentGroup(assignmentId)
+        .then((status) => {
+            dispatch(deleteAssignmentGroup(assignmentId))
+        });
+    }
+    const handleUpdateAssignmentGroup = async () => {
+        if (assignmentGroupState.category === "" || assignmentGroupState.total_grade_percentage > 100 || assignmentGroupState.total_grade_percentage < 0) {
+            return;
+        }
+        const status = await client.updateAssignmentGroup(assignmentGroupState);
+        dispatch(updateAssignmentGroup(assignmentGroupState));
+        dispatch(resetAssignmentGroupState());
+    }
+
+
+
+
+
     return (
-        <div className="flex-fill me-2 ms-2">
+        <div className="flex-fill me-2 ms-2 mt-2">
             <div className="d-flex flex-row justify-content-between ps-3 pe-3">
                 <div className="w-25">
                     <input className="form-control" type="text" placeholder="Search for Assignments" title="Search by assignment name"></input>
@@ -83,8 +128,8 @@ function Assignments() {
                         onChange={(e) => dispatch(setAssignmentGroupState({ ...assignmentGroupState, total_grade_percentage: parseInt(e.target.value)}))}/>
                     </div>
                     <div className="col-auto">
-                        <Button className="btn btn-danger me-2" onClick={() => dispatch(addAssignmentGroup({courseId: courseId, assignmentGroupState: assignmentGroupState}))}>Add</Button>
-                        <Button className="btn btn-secondary" onClick={() => dispatch(updateAssignmentGroup(assignmentGroupState))}>Update</Button>
+                        <Button className="btn btn-danger me-2" onClick={() => {handleAddAssignmentGroup(); setAssignmentGroupFormCollapse(false)}}>Add</Button>
+                        <Button className="btn btn-secondary" onClick={() => {handleUpdateAssignmentGroup(); setAssignmentGroupFormCollapse(false)}}>Update</Button>
                     </div>
                 </div>
             </Collapse>
@@ -107,7 +152,7 @@ function Assignments() {
                                     <ul className="dropdown-menu">
                                         <li><button className="dropdown-item" onClick={() => {
                                             if (assignment.items.length > 0) { alert("Cannot delete assignment group with assignments"); return; };
-                                            dispatch(deleteAssignmentGroup(assignment._id))
+                                            handleDeleteAssignmentGroup(assignment._id);
                                         }}>Delete Assignment Group</button></li>
                                         <li><button className="dropdown-item" onClick={() => {
                                             setAssignmentGroupFormCollapse(true);

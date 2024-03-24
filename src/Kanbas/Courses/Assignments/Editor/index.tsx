@@ -1,5 +1,4 @@
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
-import db from "../../../Database";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaEllipsisV } from "react-icons/fa";
 import "./index.css";
@@ -7,6 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../../store";
 import { resetAssignmentState, updateAssignment, setAssignmentState, addAssignment } from "../assignmentsReducer";
 import { useState } from "react";
+
+
+import * as client from "../client"
+
 
 function AssignmentEditor() {
     const { courseId } = useParams();
@@ -18,18 +21,31 @@ function AssignmentEditor() {
     const navigate = useNavigate();
     const dispatch = useDispatch(); 
     const { pathname } = useLocation(); 
-    console.log("assignmentGroupId:", assignmentGroupIdState);
+    
+
+    const handleAddLesson = () => {
+        client.addAssignmentItem(assignmentGroupIdState, assignment)
+        .then((newAssignmentItem) => {
+            dispatch(addAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: newAssignmentItem }))
+        });
+    }
+
+    const handleUpdateLesson = () => {
+        console.log("hangleUpdateLesson Called")
+        client.updateAssignmentItem(assignmentGroupIdState, assignment)
+        .then((status) => {
+            dispatch(updateAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment}))
+        });
+    }
+
 
     const handleSave = () => {
         console.log("Action: Save");
         if (pathname.includes("Add")) {
-            dispatch(addAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment }));
+            handleAddLesson();
         } else {
-            
-            dispatch(updateAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment }));
+            handleUpdateLesson();
         }
-
-
         dispatch(resetAssignmentState());
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
@@ -68,10 +84,12 @@ function AssignmentEditor() {
                         <input type="number" className="form-control w-100" id="assignment-points" value={assignment.points} onChange={(e) => {dispatch(setAssignmentState({ ...assignment, points: parseInt(e.target.value)}))}} />
                     </div>
                 </div>
+                { pathname.includes("Add") && 
                 <div className="row mb-3 align-items-center"> 
                     <div className="col-2 wd-courses-assignments-edit-input-label text-end">
                         <label htmlFor="assignment-group" className="form-label mb-0">Assignment Group</label>
                     </div>
+                    
                     <div className="col-8">
                         <select className="form-select" id="assignment-group" onChange={
                             (e) => {
@@ -88,6 +106,7 @@ function AssignmentEditor() {
                         </select>
                     </div>
                 </div>
+                }
                 <div className="row mb-3 align-items-center">
                     <div className="col-2 wd-courses-assignments-edit-input-label text-end">
                         <label htmlFor="assignment-description" className="form-label mb-0">Module</label>
