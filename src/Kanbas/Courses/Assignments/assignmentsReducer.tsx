@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../Database";
+
 
 const initialState = {
-    assignments: [{_id: "", category: "", course: "0", total_grade_percentage: 0, items: [{item_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: ""}]}],
+    assignments: [{_id: "", category: "", course: "0", total_grade_percentage: 0, items: [{_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: "", assignment_group_id: "" }]}],
     assignmentGroup: {category: "", course: "0", total_grade_percentage: 0, items: []},
-    assignment: {item_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: ""},
+    assignment: {_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: "", assignment_group_id: "" },
 }
 
 const assignmentsSlice = createSlice({
@@ -57,13 +57,13 @@ const assignmentsSlice = createSlice({
                 (assignmentGroup) => {
                     if (assignmentGroup._id === assignmentGroupId) {
                         assignmentGroup.items = assignmentGroup.items.filter(
-                            (item) => item.item_id !== assignmentId
+                            (item) => item._id !== assignmentId
                         );
                     }
                     return assignmentGroup;
                 }
             )
-            state.assignment = {item_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: ""};
+            state.assignment = {_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: "", assignment_group_id: "" };
             state.assignmentGroup = {category: "", course: "0", total_grade_percentage: 0, items: []};
         },
 
@@ -72,7 +72,7 @@ const assignmentsSlice = createSlice({
         },
         
         resetAssignmentState: (state) => {
-            state.assignment = {item_id: "", item_name: "", module: "", points: 0, due_date: "", due_time: "", available_from_date: "", available_to_date: ""};
+            state.assignment = {_id: "", item_name: "", module: "", points: 0, due_date: new Date().toISOString(), due_time: "", available_from_date: new Date().toISOString(), available_to_date: new Date().toISOString(), assignment_group_id: "" };
         },
 
         addAssignment: (state, action) => {
@@ -82,7 +82,7 @@ const assignmentsSlice = createSlice({
                     if (assignmentGroup._id === assignmentGroupId) {
                         assignmentGroup.items = [
                             ...assignmentGroup.items,
-                            { ...assignment, item_id: `${assignmentGroup._id}.${new Date().getTime().toString()}` }
+                            { ...assignment }
                         ];
                     }
                     return assignmentGroup;
@@ -94,7 +94,7 @@ const assignmentsSlice = createSlice({
             const {assignmentGroupId, assignment} = action.payload;
             const assignmentGroup = state.assignments.find((assignmentGroup) => assignmentGroup._id === assignmentGroupId);
             assignmentGroup?.items.map((item) => {
-                if (item.item_id === assignment.item_id) {
+                if (item._id === assignment._id) {
                     item = assignment;
                 }
                 return item;

@@ -1,4 +1,3 @@
-import db from "../../Kanbas/Database";
 import { useParams, Navigate, Route, Routes, Link } from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { FaGraduationCap } from "react-icons/fa";
@@ -26,7 +25,8 @@ function Courses() {
     const { "*":tab, courseId } = useParams();   
     const dispatch = useDispatch();
     
-    const COURSES_API = "https://kanbas-node-server-app-8t36.onrender.com/api/courses";
+    const BASE_API = process.env.REACT_APP_BASE_API_URL;
+    const COURSES_API = `${BASE_API}/api/courses`;
 
     const defaultEmptyCourseType = { _id: "", number: "", name: "", startDate: "", endDate: "", term: "", image: "" }
     const [course, setCourse] = useState<courseType>(defaultEmptyCourseType);
@@ -47,9 +47,6 @@ function Courses() {
         const tabList = tab? tab.split("/"): [];
 
         if (tabList.length > 0 && tabList[0] === "Assignments" && tabList[1]?.[0] === "A" && tabList[2]?.[0] === "A") {
-            const assignmentGroup = db.assignments.find( (assignmentId) => assignmentId._id === tabList[1] );
-            const assignment = assignmentGroup?.items.find( (item) => item.item_id === tabList[2] );
-            console.log("excuted")
             return (
                 <Breadcrumb className="pt-2 d-inline-block">
                     <Breadcrumb.Item linkAs="span">

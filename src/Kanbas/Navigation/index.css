@@ -36,6 +36,9 @@
 #wd-kanbas-navigation-account-icon {
     color: white;
 }
+li.wd-active #wd-kanbas-navigation-account-icon {
+    color: red;
+}
 
 .wd-kanbas-navigation img {
     width: 100%;

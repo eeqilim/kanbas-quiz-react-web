@@ -1,22 +1,31 @@
 import ModuleList from "../Modules/List";
 import { useParams, Link } from "react-router-dom";
 import "./index.css";
-import db from "../../Database";
+
 import { FaExclamationCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
+import * as client from "../Assignments/client";
+import { assignmentItemType, assignmentType } from "../../store";
 
 function Home() {
     const { courseId } = useParams();
-    const getAssignmentList = () => {
-        const result = [];
-        const assignmentList = db.assignments.filter( (assignment) => assignment.course === courseId );
-        for (let i=0; i<assignmentList.length; i++) {
-            for (let j=0; j<assignmentList[i].items.length; j++) {
-                result.push(assignmentList[i].items[j]);
-            }
-        }
-        return result;
+
+    const [assignmentItems, setAssignmentItems] = useState<assignmentItemType[]>([]);
+
+    const getAssignmentList = async () => {
+        const assignmentList = await client.findAssignmentsForCourse(courseId);
+        const result = assignmentList.flatMap((assignment: assignmentType) => assignment.items);
+        return result
     }
-    const assignmentList = getAssignmentList();
+
+    const fetchAssignments = async () => {
+        const items = await getAssignmentList();
+        setAssignmentItems(items);
+    }
+    useEffect(() => {
+        fetchAssignments();
+    }, []);
 
     function formatDate(inputDate : string) {
         const date = new Date(inputDate);
@@ -108,14 +117,14 @@ function Home() {
 
                         
                         {
-                            assignmentList.map((assignment, index) => (
+                            assignmentItems.map((assignment, index) => (
                                 
                                 <div key={index} className="d-flex to-do-element-container mt-3">
                                     <div className="to-do-section-icon-container">
                                         <FaExclamationCircle /> 
                                     </div>
                                     <div className="to-do-section-text-container">
-                                        <Link to={ `/Kanbas/Courses/${ courseId }/Assignments/${ assignment.item_id }` } className="red-links">{ assignment.item_name }</Link>
+                                        <Link to={ `/Kanbas/Courses/${ courseId }/Assignments` } className="red-links">{ assignment.item_name }</Link>
                                         <p>{`${ assignment.points } points • ${ formatDate(assignment.due_date) } at ${ assignment.due_time }`}</p>
                                     </div>
                                 </div>

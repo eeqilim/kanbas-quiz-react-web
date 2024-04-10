@@ -1,7 +1,9 @@
 import axios from "axios"
 
-const COURSE_API = "https://kanbas-node-server-app-8t36.onrender.com/api/courses"
-const ASSIGNMENT_API = "https://kanbas-node-server-app-8t36.onrender.com/api/assignments"
+const BASE_API = process.env.REACT_APP_BASE_API_URL;
+
+const COURSE_API = `${BASE_API}/api/courses`;
+const ASSIGNMENT_API = `${BASE_API}/api/assignments`;
 
 
 
@@ -40,7 +42,7 @@ export const deleteAssignmentItem = async (assignmentGroupId, assignmentItemId) 
 }
 
 export const updateAssignmentItem = async (assignmentGroupId, assignmentItem) => {
-    const response = await axios.put(`${ASSIGNMENT_API}/${assignmentGroupId}/assignment/${assignmentItem.item_id}`, assignmentItem);
+    const response = await axios.put(`${ASSIGNMENT_API}/${assignmentGroupId}/assignment/${assignmentItem._id}`, assignmentItem);
     console.log(response.data);
     return response.data;
 }

@@ -60,8 +60,8 @@ function Assignments() {
     const [showDeleteAssignmentModal, setShowDeleteAssignmentModal] = useState(false);
 
     const handleDeleteAssignment = () => {
-        client.deleteAssignmentItem(assignmentGroupState._id, assignmentState.item_id)
-        dispatch(deleteAssignment({assignmentGroupId: assignmentGroupState._id, assignmentId: assignmentState.item_id}));
+        client.deleteAssignmentItem(assignmentGroupState._id, assignmentState._id)
+        dispatch(deleteAssignment({assignmentGroupId: assignmentGroupState._id, assignmentId: assignmentState._id}));
         setShowDeleteAssignmentModal(false);
         dispatch(resetAssignmentGroupState());
         dispatch(resetAssignmentState());
@@ -167,13 +167,13 @@ function Assignments() {
                         <div className="collapse show p-0" id={`collapse-${assignment.category}-list`}>
                             <ul className="listGroup">
                                 { assignment.items?.map( (item) => (
-                                    <li key={item.item_id} className="list-group-item">
+                                    <li key={item._id} className="list-group-item">
                                         <div className="d-flex align-items-center">
                                             <FaEllipsisV className="me-2 ms-2"/>
                                             <HiOutlinePencilSquare className="me-3 ms-2 text-success"/>
                                             <div className="flex-fill">
                                                 <div onClick={() => {dispatch(setAssignmentState(item)); console.log(item)}}>
-                                                    <Link className="fw-bold assignment-list-link text-dark" to={ `/Kanbas/Courses/${courseId}/Assignments/${assignment._id}/${item.item_id}` }>
+                                                    <Link className="fw-bold assignment-list-link text-dark" to={ `/Kanbas/Courses/${courseId}/Assignments/${assignment._id}/${item._id}` }>
                                                         {item.item_name}
                                                     </Link>
                                                 </div>
@@ -200,7 +200,7 @@ function Assignments() {
                                                                 dispatch(setAssignmentState(item));
                                                             }}>Delete Assignment</button></li>
                                                         <li><button className="dropdown-item" onClick={() => {dispatch(setAssignmentState(item))}}>
-                                                            <Link style={{"textDecoration": "None", "color": "black"}} to={ `/Kanbas/Courses/${courseId}/Assignments/${assignment._id}/${item.item_id}` }>
+                                                            <Link style={{"textDecoration": "None", "color": "black"}} to={ `/Kanbas/Courses/${courseId}/Assignments/${assignment._id}/${item._id}` }>
                                                                 Edit Assignment
                                                             </Link>
                                                         </button></li>

@@ -17,13 +17,17 @@ function AssignmentEditor() {
     const assignment = useSelector((state: KanbasState) => state.assignmentsReducer.assignment);
     const modules = useSelector((state: KanbasState) => state.modulesReducer.modules.filter((module) => module.course === courseId));
     const assignmentGroups = useSelector((state: KanbasState) => state.assignmentsReducer.assignments.filter((assignment) => assignment.course === courseId));
-    const [assignmentGroupIdState, setAssignmentGroupIdState] = useState(assignment.item_id === "" ? "" : assignment.item_id.split(".")[0]);
+    const [assignmentGroupIdState, setAssignmentGroupIdState] = useState(assignment._id === "" ? "" : assignment.assignment_group_id);
     const navigate = useNavigate();
     const dispatch = useDispatch(); 
     const { pathname } = useLocation(); 
     
 
     const handleAddLesson = () => {
+        if (assignmentGroupIdState === "") {
+            alert("Please select an assignment group");
+            return;
+        }
         client.addAssignmentItem(assignmentGroupIdState, assignment)
         .then((newAssignmentItem) => {
             dispatch(addAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: newAssignmentItem }))
@@ -34,7 +38,7 @@ function AssignmentEditor() {
         console.log("hangleUpdateLesson Called")
         client.updateAssignmentItem(assignmentGroupIdState, assignment)
         .then((status) => {
-            dispatch(updateAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment}))
+            dispatch(updateAssignment({ assignmentGroupId: assignmentGroupIdState, assignment: assignment }))
         });
     }
 
@@ -100,7 +104,7 @@ function AssignmentEditor() {
                             {
                                 assignmentGroups.map((group, index) => (
                                     <option key={index} value={group._id} 
-                                    selected={assignment.item_id === "" ? false : group._id === assignment.item_id.split(".")[0]}>{group.category}</option>
+                                    selected={assignment._id === "" ? false : group._id === assignment.assignment_group_id}>{group.category}</option>
                                 ))
                             }
                         </select>
@@ -167,9 +171,9 @@ function AssignmentEditor() {
                                     <div className="col-6">
                                         <label htmlFor="due_date" className="form-label fw-bold fs-6">Due Date</label>
                                         <div className="input-group">
-                                            <input type="date" id="due_date" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.due_date} onChange={
+                                            <input type="date" id="due_date" className="form-control" aria-describedby="passwordHelpBlock" value={new Date(assignment.due_date).toISOString().split('T')[0]} onChange={
                                                 (e) => {dispatch(setAssignmentState({ ...assignment, due_date: e.target.value}))}
-                                                }/>
+                                            }/>
                                         </div>
                                     </div>
                                     <div className="col-6">
@@ -185,7 +189,7 @@ function AssignmentEditor() {
                                     <div className="col-6">
                                         <label htmlFor="availableFromDate" className="form-label fw-bold fs-6">Available From</label>
                                         <div className="input-group">
-                                            <input type="date" id="availableFromDate" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.available_from_date} onChange={
+                                            <input type="date" id="availableFromDate" className="form-control" aria-describedby="passwordHelpBlock" value={new Date(assignment.available_from_date).toISOString().split('T')[0]} onChange={
                                                 (e) => {dispatch(setAssignmentState({ ...assignment, available_from_date: e.target.value}))}
                                             }/>
                                         </div>
@@ -193,7 +197,7 @@ function AssignmentEditor() {
                                     <div className="col-6">
                                         <label htmlFor="availableUntilDate" className="form-label fw-bold fs-6">Untill</label>
                                         <div className="input-group">
-                                            <input type="date" id="availableUntilDate" className="form-control" aria-describedby="passwordHelpBlock" value={assignment.available_to_date} onChange={
+                                            <input type="date" id="availableUntilDate" className="form-control" aria-describedby="passwordHelpBlock" value={new Date(assignment.available_to_date).toISOString().split('T')[0]} onChange={
                                                 (e) => {dispatch(setAssignmentState({ ...assignment, available_to_date: e.target.value}))}
                                             }/>
                                         </div>

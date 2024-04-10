@@ -17,7 +17,7 @@ export type moduleType = {
     lessons: moduleLessonType[];
 };
 export type assignmentItemType = {
-    item_id: string;
+    _id: string;
     item_name: string;
     module: string;
     points: number;
@@ -25,6 +25,7 @@ export type assignmentItemType = {
     due_time: string;
     available_from_date: string;
     available_to_date: string;
+    assignment_group_id: string;
 };
 export type assignmentType = {
     _id: string;
