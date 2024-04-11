@@ -7,6 +7,8 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
+import Quizzes from "./Quizzes";
+import QuizDetails from "./Quizzes/Details";
 import Grades from "./Grades";
 
 import "../../index.css";
@@ -22,16 +24,16 @@ import { useDispatch } from "react-redux";
 
 
 function Courses() {
-    const { "*":tab, courseId } = useParams();   
+    const { "*": tab, courseId } = useParams();
     const dispatch = useDispatch();
-    
+
     const BASE_API = process.env.REACT_APP_BASE_API_URL;
     const COURSES_API = `${BASE_API}/api/courses`;
 
     const defaultEmptyCourseType = { _id: "", number: "", name: "", startDate: "", endDate: "", term: "", image: "" }
     const [course, setCourse] = useState<courseType>(defaultEmptyCourseType);
 
-    
+
 
     const findCourseById = async (courseID?: string) => {
         const response = await axios.get(`${COURSES_API}/${courseID}`);
@@ -42,24 +44,24 @@ function Courses() {
         findCourseById(courseId);
         moduleClient.findModulesForCourse(courseId).then((modules) => dispatch(setModules(modules)));
     }, [courseId]);
-    
+
     const renderBreadcrumb = (courseName: string, tab?: string) => {
-        const tabList = tab? tab.split("/"): [];
+        const tabList = tab ? tab.split("/") : [];
 
         if (tabList.length > 0 && tabList[0] === "Assignments" && tabList[1]?.[0] === "A" && tabList[2]?.[0] === "A") {
             return (
                 <Breadcrumb className="pt-2 d-inline-block">
                     <Breadcrumb.Item linkAs="span">
-                        <Link to={`/Kanbas/courses/${courseId}/Assignments`}  className="red-links">
-                            { courseName }
+                        <Link to={`/Kanbas/courses/${courseId}/Assignments`} className="red-links">
+                            {courseName}
                         </Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item linkAs="span"> 
-                        <Link to={`/Kanbas/courses/${courseId}/Assignments`}  className="red-links">
-                            { tabList[0] }
+                    <Breadcrumb.Item linkAs="span">
+                        <Link to={`/Kanbas/courses/${courseId}/Assignments`} className="red-links">
+                            {tabList[0]}
                         </Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item active>{ tabList[1] }</Breadcrumb.Item>
+                    <Breadcrumb.Item active>{tabList[1]}</Breadcrumb.Item>
                 </Breadcrumb>
             );
         }
@@ -67,55 +69,57 @@ function Courses() {
 
         return (
             <Breadcrumb className="pt-2 d-inline-block">
-                 <Breadcrumb.Item linkAs="span">
-                        <Link to={`/Kanbas/Courses/${courseId}`} className="red-links">
-                            { courseName }
-                        </Link>
-                    </Breadcrumb.Item>
-                <Breadcrumb.Item active>{ tabList[0] }</Breadcrumb.Item>
+                <Breadcrumb.Item linkAs="span">
+                    <Link to={`/Kanbas/Courses/${courseId}`} className="red-links">
+                        {courseName}
+                    </Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>{tabList[0]}</Breadcrumb.Item>
             </Breadcrumb>
         );
     }
-    
+
     return (
         <>
-        {/* BreadCrumb Top Bar */}
-        <div className="container-fluid flex-fill d-none d-md-flex m-0 justify-content-between pt-3 align-items-center align-middle">
-            <div>
-                <button className="btn pt-0" type="button" data-bs-toggle="collapse" data-bs-target="#wd-courses-navigation-side-bar" aria-expanded="false" aria-controls="collapseWidthExample">
-                    <HiMiniBars3 style={{color: "red"}} />
-                </button>
-                {course && renderBreadcrumb(course.name, tab)}
+            {/* BreadCrumb Top Bar */}
+            <div className="container-fluid flex-fill d-none d-md-flex m-0 justify-content-between pt-3 align-items-center align-middle">
+                <div>
+                    <button className="btn pt-0" type="button" data-bs-toggle="collapse" data-bs-target="#wd-courses-navigation-side-bar" aria-expanded="false" aria-controls="collapseWidthExample">
+                        <HiMiniBars3 style={{ color: "red" }} />
+                    </button>
+                    {course && renderBreadcrumb(course.name, tab)}
+                </div>
+                <div className="float-end">
+                    <a href="#" className="btn gray-buttons"><FaGraduationCap className="me-1 fs-5" />Student View</a>
+                </div>
             </div>
-            <div className="float-end">
-                <a href="#" className="btn gray-buttons"><FaGraduationCap className="me-1 fs-5"/>Student View</a>
-            </div>
-        </div>
 
 
-        <hr className="d-none d-md-block m-0 mt-1 mb-1"></hr> 
+            <hr className="d-none d-md-block m-0 mt-1 mb-1"></hr>
 
-        <div className="d-flex">
-            <div className="collapse collapse-horizontal show" id="wd-courses-navigation-side-bar">
-                <CourseNavigation />
+            <div className="d-flex">
+                <div className="collapse collapse-horizontal show" id="wd-courses-navigation-side-bar">
+                    <CourseNavigation />
+                </div>
+
+
+
+                <Routes>
+                    <Route path="/" element={<Navigate to="Home" />} />
+                    <Route path="Home" element={<Home />} />
+                    <Route path="Modules" element={<Modules />} />
+                    <Route path="Piazza" element={<h1>Piazza</h1>} />
+                    <Route path="Assignments" element={<Assignments />} />
+                    <Route path="Assignments/:assignmentGroupId/:assignmentId" element={<AssignmentEditor />} />
+                    <Route path="Assignments/Add" element={<AssignmentEditor />} />
+                    <Route path="Quizzes/:quizGroupId/:quizId" element={<QuizDetails />} />
+                    <Route path="Quizzes" element={<Quizzes />} />
+                    <Route path="Grades" element={<Grades />} />
+                </Routes>
+
+
+
             </div>
-            
-            
-        
-            <Routes>
-                <Route path="/" element={<Navigate to="Home" />} />
-                <Route path="Home" element={<Home />} />
-                <Route path="Modules" element={<Modules/>} />
-                <Route path="Piazza" element={<h1>Piazza</h1>} />
-                <Route path="Assignments" element={<Assignments />} />
-                <Route path="Assignments/:assignmentGroupId/:assignmentId" element={<AssignmentEditor />} />
-                <Route path="Assignments/Add" element={<AssignmentEditor />} />
-                <Route path="Grades" element={<Grades />} />
-            </Routes>
-           
-            
-            
-        </div>
         </>
     );
 
