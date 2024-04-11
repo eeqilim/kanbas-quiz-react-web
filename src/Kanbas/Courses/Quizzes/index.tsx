@@ -1,5 +1,5 @@
 import { FaCheckCircle, FaEllipsisV, FaPlus, FaSortDown } from "react-icons/fa";
-import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { PiProhibit } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
 import "./index.css";
@@ -51,13 +51,12 @@ function Quizzes() {
                         <Link to={`/Kanbas/Courses/${courseId}/Quizzes/Add`} className="btn ms-1 red-button border border-dark" ><FaPlus />Quiz</Link>
                     </div>
                     <a className="btn ms-1 ps-1 pe-1 border border-dark bg-light"><FaEllipsisV /></a>
-
                 </div>
             </div>
             <hr />
             <ul className="list-group wd-courses-quizzes">
                 {quizList.map((quiz) => (
-                    <li key={quiz._id} className="list-group-item">
+                    <li key={quiz._id}>
                         <div>
                             <FaEllipsisV className="me-3 ms-2" />
                             <a className="btn me-3 " data-bs-toggle="collapse" href={`#collapse-${quiz.category}-list`} role="button" aria-expanded="false" aria-controls={`collapse-${quiz.category}-list`}>
@@ -68,10 +67,15 @@ function Quizzes() {
                         <div className="collapse show p-0" id={`collapse-${quiz.category}-list`}>
                             <ul className="listGroup">
                                 {quiz.items?.map((item: any) => (
-                                    <li key={item.item_id} className="list-group-item">
+                                    <li key={item.item_id} className={`list-group-item 
+                                    ${item.available !== "No" || item.published !== "No" ? 'wd-courses-quizzes-available-published' : ''}`}>
                                         <div className="d-flex align-items-center">
                                             <FaEllipsisV className="me-2 ms-2" />
-                                            <HiOutlinePencilSquare className="me-3 ms-2 text-success" />
+                                            {item.available === "No" && item.published === "No" ? (
+                                                <HiOutlineRocketLaunch className="me-3 ms-2 text-muted" />
+                                            ) : (
+                                                < HiOutlineRocketLaunch className="me-3 ms-2 text-success" />
+                                            )}
                                             <div className="flex-fill">
                                                 <div>
                                                     <Link className="fw-bold quiz-list-link text-dark" to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/${item.item_id}`}>
@@ -89,7 +93,7 @@ function Quizzes() {
                                                     <b>Due</b> {formatDate(item.due_date)} at {formatTime(item.due_date)} | {item.points} pts | {item.question_count} Questions
                                                 </div>
                                             </div>
-                                            <span className="ms-auto">
+                                            <span className="float-end" style={{ display: "flex", alignItems: "center" }}>
                                                 {item.available === "No" && item.published === "No" ? (
                                                     <PiProhibit />
                                                 ) : (

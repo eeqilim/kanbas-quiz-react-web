@@ -2,27 +2,32 @@
     background-color: red !important;
     color: white !important;
 }
+
 .top-row-buttons .btn {
     background-color: gainsboro;
     border: 1px solid gray;
 }
+
 .top-row-buttons svg {
     margin-left: 5px;
     margin-right: 5px;
 }
+
 .top-row-buttons {
     padding-top: 16px;
 }
+
 .wd-courses-quizzes {
     border-radius: 0%;
     margin: 0px;
     padding: 0px;
 }
-.wd-courses-quizzes > li > div > ul {
+
+.wd-courses-quizzes>li>div>ul {
     padding: 0px;
 }
 
-.wd-courses-quizzes > li {
+.wd-courses-quizzes>li {
     background-color: lightgray;
     border: 1px solid gray !important;
     border-left: none !important;
@@ -30,24 +35,30 @@
     padding: 0px;
     margin-bottom: 20px;
 }
-.wd-courses-quizzes > li > div {
+
+.wd-courses-quizzes>li>div {
     border-radius: 0%;
     padding: 6px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-left: 1px solid gray !important;
-  
 }
-.wd-courses-quizzes > li > .collapse > ul > li {
+
+.wd-courses-quizzes>li>.collapse>ul>li {
     padding: 4px;
     border-top: 1px solid gray !important;
+}
+
+.wd-courses-quizzes-available-published {
     border-left: 3px solid green;
 }
+
 .wd-courses-quizzes-unpublished {
     padding: 4px;
     border-top: 1px solid gray !important;
     border-left: 1px solid gray;
 }
+
 .wd-courses-quizzes-grade-percentage {
     border: 1px solid gray;
     padding-left: 10px;
@@ -55,22 +66,27 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
 svg {
     vertical-align: middle;
 }
+
 .wd-courses-quizzes-minor-text {
     font-size: 14px;
     color: gray;
     text-decoration: none;
 }
+
 .wd-courses-quizzes-icon-link {
     color: black;
     text-decoration: none;
 }
+
 .quizzes-list-link {
     text-decoration: none;
 }
+
 .quizzes-list-link:hover {
-    color: red !important; 
+    color: red !important;
     text-decoration: underline;
 }

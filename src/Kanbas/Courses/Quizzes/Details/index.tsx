@@ -25,7 +25,6 @@ function QuizDetails() {
     };
     return (
         <div className="container-fluid me-3 ms-3">
-
             <div className="row pt-3">
                 <div className="col text-end">
                     <div className="text-success fs-5 me-1 d-inline">
@@ -100,28 +99,45 @@ function QuizDetails() {
             <br />
             <div className="row">
                 <div className="col-md-3"><b>Due</b></div>
-                <div className="col-md-2"><b>For</b></div>
-                <div className="col-md-4"><b>Available from</b></div>
-                <div className="col-md-3"><b>Until</b></div>
-            </div>
-            <hr />
-            <div className="row">
-                <div className="col-md-3">
-                    {quizItem?.due_date && (
-                    <>{formatDate(quizItem.due_date)} at {formatTime(quizItem.due_date)}</>
-                )}
+                <div className="col d-md-none">{quizItem?.due_date && (
+                    <>{formatDate(quizItem.due_date)} at {formatTime(quizItem.due_date)}</>)}
+                    <br /><br />
                 </div>
-                <div className="col-md-2">{quizItem?.assign_to}</div>
-                <div className="col-md-4">{quizItem?.due_date && (
+                <div className="col-md-2"><b>For</b></div>
+                <div className="col d-md-none">{quizItem?.assign_to}</div>
+                <br /><br />
+                <div className="col-md-4"><b>Available from</b></div>
+                <div className="col d-md-none">{quizItem?.due_date && (
                     <>{formatDate(quizItem.available_from_date)} at {formatTime(quizItem.available_from_date)}</>
                 )}
                 </div>
-                <div className="col-md-3">{quizItem?.due_date && (
+                <br /><br />
+                <div className="col-md-3"><b>Until</b></div>
+                <div className="col d-md-none">{quizItem?.due_date && (
                     <>{formatDate(quizItem.available_to_date)} at {formatTime(quizItem.available_to_date)}</>
                 )}
                 </div>
+                <br /><br />
+                <hr className="d-none d-md-block" />
             </div>
-            <hr />
+            <div className="row">
+                <div className="col-md-3 d-none d-md-block">
+                    {quizItem?.due_date && (
+                        <>{formatDate(quizItem.due_date)} at {formatTime(quizItem.due_date)}</>
+                    )}
+                </div>
+                <div className="col-md-2 d-none d-md-block">{quizItem?.assign_to}</div>
+                <div className="col-md-4 d-none d-md-block">{quizItem?.due_date && (
+                    <>{formatDate(quizItem.available_from_date)} at {formatTime(quizItem.available_from_date)}</>
+                )}
+                </div>
+                <div className="col-md-3 d-none d-md-block">{quizItem?.due_date && (
+                    <>{formatDate(quizItem.available_to_date)} at {formatTime(quizItem.available_to_date)}</>
+                )}
+                </div>
+                <br /><br />
+                <hr className="d-none d-md-block" />
+            </div>
         </div>
     );
 }
