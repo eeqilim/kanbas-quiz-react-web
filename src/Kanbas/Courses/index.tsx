@@ -22,6 +22,7 @@ import axios from "axios";
 import * as moduleClient from "./Modules/client"
 import { setModules } from "./Modules/modulesReducer"
 import { useDispatch } from "react-redux";
+import QuestionEditor from "./Quizzes/EditQuestions";
 
 
 function Courses() {
@@ -116,6 +117,7 @@ function Courses() {
                     <Route path="Quizzes/:quizGroupId/:quizId" element={<QuizDetails />} />
                     <Route path="Quizzes" element={<Quizzes />} />
                     <Route path="Quizzes/Editor/:action/*" element={<QuizEditor />} />
+                    <Route path="Quizzes/:quizGroupId/:quizId/editquestion" element={<QuestionEditor/>} />
                     <Route path="Grades" element={<Grades />} />
                 </Routes>
 

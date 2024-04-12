@@ -90,3 +90,15 @@ svg {
     color: red !important;
     text-decoration: underline;
 }
+.custom-quill .ql-container {
+    border: none; 
+    height:150px; 
+  }
+  #myCustomQuillEditorQuestion .ql-container {
+    border: none; 
+    height: 150px; 
+}
+  .text-muted-question {
+    font-size: smaller; 
+    color:rgb(43, 33, 33); 
+  }
