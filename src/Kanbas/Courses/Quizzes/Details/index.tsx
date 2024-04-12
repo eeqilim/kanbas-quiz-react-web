@@ -7,9 +7,9 @@ import { quizzes } from "../../../Database";
 function QuizDetails() {
     const { quizId } = useParams();
     const quiz = quizzes.find((quiz) => {
-        return quiz.items.some((item) => item.item_id === quizId);
+        return quiz.items.some((item) => item._id === quizId);
     });
-    const quizItem = quiz?.items.find((item) => item.item_id === quizId);
+    const quizItem = quiz?.items.find((item) => item._id === quizId);
     const formatDate = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',

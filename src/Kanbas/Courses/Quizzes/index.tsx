@@ -48,7 +48,7 @@ function Quizzes() {
                 </div>
                 <div>
                     <div className="d-inline">
-                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes/Add`} className="btn ms-1 red-button border border-dark" ><FaPlus />Quiz</Link>
+                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/Add`} className="btn ms-1 red-button border border-dark" ><FaPlus />Quiz</Link>
                     </div>
                     <a className="btn ms-1 ps-1 pe-1 border border-dark bg-light"><FaEllipsisV /></a>
                 </div>
@@ -67,7 +67,7 @@ function Quizzes() {
                         <div className="collapse show p-0" id={`collapse-${quiz.category}-list`}>
                             <ul className="listGroup">
                                 {quiz.items?.map((item: any) => (
-                                    <li key={item.item_id} className={`list-group-item 
+                                    <li key={item._id} className={`list-group-item 
                                     ${item.available !== "No" || item.published !== "No" ? 'wd-courses-quizzes-available-published' : ''}`}>
                                         <div className="d-flex align-items-center">
                                             <FaEllipsisV className="me-2 ms-2" />
@@ -78,7 +78,7 @@ function Quizzes() {
                                             )}
                                             <div className="flex-fill">
                                                 <div>
-                                                    <Link className="fw-bold quiz-list-link text-dark" to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/${item.item_id}`}>
+                                                    <Link className="fw-bold quiz-list-link text-dark" to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/${item._id}`}>
                                                         {item.item_name}
                                                     </Link>
                                                 </div>

@@ -6,11 +6,11 @@
         "total_grade_percentage": 40,
         "items": [
             {
-                "item_id": "Q111.1",
+                "_id": "Q111.1",
                 "item_name": "Q1 - HTML",
                 "question_count": "11",
                 "available": "No",
-                "published": "No",
+                "published": false,
                 "quiz_type": "Graded Quiz",
                 "points": 29,
                 "group": "QUIZZES",
@@ -30,7 +30,7 @@
                 "available_to_date": "2024-09-18T13:00"
             },
             {
-                "item_id": "Q111.2",
+                "_id": "Q111.2",
                 "item_name": "Q2 - CSS",
                 "question_count": "10",
                 "available": "No",
@@ -53,7 +53,7 @@
                 "available_to_date": "2024-05-25T13:00"
             },
             {
-                "item_id": "Q111.3",
+                "_id": "Q111.3",
                 "item_name": "Q3 - JS, ES6",
                 "question_count": "10",
                 "available": "No",
@@ -76,7 +76,7 @@
                 "available_to_date": "2024-05-02T23:59"
             },
             {
-                "item_id": "Q111.4",
+                "_id": "Q111.4",
                 "item_name": "Q4 - Node",
                 "question_count": "8",
                 "available": "No",
@@ -99,7 +99,7 @@
                 "available_to_date": "2024-10-09T23:59"
             },
             {
-                "item_id": "Q111.5",
+                "_id": "Q111.5",
                 "item_name": "Q5 - MONGO",
                 "question_count": "5",
                 "available": "No",
@@ -122,7 +122,7 @@
                 "available_to_date": "2023-10-16T23:59"
             },
             {
-                "item_id": "Q111.6",
+                "_id": "Q111.6",
                 "item_name": "EXAM 2 FA23",
                 "question_count": "25",
                 "available": "No",
@@ -153,7 +153,7 @@
         "total_grade_percentage": 70,
         "items": [
             {
-                "item_id": "Q115.1",
+                "_id": "Q115.1",
                 "item_name": "Q1 - Recursion",
                 "question_count": "8",
                 "available": "No",
@@ -176,7 +176,7 @@
                 "available_to_date": "2022-09-18T23:59"
             },
             {
-                "item_id": "Q115.2",
+                "_id": "Q115.2",
                 "item_name": "Q2 - Graphs",
                 "question_count": "5",
                 "available": "No",
@@ -199,7 +199,7 @@
                 "available_to_date": "2024-10-25T23:59"
             },
             {
-                "item_id": "Q115.3",
+                "_id": "Q115.3",
                 "item_name": "Q3 - Dynamic Programming",
                 "question_count": "6",
                 "available": "No",
@@ -222,7 +222,7 @@
                 "available_to_date": "2024-10-02T23:59"
             },
             {
-                "item_id": "Q115.4",
+                "_id": "Q115.4",
                 "item_name": "Q4 - Greedy Algorithms",
                 "question_count": "8",
                 "available": "No",
@@ -245,7 +245,7 @@
                 "available_to_date": "2024-10-09T23:59"
             },
             {
-                "item_id": "Q115.5",
+                "_id": "Q115.5",
                 "item_name": "FINAL SP24",
                 "question_count": "10",
                 "available": "No",
@@ -276,7 +276,7 @@
         "total_grade_percentage": 40,
         "items": [
             {
-                "item_id": "Q117.1",
+                "_id": "Q117.1",
                 "item_name": "Q1 - HTML",
                 "question_count": "8",
                 "available": "No",
@@ -299,7 +299,7 @@
                 "available_to_date": "2022-09-18T23:59"
             },
             {
-                "item_id": "Q117.2",
+                "_id": "Q117.2",
                 "item_name": "Q2 - CSS, BOOTSTRAP",
                 "question_count": "4",
                 "available": "No",
@@ -322,7 +322,7 @@
                 "available_to_date": "2022-09-25T23:59"
             },
             {
-                "item_id": "Q117.3",
+                "_id": "Q117.3",
                 "item_name": "Q3 - REACT, JS",
                 "question_count": "11",
                 "available": "No",
@@ -345,7 +345,7 @@
                 "available_to_date": "2024-10-02T23:59"
             },
             {
-                "item_id": "Q117.4",
+                "_id": "Q117.4",
                 "item_name": "Q4 - NODE, MONGO",
                 "question_count": "18",
                 "available": "No",
