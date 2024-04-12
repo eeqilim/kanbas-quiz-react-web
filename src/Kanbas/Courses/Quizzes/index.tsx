@@ -48,7 +48,9 @@ function Quizzes() {
                 </div>
                 <div>
                     <div className="d-inline">
-                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes/Add`} className="btn ms-1 red-button border border-dark"><FaPlus />Quiz</Link>
+
+                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/Add`} className="btn ms-1 red-button border border-dark"><FaPlus />Quiz</Link>
+
                     </div>
                     <a className="btn ms-1 ps-1 pe-1 border border-dark bg-light"><FaEllipsisV /></a>
                 </div>
@@ -61,6 +63,7 @@ function Quizzes() {
                     <span className="fw-bold"> Assignment Quizzes</span>
                 </div>
                 {quizList.map((quiz) => (
+
                     <li key={quiz._id} className={
                         `list-group-item ${quiz.available !== "No" || quiz.published !== "No" ? 'wd-courses-quizzes-available-published' : ''}`
                     }>
@@ -109,7 +112,6 @@ function Quizzes() {
                                 </div>
 
                             </span>
-
                         </div>
                     </li>
                 ))}

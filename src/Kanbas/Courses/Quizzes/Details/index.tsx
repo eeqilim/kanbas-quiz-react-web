@@ -6,7 +6,10 @@ import { quizzes } from "../../../Database";
 
 function QuizDetails() {
     const { quizId } = useParams();
+
     const quiz = quizzes.find((quiz) => quiz._id === quizId);
+
+
     const formatDate = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',
