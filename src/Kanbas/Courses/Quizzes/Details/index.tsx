@@ -6,10 +6,10 @@ import { quizzes } from "../../../Database";
 
 function QuizDetails() {
     const { quizId } = useParams();
-    const quiz = quizzes.find((quiz) => {
-        return quiz.items.some((item) => item._id === quizId);
-    });
-    const quizItem = quiz?.items.find((item) => item._id === quizId);
+
+    const quiz = quizzes.find((quiz) => quiz._id === quizId);
+
+
     const formatDate = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',
@@ -44,77 +44,77 @@ function QuizDetails() {
                 </div>
             </div>
             <hr />
-            <h1>{quizItem?.item_name}</h1>
+            <h1>{quiz?.item_name}</h1>
             <br />
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Quiz Type</b></div>
-                <div className="col-sm-5">{quizItem?.item_name}</div>
+                <div className="col-sm-5">{quiz?.item_name}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Points</b></div>
-                <div className="col-sm-5">{quizItem?.points}</div>
+                <div className="col-sm-5">{quiz?.points}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Assignment Group</b></div>
-                <div className="col-sm-5">{quizItem?.group}</div></div>
+                <div className="col-sm-5">{quiz?.group}</div></div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Shuffle Answer</b></div>
-                <div className="col-sm-5">{quizItem?.shuffle}</div>
+                <div className="col-sm-5">{quiz?.shuffle}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Time Limit</b></div>
-                <div className="col-sm-5">{quizItem?.time_limit}</div>
+                <div className="col-sm-5">{quiz?.time_limit}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Multiple Attempts</b></div>
-                <div className="col-sm-5">{quizItem?.multiple_attempts}</div>
+                <div className="col-sm-5">{quiz?.multiple_attempts}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>View Responses</b></div>
-                <div className="col-sm-5">{quizItem?.reponses}</div>
+                <div className="col-sm-5">{quiz?.reponses}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Show Correct Answer</b></div>
-                <div className="col-sm-5">{quizItem?.show_ans}</div></div>
+                <div className="col-sm-5">{quiz?.show_ans}</div></div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>One Question at a Time</b></div>
-                <div className="col-sm-5">{quizItem?.one_q_per_time}</div>
+                <div className="col-sm-5">{quiz?.one_q_per_time}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Require Respondus LockDown Browser</b></div>
-                <div className="col-sm-5">{quizItem?.lockdown_browser}</div>
+                <div className="col-sm-5">{quiz?.lockdown_browser}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Required to View Quiz Results</b></div>
-                <div className="col-sm-5">{quizItem?.view_results}</div>
+                <div className="col-sm-5">{quiz?.view_results}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Webcam Required</b></div>
-                <div className="col-sm-5">{quizItem?.webcam}</div>
+                <div className="col-sm-5">{quiz?.webcam}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Lock Questions After Answering</b></div>
-                <div className="col-sm-5">{quizItem?.lock_questions}</div>
+                <div className="col-sm-5">{quiz?.lock_questions}</div>
             </div>
             <br />
             <div className="row">
                 <div className="col-md-3"><b>Due</b></div>
-                <div className="col d-md-none">{quizItem?.due_date && (
-                    <>{formatDate(quizItem.due_date)} at {formatTime(quizItem.due_date)}</>)}
+                <div className="col d-md-none">{quiz?.due_date && (
+                    <>{formatDate(quiz.due_date)} at {formatTime(quiz.due_date)}</>)}
                     <br /><br />
                 </div>
                 <div className="col-md-2"><b>For</b></div>
-                <div className="col d-md-none">{quizItem?.assign_to}</div>
+                <div className="col d-md-none">{quiz?.assign_to}</div>
                 <br /><br />
                 <div className="col-md-4"><b>Available from</b></div>
-                <div className="col d-md-none">{quizItem?.due_date && (
-                    <>{formatDate(quizItem.available_from_date)} at {formatTime(quizItem.available_from_date)}</>
+                <div className="col d-md-none">{quiz?.due_date && (
+                    <>{formatDate(quiz.available_from_date)} at {formatTime(quiz.available_from_date)}</>
                 )}
                 </div>
                 <br /><br />
                 <div className="col-md-3"><b>Until</b></div>
-                <div className="col d-md-none">{quizItem?.due_date && (
-                    <>{formatDate(quizItem.available_to_date)} at {formatTime(quizItem.available_to_date)}</>
+                <div className="col d-md-none">{quiz?.due_date && (
+                    <>{formatDate(quiz.available_to_date)} at {formatTime(quiz.available_to_date)}</>
                 )}
                 </div>
                 <br /><br />
@@ -122,17 +122,17 @@ function QuizDetails() {
             </div>
             <div className="row">
                 <div className="col-md-3 d-none d-md-block">
-                    {quizItem?.due_date && (
-                        <>{formatDate(quizItem.due_date)} at {formatTime(quizItem.due_date)}</>
+                    {quiz?.due_date && (
+                        <>{formatDate(quiz.due_date)} at {formatTime(quiz.due_date)}</>
                     )}
                 </div>
-                <div className="col-md-2 d-none d-md-block">{quizItem?.assign_to}</div>
-                <div className="col-md-4 d-none d-md-block">{quizItem?.due_date && (
-                    <>{formatDate(quizItem.available_from_date)} at {formatTime(quizItem.available_from_date)}</>
+                <div className="col-md-2 d-none d-md-block">{quiz?.assign_to}</div>
+                <div className="col-md-4 d-none d-md-block">{quiz?.due_date && (
+                    <>{formatDate(quiz.available_from_date)} at {formatTime(quiz.available_from_date)}</>
                 )}
                 </div>
-                <div className="col-md-3 d-none d-md-block">{quizItem?.due_date && (
-                    <>{formatDate(quizItem.available_to_date)} at {formatTime(quizItem.available_to_date)}</>
+                <div className="col-md-3 d-none d-md-block">{quiz?.due_date && (
+                    <>{formatDate(quiz.available_to_date)} at {formatTime(quiz.available_to_date)}</>
                 )}
                 </div>
                 <br /><br />
