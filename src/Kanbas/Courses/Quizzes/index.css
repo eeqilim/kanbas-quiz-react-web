@@ -28,11 +28,12 @@
 }
 
 .wd-courses-quizzes>li {
-    /* background-color: lightgray; */
+    background-color: lightgray;
     border: 1px solid gray !important;
     border-left: none !important;
     margin: 0px;
     padding: 0px;
+    margin-bottom: 20px;
 }
 
 .wd-courses-quizzes>li>div {

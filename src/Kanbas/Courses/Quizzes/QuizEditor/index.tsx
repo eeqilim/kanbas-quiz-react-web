@@ -12,7 +12,7 @@ import "./index.css";
 function QuizEditor() {
     const { courseId, quizGroupId, action } = useParams();
     const { pathname } = useLocation();
-    const quizItem = quizzes[0].items[0];
+    const quizItem = quizzes[0];
 
     return (
         <div className="flex-fill me-2 ms-2 mt-2">
