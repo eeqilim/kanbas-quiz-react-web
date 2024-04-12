@@ -1,0 +1,6 @@
+.red-nav-link {
+    color: red;
+}
+.red-nav-link:hover {
+    color: red !important;
+}

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modulesReducer from "../Courses/Modules/modulesReducer";
 import assignmentsReducer from "../Courses/Assignments/assignmentsReducer";
+import quizsReducer from "../Courses/Quizzes/quizsReducer";
 
 
 export type moduleLessonType = {
@@ -53,6 +54,7 @@ const store = configureStore({
     reducer: {
         modulesReducer,
         assignmentsReducer,
+        quizsReducer,
     },
 })
 
