@@ -1,9 +1,13 @@
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import Preview from "../../Preview";//test1
 
 function QuestionsEditor() {
+
     return (
         <div className="mt-3 ms-3">
+            <Preview />
+
             <form>
                 <div className="card m-3" style={{width: "95%"}}>
                     <div className="card-body">
