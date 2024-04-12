@@ -6,8 +6,10 @@ import { FaEllipsisV } from "react-icons/fa";
 import { quizzes } from "../../../Database";
 import QuizDetails from "../Details";
 import QuizDetailsEditor from "./DetailsEditor";
+import QuizQuestions from "./QuestionsEditor";
 
 import "./index.css";
+import QuestionsEditor from "./QuestionsEditor";
 
 function QuizEditor() {
     const { courseId, quizGroupId, action } = useParams();
@@ -37,6 +39,7 @@ function QuizEditor() {
             <Routes>
                 <Route path="/" element={<QuizDetailsEditor />} />
                 <Route path="/Details"  element={<QuizDetailsEditor />} />
+                <Route path="/Questions" element={<QuestionsEditor />} />
             </Routes>
         </div>
     )
