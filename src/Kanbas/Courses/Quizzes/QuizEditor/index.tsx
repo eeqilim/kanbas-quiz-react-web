@@ -10,6 +10,7 @@ import QuizQuestions from "./QuestionsEditor";
 
 import "./index.css";
 import QuestionsEditor from "./QuestionsEditor";
+import MultipleChoiceQuestionEditor from "../EditQuestions";
 
 function QuizEditor() {
     const { courseId, quizGroupId, action } = useParams();
@@ -40,6 +41,7 @@ function QuizEditor() {
                 <Route path="/" element={<QuizDetailsEditor />} />
                 <Route path="/Details"  element={<QuizDetailsEditor />} />
                 <Route path="/Questions" element={<QuestionsEditor />} />
+                <Route path="/Questions/addmultiple" element={<MultipleChoiceQuestionEditor/>} />
             </Routes>
         </div>
     )

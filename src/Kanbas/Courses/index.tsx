@@ -22,6 +22,7 @@ import axios from "axios";
 import * as moduleClient from "./Modules/client"
 import { setModules } from "./Modules/modulesReducer"
 import { useDispatch } from "react-redux";
+import MultipleChoiceQuestionEditor from "./Quizzes/EditQuestions";
 
 
 function Courses() {

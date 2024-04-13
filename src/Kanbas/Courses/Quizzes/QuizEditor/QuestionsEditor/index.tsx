@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import Preview from "../../Preview";//test1
 
 function QuestionsEditor() {
@@ -17,7 +18,7 @@ function QuestionsEditor() {
                 </div>
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a role="button" href="#" className="btn btn-light"><FaPlus/>New Question</a> &nbsp;
+                    <a role="button" href="" className="btn btn-light"><FaPlus/>New Question</a> &nbsp;
                     <a role="button" href="#" className="btn btn-light"><FaPlus/>New Question Group</a> &nbsp;
                     <a role="button" href="#" className="btn btn-light"><FaMagnifyingGlass/>Find Questions</a> &nbsp;
                 </div>
