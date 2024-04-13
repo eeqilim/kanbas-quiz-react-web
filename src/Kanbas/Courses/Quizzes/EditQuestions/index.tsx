@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../index.css';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaTrash } from 'react-icons/fa';
 import { Dropdown } from 'react-bootstrap';
 interface Answer {
   id: string;
@@ -17,7 +17,7 @@ interface QuestionEditorState {
   correctAnswer:string;
 }
 
-export default function QuestionEditor() {
+export default function MultipleChoiceQuestionEditor() {
   const [state, setState] = useState<QuestionEditorState>({
     title: '',
     points: 1,
@@ -110,7 +110,7 @@ export default function QuestionEditor() {
                 placeholder="3"
             />
             </div>
-            {state.possibleAnswers.map((answer, index) => (
+        {state.possibleAnswers.map((answer, index) => (
         <div key={answer.id} className="input-group mb-3">
           <span >
           Possible Answer:
@@ -131,6 +131,7 @@ export default function QuestionEditor() {
             placeholder={`Possible Answer ${index + 1}`}
           />
           <button className="btn btn-outline-secondary" type="button" onClick={() => handleRemoveAnswer(index)}>
+          <FaTrash/>
             Remove
           </button>
         </div>
