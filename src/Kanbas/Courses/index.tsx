@@ -114,7 +114,7 @@ function Courses() {
                     <Route path="Assignments" element={<Assignments />} />
                     <Route path="Assignments/:assignmentGroupId/:assignmentId" element={<AssignmentEditor />} />
                     <Route path="Assignments/Add" element={<AssignmentEditor />} />
-                    <Route path="Quizzes/:quizGroupId/:quizId" element={<QuizDetails />} />
+                    <Route path="Quizzes/:quizId" element={<QuizDetails />} />
                     <Route path="Quizzes" element={<Quizzes />} />
                     <Route path="Quizzes/Editor/:action/*" element={<QuizEditor />} />
                     <Route path="Grades" element={<Grades />} />

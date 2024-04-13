@@ -59,15 +59,15 @@ function QuizDetails() {
                 <div className="col-sm-5">{quiz?.group}</div></div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Shuffle Answer</b></div>
-                <div className="col-sm-5">{quiz?.shuffle}</div>
+                <div className="col-sm-5">{quiz?.shuffle ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Time Limit</b></div>
-                <div className="col-sm-5">{quiz?.time_limit}</div>
+                <div className="col-sm-5">{quiz?.time_limit} Minutes</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Multiple Attempts</b></div>
-                <div className="col-sm-5">{quiz?.multiple_attempts}</div>
+                <div className="col-sm-5">{quiz?.multiple_attempts ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>View Responses</b></div>
@@ -75,26 +75,22 @@ function QuizDetails() {
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Show Correct Answer</b></div>
-                <div className="col-sm-5">{quiz?.show_ans}</div></div>
+                <div className="col-sm-5">{quiz?.show_ans ? "Immediately" : "No"}</div></div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>One Question at a Time</b></div>
-                <div className="col-sm-5">{quiz?.one_q_per_time}</div>
+                <div className="col-sm-5">{quiz?.one_question_at_a_time ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Require Respondus LockDown Browser</b></div>
-                <div className="col-sm-5">{quiz?.lockdown_browser}</div>
-            </div>
-            <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Required to View Quiz Results</b></div>
-                <div className="col-sm-5">{quiz?.view_results}</div>
+                <div className="col-sm-5">{quiz?.lockdown_browser ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Webcam Required</b></div>
-                <div className="col-sm-5">{quiz?.webcam}</div>
+                <div className="col-sm-5">{quiz?.webcam_required ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Lock Questions After Answering</b></div>
-                <div className="col-sm-5">{quiz?.lock_questions}</div>
+                <div className="col-sm-5">{quiz?.lock_questions_after_answering ? "Yes" : "No"}</div>
             </div>
             <br />
             <div className="row">
