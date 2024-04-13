@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { quizzes } from "../../../Database";
 import { CAlert } from "@coreui/react";
-import { cilWarning } from "@coreui/icons";
+import { cilPencil, cilWarning } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 
 function Perview(){
@@ -19,32 +19,47 @@ function Perview(){
 
             <h2>Quiz Instructions</h2>
             <hr />
-            <div className="card">
-                <div className="card-header">
-                    Question 1
-                </div>
-                <div className="card-body">
-                    {/* <h5 className="card-title">Special title</h5> */}
-                    <p className="card-text">An HTML label element can be associated with an HTML input element by settingtheir id attributes to the same value.</p>
-                    <p className="card-text">The resulting effect is that when you click on the label text, the input elementreceives focus as if you had click on the input element itself.</p>
-                    <hr />
-                    
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                        <label className="form-check-label" htmlFor="flexRadioDefault1">
-                            True
-                        </label>
+            <div>
+                <div className="card">
+                    <div className="card-header" style={{fontWeight: "bold"}}>
+                        Question 1
                     </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-                        <label className="form-check-label" htmlFor="flexRadioDefault2">
-                            False
-                        </label>
+                    <div className="card-body">
+                        {/* <h5 className="card-title">Special title</h5> */}
+                        <p className="card-text">An HTML label element can be associated with an HTML input element by settingtheir id attributes to the same value.</p>
+                        <p className="card-text">The resulting effect is that when you click on the label text, the input elementreceives focus as if you had click on the input element itself.</p>
+                        <hr />
+                        
+                        <div className="form-check">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                            <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                True
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+                            <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                False
+                            </label>
+                        </div>
                     </div>
-                    <a href="#" className="btn btn-light m-3">Next</a>
                 </div>
 
-                
+                <div className="mt-3 ms-3 text-end">
+                    <a href="#" role="button" className="btn btn-light">Next</a>
+                </div>
+
+                <div className="card mt-3 ms-3" style={{width: "98%"}}>
+                    <div className="card-body text-end">
+                        {/* TODO: to displays list of questions for this quiz. List is initially empty */}
+                        Quiz saved at {new Date().toLocaleTimeString()}
+                        <a href="#" role="button" className="btn btn-light">Submit Quiz</a>
+                    </div>
+                </div>
+
+                <div className="card mt-3 ms-3" style={{width: "98%"}}>
+                    <a href="#" role="button" className="btn btn-light">Keep Editing This Quiz</a>
+                </div>
             </div>
         </div>
     );
