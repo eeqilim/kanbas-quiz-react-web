@@ -74,15 +74,15 @@ function Quizzes() {
 
                         {quizList.map((quiz) => (
                             <li key={quiz._id} className={
-                                `list-group-item ${quiz.available !== "No" || quiz.published !== "No" ? 'wd-courses-quizzes-available-published' : ''}`
+                                `list-group-item ${quiz.available_from_date && new Date(quiz.available_from_date) < new Date() || quiz.published ? 'wd-courses-quizzes-available-published' : ''}`
                             }>
                                 <div className="d-flex align-items-center">
                                     <div className="d-flex align-items-center" style={{ flexShrink: 0 }}>
-                                        <HiOutlineRocketLaunch className={`me-3 ms-2 ${quiz.available === "No" && quiz.published === "No" ? "text-muted" : "text-success"}`} />
+                                        <HiOutlineRocketLaunch className={`me-3 ms-2 ${quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? "text-muted" : "text-success"}`} />
                                     </div>
                                     <div className="flex-fill">
                                         <div>
-                                            <Link className="fw-bold quizzes-list-link text-dark" to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/${quiz._id}`}>
+                                            <Link className="fw-bold quizzes-list-link text-dark" to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}>
                                                 {quiz.item_name}
                                             </Link>
                                         </div>
@@ -98,7 +98,7 @@ function Quizzes() {
                                         </div>
                                     </div>
                                     <span className="float-end" style={{ display: "flex", alignItems: "center" }}>
-                                        {quiz.available === "No" && quiz.published === "No" ? (
+                                        {quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? (
                                             <PiProhibit />
                                         ) : (
                                             <FaCheckCircle className="text-success" />
