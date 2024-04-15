@@ -3,10 +3,18 @@ import { quizzes } from "../../../Database";
 import { CAlert } from "@coreui/react";
 import { cilPencil, cilWarning } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { Answer, QuestionEditorState } from "../EditQuestions";
+import QuestionsEditor from "../QuizEditor/QuestionsEditor";
 
 function Perview(){
     const { quizId } = useParams();
     const quiz = quizzes.find((quiz) => quiz._id === quizId);
+    // assuming that the one quiz has mulitple questions, array of questions
+    // const questions = quiz?.questions ?? [];
+    
 
     return (
         <div>
@@ -58,7 +66,20 @@ function Perview(){
                 </div>
 
                 <div className="card mt-3 ms-3" style={{width: "98%"}}>
-                    <a href="#" role="button" className="btn btn-light">Keep Editing This Quiz</a>
+                    <a href="#" role="button" className="btn btn-light" style={{ textAlign: "left"}}>
+                        <FontAwesomeIcon icon={faPencilAlt} className="me-2"/>Keep Editing This Quiz
+                    </a>
+                </div>
+
+                <div>
+                    <h4 className="mt-3 ms-3">Questions</h4>
+                    <ul className="list-group list-group-flush mt-4 ms-4">
+                        {/* {quiz.map((question:any) => (
+                            <li key={question.id} className="list-group-item">{question.title}</li>
+                        ))} */}
+                        <li className="list-group-item"><FontAwesomeIcon icon={faQuestion} className="me-1"/>Question 1</li>
+                        <li className="list-group-item"><FontAwesomeIcon icon={faQuestion} className="me-1"/>Question 2</li>
+                    </ul>
                 </div>
             </div>
         </div>

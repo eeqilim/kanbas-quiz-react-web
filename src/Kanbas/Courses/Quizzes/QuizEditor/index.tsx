@@ -11,6 +11,8 @@ import QuizQuestions from "./QuestionsEditor";
 import "./index.css";
 import QuestionsEditor from "./QuestionsEditor";
 import MultipleChoiceQuestionEditor from "../EditQuestions";
+import EditTrueFalseQuestion from "../EditQuestions/EditTrueFalseQuestion";
+import EditFillInBlanksQuestion from "../EditQuestions/EditFillInBlanksQuestion";
 
 function QuizEditor() {
     const { courseId, quizGroupId, action } = useParams();
@@ -42,6 +44,8 @@ function QuizEditor() {
                 <Route path="/Details"  element={<QuizDetailsEditor />} />
                 <Route path="/Questions" element={<QuestionsEditor />} />
                 <Route path="/Questions/addmultiple" element={<MultipleChoiceQuestionEditor/>} />
+                <Route path="/Questions/addtruefalse" element={<EditTrueFalseQuestion/>} />
+                <Route path="/Questions/addfillintheblank" element={<EditFillInBlanksQuestion/>} />
             </Routes>
         </div>
     )
