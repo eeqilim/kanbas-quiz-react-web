@@ -1,71 +1,70 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../index.css';
-import { FaPlus, FaTrash } from 'react-icons/fa';
 import { Dropdown } from 'react-bootstrap';
-export interface Answer {
-  answerId: string;
-  text: string;
-  questionId: string;
-}
+import { Answer, QuestionEditorState } from './index';
+import { FaPlus, FaTrash } from 'react-icons/fa';
 
-export interface QuestionEditorState {
-  questionId: string;
-  title: string;
-  points: number;
-  questionText: string;
-  possibleAnswers: Answer[];
-  correctAnswer:string;//"true" or "false"
-  questionType:string;//M for multiple choice, T for true/false, B for fill in the blank
-  quizId: string;
-}
+function EditTrueFalseQuestion() {
+    const initialState: QuestionEditorState = {
+        questionId: 'question111',
+        title: '',
+        points: 1,
+        questionText: '',
+        correctAnswer: '',//"true" or "false"
+        questionType: 'T',
+        possibleAnswers: [{ answerId: 'a1', text: 'true', questionId: "question111" }, { answerId: 'a2', text: 'false', questionId:"question111" }],
+        quizId: 'quiz1',
+    };
 
-export default function MultipleChoiceQuestionEditor() {
-  const [state, setState] = useState<QuestionEditorState>({
-    questionId: 'question111',
-    title: '',
-    points: 1,
-    questionText: '',
-    possibleAnswers: [{ answerId: 'a1', text: 'Example anwser 1', questionId: 'question111'},
-    { answerId: 'a2', text: 'Example answer 2', questionId: 'question111'}],
-    correctAnswer:'',
-    questionType:'M',
-    quizId: 'quiz1',
-  });
-  const handleAnswerChange = (text:any, index:any) => {
-    const newAnswers = [...state.possibleAnswers];
-    newAnswers[index].text = text;
-    setState({ ...state, possibleAnswers: newAnswers });
-  };
+    const [question, setQuestion] = useState<QuestionEditorState>(initialState);
 
-  const handleSelectCorrectAnswer = (id:any) => {
-    setState({ ...state, correctAnswer: id });
-  };
+      const handleAnswerChange = (text:any, index:any) => {
+        const newAnswers = [...question.possibleAnswers];
+        newAnswers[index].text = text;
+        setQuestion({ ...question, possibleAnswers: newAnswers });
+      };
+    
+      const handleSelectCorrectAnswer = (id:any) => {
+        setQuestion({ ...question, correctAnswer: id });
+      };
 
-  const handleRemoveAnswer = (index:any) => {
-    const newAnswers = [...state.possibleAnswers];
-    newAnswers.splice(index, 1);
-    setState({ ...state, possibleAnswers: newAnswers });
-  };
+      const handleUpdate = () => {
+        // API call to save the current state
+        console.log('Saving data...', question);
+        // Example: axios.post('/api/update-question', question)
+        // .then(response => console.log('Saved successfully'))
+        // .catch(error => console.error('Error saving:', error));
+    }
 
-  return (
-    <div className="container-fluid me-3 ms-3">
+    const handleCancel = () => {
+        setQuestion(initialState);
+    }
+
+    // Fetch and set initial data
+    useEffect(() => {
+        // Fetch data from API and set it
+        // setQuestion(fetchedData);
+    }, []);
+    
+      return (
+        <div className="container-fluid me-3 ms-3">
       {/* Row for Title and Points */}
       <div className="row pt-3">
         <div className="col-4">
           <input
             className="form-control"
             type="text"
-            value={state.title}
-            onChange={() => {}}
+            value={question.title}
+            onChange={(e) => setQuestion({ ...question, title: e.target.value })}
             placeholder="Question Title"
           />
         </div>
         <div className="col-4">
         <Dropdown>
             <Dropdown.Toggle variant="light"  id="dropdown-basic">
-             Multiple choice
+             True/False
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 <Dropdown.Item href="#/action-1">Multiple choice</Dropdown.Item>
@@ -80,8 +79,8 @@ export default function MultipleChoiceQuestionEditor() {
           <input
             className="form-control"
             type="number"
-            value={state.points}
-            onChange={() => {}}
+            value={question.points}
+            onChange={(e) => setQuestion({ ...question, points: parseInt(e.target.value) })}
             placeholder="Points"
             style={{ width: "auto" }}
           />   
@@ -95,13 +94,12 @@ export default function MultipleChoiceQuestionEditor() {
           <ReactQuill
             className="custom-quill form-control"
             id="myCustomQuillEditorQuestion"
-            value={state.questionText}
-            onChange={() => {}}
+            value={question.questionText}
+            onChange={(newQuestionText) => setQuestion({ ...question, questionText: newQuestionText})}
             placeholder="Enter your question text here..."
           />
         </div>
       </div>
-
      
       <div className="row pt-3">
       <strong>Answers:</strong>
@@ -112,12 +110,11 @@ export default function MultipleChoiceQuestionEditor() {
             <input
                 className="form-control mb-3"
                 type="text"
-                value={state.correctAnswer}
-                onChange={(e) => setState({ ...state, correctAnswer: e.target.value })}
-                placeholder="3"
+                value={question.correctAnswer}
+                placeholder="Click to select correct answer"
             />
             </div>
-        {state.possibleAnswers.map((answer, index) => (
+        {question.possibleAnswers.map((answer, index) => (
         <div key={answer.answerId} className="input-group mb-3">
           <span >
           Possible Answer:
@@ -126,8 +123,8 @@ export default function MultipleChoiceQuestionEditor() {
             <input
               type="radio"
               name="correctAnswer"
-              checked={state.correctAnswer === answer.answerId}
-              onChange={() => handleSelectCorrectAnswer(answer.answerId)}
+              checked={question.correctAnswer === answer.text}
+              onChange={() => handleSelectCorrectAnswer(answer.text)}
             />
           </div>
           <input
@@ -137,47 +134,29 @@ export default function MultipleChoiceQuestionEditor() {
             onChange={(e) => handleAnswerChange(e.target.value, index)}
             placeholder={`Possible Answer ${index + 1}`}
           />
-          <button className="btn btn-outline-secondary" type="button" onClick={() => handleRemoveAnswer(index)}>
-          <FaTrash/>
-            Remove
-          </button>
         </div>
-      ))}
-        
-        </div>
-      
-        
-
-      <div  style={{ display: 'flex', justifyContent: 'flex-end' }}>
-    
-        <button
-        className="btn btn-custom-red-addquestion"
-        type="button"
-        style={{ flex: "0 1 auto" }}
-        onClick={() => {}}>
-        <FaPlus /> Add Another Answer
-        </button>
-    </div>
+      ))}        
+      </div>
 
       <div className="row pt-3">
         <div className="col">
           <button
             className="btn me-2"
             type="button"
-            onClick={() => {}}
+            onClick={handleCancel}
           >
             Cancel
           </button>
           <button
             className="btn btn-danger"
             type="button"
-            onClick={() => {}}
+            onClick={handleUpdate}
           >
             Update Question
           </button>
         </div>
       </div>
     </div>
-  );
-
+      );
 }
+export default EditTrueFalseQuestion;

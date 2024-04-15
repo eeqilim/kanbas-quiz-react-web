@@ -18,9 +18,9 @@ function QuestionsEditor() {
                 </div>
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a role="button" href="" className="btn btn-light"><FaPlus/>New Question</a> &nbsp;
-                    <a role="button" href="#" className="btn btn-light"><FaPlus/>New Question Group</a> &nbsp;
-                    <a role="button" href="#" className="btn btn-light"><FaMagnifyingGlass/>Find Questions</a> &nbsp;
+                    <a role="button" href="" className="btn btn-light"><FaPlus className="me-1"/>New Question</a> &nbsp;
+                    <a role="button" href="#" className="btn btn-light"><FaPlus className="me-1"/>New Question Group</a> &nbsp;
+                    <a role="button" href="#" className="btn btn-light"><FaMagnifyingGlass className="me-1"/>Find Questions</a> &nbsp;
                 </div>
                 <hr />
 
