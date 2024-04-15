@@ -29,7 +29,8 @@
 
 .wd-courses-quizzes>li {
     background-color: lightgray;
-    border: 1px solid gray !important;
+    border-top: 1px solid gray !important;
+    border-right: 1px solid gray !important;
     border-left: none !important;
     margin: 0px;
     padding: 0px;
@@ -42,6 +43,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-left: 1px solid gray !important;
+    border-bottom: 1px solid gray !important;
 }
 
 .wd-courses-quizzes>li>.collapse>ul>li {
@@ -57,14 +59,6 @@
     padding: 4px;
     border-top: 1px solid gray !important;
     border-left: 1px solid gray;
-}
-
-.wd-courses-quizzes-grade-percentage {
-    border: 1px solid gray;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 svg {
@@ -90,15 +84,18 @@ svg {
     color: red !important;
     text-decoration: underline;
 }
+
 .custom-quill .ql-container {
-    border: none; 
-    height:150px; 
-  }
-  #myCustomQuillEditorQuestion .ql-container {
-    border: none; 
-    height: 150px; 
+    border: none;
+    height: 150px;
 }
-  .text-muted-question {
-    font-size: smaller; 
-    color:rgb(43, 33, 33); 
-  }
+
+#myCustomQuillEditorQuestion .ql-container {
+    border: none;
+    height: 150px;
+}
+
+.text-muted-question {
+    font-size: smaller;
+    color: rgb(43, 33, 33);
+}
