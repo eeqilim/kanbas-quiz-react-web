@@ -58,7 +58,7 @@ function QuizDetails() {
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Assignment Group</b></div>
                 <div className="col-sm-5">{quiz?.group}</div></div>
             <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Shuffle Answer</b></div>
+                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Shuffle Answers</b></div>
                 <div className="col-sm-5">{quiz?.shuffle ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
@@ -70,19 +70,16 @@ function QuizDetails() {
                 <div className="col-sm-5">{quiz?.multiple_attempts ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>View Responses</b></div>
-                <div className="col-sm-5">{quiz?.reponses}</div>
+                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Show Correct Answers</b></div>
+                <div className="col-sm-5">{quiz?.show_ans ? "Immediately" : "No"}</div>
             </div>
             <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Show Correct Answer</b></div>
-                <div className="col-sm-5">{quiz?.show_ans ? "Immediately" : "No"}</div></div>
+                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Access Code</b></div>
+                <div className="col-sm-5">{quiz?.access_code}</div>
+            </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>One Question at a Time</b></div>
                 <div className="col-sm-5">{quiz?.one_question_at_a_time ? "Yes" : "No"}</div>
-            </div>
-            <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Require Respondus LockDown Browser</b></div>
-                <div className="col-sm-5">{quiz?.lockdown_browser ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Webcam Required</b></div>
@@ -134,7 +131,7 @@ function QuizDetails() {
                 <br /><br />
                 <hr className="d-none d-md-block" />
             </div>
-        </div>
+        </div >
     );
 }
 

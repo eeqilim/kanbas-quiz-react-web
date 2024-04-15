@@ -6,7 +6,7 @@
         "question_count": 11,
         "published": false,
         "quiz_type": "Graded Quiz",
-        "points": "29",
+        "points": 29,
         "group": "QUIZZES",
         "shuffle": true,
         "time_limit": 30,
@@ -20,7 +20,9 @@
         "due_date": "2024-09-18T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2024-09-11T11:40",
-        "available_to_date": "2024-09-18T13:00"
+        "available_to_date": "2024-09-18T13:00",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q111.2",
@@ -28,7 +30,7 @@
         "item_name": "Q2 - CSS",
         "question_count": 11,
         "published": true,
-        "points": "15",
+        "points": 15,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -42,7 +44,9 @@
         "due_date": "2024-09-25T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2024-01-18T11:40",
-        "available_to_date": "2024-05-25T13:00"
+        "available_to_date": "2024-05-25T13:00",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q111.3",
@@ -50,7 +54,7 @@
         "item_name": "Q3 - JS, ES6",
         "question_count": 10,
         "published": true,
-        "points": "15",
+        "points": 15,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -64,7 +68,9 @@
         "due_date": "2022-10-02T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2024-03-25T23:59",
-        "available_to_date": "2024-05-02T23:59"
+        "available_to_date": "2024-05-02T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q111.4",
@@ -72,7 +78,7 @@
         "item_name": "Q4 - Node",
         "question_count": 8,
         "published": false,
-        "points": "50",
+        "points": 15,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -86,7 +92,9 @@
         "due_date": "2022-10-09T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2024-04-02T23:59",
-        "available_to_date": "2024-10-09T23:59"
+        "available_to_date": "2024-10-09T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q111.5",
@@ -94,7 +102,7 @@
         "item_name": "Q5 - MONGO",
         "question_count": 5,
         "published": false,
-        "points": "10",
+        "points": 10,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -108,7 +116,9 @@
         "due_date": "2022-10-16T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2023-10-09T23:59",
-        "available_to_date": "2023-10-16T23:59"
+        "available_to_date": "2023-10-16T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q111.6",
@@ -117,7 +127,7 @@
         "question_count": 25,
         "available": "No",
         "published": true,
-        "points": "20",
+        "points": 20,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -131,7 +141,9 @@
         "due_date": "2022-10-23T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2025-10-16T23:59",
-        "available_to_date": "2025-10-23T23:59"
+        "available_to_date": "2025-10-23T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q115.1",
@@ -140,7 +152,7 @@
         "question_count": 8,
         "available": "No",
         "published": false,
-        "points": "20",
+        "points": 20,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -154,7 +166,9 @@
         "due_date": "2022-09-18T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2022-09-11T23:59",
-        "available_to_date": "2022-09-18T23:59"
+        "available_to_date": "2022-09-18T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q115.2",
@@ -163,7 +177,7 @@
         "question_count": 5,
         "available": "No",
         "published": true,
-        "points": "30",
+        "points": 30,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -177,7 +191,9 @@
         "due_date": "2022-09-25T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2024-04-01T23:59",
-        "available_to_date": "2024-10-25T23:59"
+        "available_to_date": "2024-10-25T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q115.3",
@@ -186,7 +202,7 @@
         "question_count": 6,
         "available": "No",
         "published": true,
-        "points": "30",
+        "points": 30,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -200,7 +216,9 @@
         "due_date": "2022-10-02T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2023-09-25T23:59",
-        "available_to_date": "2024-10-02T23:59"
+        "available_to_date": "2024-10-02T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q115.4",
@@ -209,7 +227,7 @@
         "question_count": 8,
         "available": "No",
         "published": false,
-        "points": "35",
+        "points": 35,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -223,7 +241,9 @@
         "due_date": "2022-10-09T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2023-10-02T23:59",
-        "available_to_date": "2024-10-09T23:59"
+        "available_to_date": "2024-10-09T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q115.5",
@@ -232,7 +252,7 @@
         "question_count": 10,
         "available": "No",
         "published": true,
-        "points": "30",
+        "points": 30,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -246,7 +266,9 @@
         "due_date": "2022-10-16T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2025-10-09T23:59",
-        "available_to_date": "2025-10-16T23:59"
+        "available_to_date": "2025-10-16T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q117.1",
@@ -255,7 +277,7 @@
         "question_count": 8,
         "available": "No",
         "published": true,
-        "points": "70",
+        "points": 70,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -269,7 +291,9 @@
         "due_date": "2022-09-18T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2022-09-11T23:59",
-        "available_to_date": "2022-09-18T23:59"
+        "available_to_date": "2022-09-18T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q117.2",
@@ -278,7 +302,7 @@
         "question_count": 4,
         "available": "No",
         "published": true,
-        "points": "10",
+        "points": 10,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -292,7 +316,9 @@
         "due_date": "2022-09-25T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2022-09-18T23:59",
-        "available_to_date": "2022-09-25T23:59"
+        "available_to_date": "2022-09-25T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q117.3",
@@ -301,7 +327,7 @@
         "question_count": 11,
         "available": "No",
         "published": true,
-        "points": "15",
+        "points": 15,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -315,7 +341,9 @@
         "due_date": "2022-10-02T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2024-01-25T23:59",
-        "available_to_date": "2024-10-02T23:59"
+        "available_to_date": "2024-10-02T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     },
     {
         "_id": "Q117.4",
@@ -324,7 +352,7 @@
         "question_count": 18,
         "available": "No",
         "published": false,
-        "points": "30",
+        "points": 30,
         "group": "QUIZZES",
         "shuffle": false,
         "time_limit": 30,
@@ -338,6 +366,8 @@
         "due_date": "2022-10-09T23:59",
         "assign_to": "Everyone",
         "available_from_date": "2026-10-02T23:59",
-        "available_to_date": "2026-10-09T23:59"
+        "available_to_date": "2026-10-09T23:59",
+        "access_code": "12345678",
+        "instructions": "Instructions"
     }
 ]
