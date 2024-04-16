@@ -132,7 +132,7 @@ function Quizzes() {
                             <div>
                                 {quizList.map((quiz) => (
                                     <li key={quiz._id} className={
-                                        `list-group-item ${quiz.available_from_date && new Date(quiz.available_from_date) < new Date() || quiz.published ? 'wd-courses-quizzes-available-published' : ''}`
+                                        `list-group-item ${quiz.published ? 'wd-courses-quizzes-available-published' : ''}`
                                     }>
 
                                         <div className="d-flex align-items-center">
@@ -162,10 +162,10 @@ function Quizzes() {
                                             </div>
 
                                             <span className="float-end" style={{ display: "flex", alignItems: "center" }}>
-                                                {quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? (
+                                                {!quiz.published ? (
                                                     <PiProhibit onClick={() => handleTogglePublishQuiz(quiz._id)} />
                                                 ) : (
-                                                    <FaCheckCircle className="text-success" />
+                                                    <FaCheckCircle className="text-success" onClick={() => handleTogglePublishQuiz(quiz._id)} />
                                                 )}
                                                 <div className="dropleft d-inline">
                                                     <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
