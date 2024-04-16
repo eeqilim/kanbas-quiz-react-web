@@ -5,10 +5,10 @@ const emptyQuiz = {
     course: "",
     item_name: "Unnamed Quiz",
     question_count: 0,
-    published: false,
-    quiz_type: "",
+    published: true,
+    quiz_type: "Graded Quiz",
     points: 0,
-    group: "Quizzes",
+    group: "QUIZZES",
     shuffle: false,
     time_limit: 20,
     multiple_attempts: false,
@@ -18,17 +18,17 @@ const emptyQuiz = {
     lockdown_browser: false,
     webcam_required: false,
     lock_questions_after_answering: false,
-    due_date: "",
+    due_date: new Date().toISOString(),
     assign_to: "Everyone",
-    available_from_date: "",
-    available_to_date: "",
+    available_from_date: new Date().toISOString(),
+    available_to_date: new Date().toISOString(),
     access_code: "",
     instructions: "",
     }
 
 
 const initialState = {
-    quizes: [emptyQuiz],
+    quizes: [],
     quiz: emptyQuiz,
 }
 
@@ -40,7 +40,7 @@ const quizesSlice = createSlice( {
 
         // reset the quizzes list state
         resetQuizesState: (state) => {
-            state.quizes = [emptyQuiz];
+            state.quizes = [];
         },
 
         // reset the single quiz state

@@ -1,36 +1,89 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./index.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ReactQuill from 'react-quill';
 import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../../../store";
 import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } from "../../quizsReducer";
 
+import * as quizClient from "../../quizClient";
 
 
 function QuizDetailsEditor() {
-    const { courseId } = useParams();
+
+    // Base on how the URL is defined. If the action == "Add", then we are adding a new quiz.
+    // When Editing an existing quiz, the action would be the quiz _id field. 
+    const { courseId, action } = useParams();
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz)
+    const quizzes = useSelector((state: KanbasState) => state.quizsReducer.quizes)
 
- 
 
-    
+    // handles some change in the form but not all, Take close look at the onChange events of the fields
     const handleOptionChange = (event: any) => {
         const { name, value, checked, type } = event.target;
         dispatch(setQuizItem({
             ...quizItem,
             [name]: type === 'checkbox' ? checked : value
         }));
+        console.log(quizItem)
+    };
+
+
+    const handleSave = async (publish: boolean) => {
+        const newQuiz = { ...quizItem, published: true };
+        
+        if (publish) {
+            dispatch(setQuizItem(newQuiz));
+            console.log('Publishing Quiz')
+            console.log(quizItem)
+        }
+
+        if (action === "Add") {
+            handleAddQuiz();
+        } else {
+            handleUpdateQuiz();
+        }
+        dispatch(resetQuizItemState());
+        navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
     };
 
 
 
+    const handleAddQuiz = () => {
+        console.log('Add Quiz Called')
+        
+        quizClient.addQuiz(courseId, quizItem)
+        .then((newQuiz) => {
+            dispatch(setQuizzes([...quizzes, newQuiz]));
+        })
+    };
+
+    const handleUpdateQuiz = () => {
+        console.log('Update Quiz Called')
+
+        quizClient.updateQuiz(quizItem._id, quizItem)
+        .then((status) => {
+            dispatch(setQuizzes(quizzes.map((quiz) => {
+                if (quiz._id === quizItem._id) {
+                    return quizItem;
+                } else {
+                    return quiz;
+                }
+            })));   
+        })
+    };  
+
   return (
     <div className="mt-3 ms-3">
+
+        
+
 
         <form>
             <div className="mb-3">
@@ -50,11 +103,12 @@ function QuizDetailsEditor() {
                     <label htmlFor="quizType" className="form-label mb-0">Quiz Type</label>
                 </div>
                 <div className="col-sm-4">
-                    <select className="form-select" id="quizType">
-                        <option>Graded Quiz</option>
-                        <option>Practice Quiz</option>
-                        <option>Graded Survey</option>
-                        <option>Ungraded Survey</option>
+                    <select className="form-select" id="quizType" value={quizItem.quiz_type}
+                    onChange={(e) => dispatch(setQuizItem({ ...quizItem, quiz_type: e.target.value })) }>
+                        <option value="Graded Quiz">Graded Quiz</option>
+                        <option value="Practice Quiz">Practice Quiz</option>
+                        <option value="Graded Survey">Graded Survey</option>
+                        <option value="Ungraded Survey">Ungraded Survey</option>
                     </select>
                 </div>
             </div>
@@ -63,11 +117,12 @@ function QuizDetailsEditor() {
                     <label htmlFor="assignmentGroup" className="form-label mb-0">Assignment Group</label>
                 </div>
                 <div className="col-sm-4">
-                    <select className="form-select" id="assignmentGroup">
-                        <option>Quizzes</option>
-                        <option>Exams</option>
-                        <option>Assignments</option>
-                        <option>Project</option>
+                    <select className="form-select" id="assignmentGroup" value={quizItem.group}
+                    onChange={(e) => dispatch(setQuizItem({ ...quizItem, group: e.target.value }))}>
+                        <option value="QUIZZES">Quizzes</option>
+                        <option value="EXAMS">Exams</option>
+                        <option value="ASSIGNMENTS">Assignments</option>
+                        <option value="PROJECTS">Project</option>
                     </select>
                 </div>
             </div>
@@ -106,11 +161,10 @@ function QuizDetailsEditor() {
                                         name="multiple_attempts" 
                                         checked={quizItem.multiple_attempts}
                                         onChange={handleOptionChange}
-                                    /> Allow Multiple Attempts
+                                    />Allow Multiple Attempts
                                 </label>
                             </div>
                         </div>
-                
                         <div className="option-item">
                             <div className="checkbox-wrapper">
                                 <label>
@@ -180,7 +234,7 @@ function QuizDetailsEditor() {
                                     name="lock_questions_after_answering" 
                                     checked={quizItem.lock_questions_after_answering}
                                     onChange={handleOptionChange}
-                                /> 
+                                />
                                 Lock Questions After Answering
                             </label>
                         </div>
@@ -207,7 +261,7 @@ function QuizDetailsEditor() {
                                     <div className="input-group">
                                         <input 
                                             type="date" id="due_date" className="form-control" 
-                                            value={quizItem.due_date} onChange={(e) => {dispatch(setQuizItem({...quizItem, due_date: e.target.value}))}}
+                                            value={new Date(quizItem.due_date).toISOString().split("T")[0]} onChange={(e) => {dispatch(setQuizItem({...quizItem, due_date: e.target.value}))}}
                                         />
                                     </div>
                                 </div>
@@ -218,7 +272,7 @@ function QuizDetailsEditor() {
                                     <div className="input-group">
                                         <input 
                                             type="date" id="availableFromDate" className="form-control" 
-                                            value={quizItem.available_from_date} onChange={(e) => dispatch(setQuizItem({ ...quizItem, available_from_date: e.target.value }))}/>
+                                            value={new Date(quizItem.available_from_date).toISOString().split("T")[0]} onChange={(e) => dispatch(setQuizItem({ ...quizItem, available_from_date: e.target.value }))}/>
                                     </div>
                                 </div>
                                 <div className="col-6">
@@ -226,7 +280,7 @@ function QuizDetailsEditor() {
                                     <div className="input-group">
                                         <input 
                                             type="date" id="availableUntilDate" className="form-control" 
-                                            value={quizItem.available_to_date} onChange={(e) => dispatch(setQuizItem({ ...quizItem, available_to_date: e.target.value }))}/>
+                                            value={new Date(quizItem.available_to_date).toISOString().split("T")[0]} onChange={(e) => dispatch(setQuizItem({ ...quizItem, available_to_date: e.target.value }))}/>
                                     </div>
                                 </div>
                             </div>
@@ -254,8 +308,15 @@ function QuizDetailsEditor() {
                         </div>
                         <div className="me-2">
                             <Link to={ `/Kanbas/Courses/${courseId}/Quizzes` } className="btn wd-courses-quizzes-edit-cancel-button me-1 border-light">Cancel</Link>
-                            <Link to={ `/Kanbas/Courses/${courseId}/Quizzes` } className="btn wd-courses-quizzes-edit-cancel-button me-1 border-light">Save & Publish</Link>
-                            <button className="btn btn-danger">Save</button>
+                            
+                            <button className="btn wd-courses-quizzes-edit-cancel-button me-1 border-light" 
+                            onClick={() => {
+                                handleSave(true);
+                            }}>
+                                Save & Publish
+                            </button>
+                            
+                            <button className="btn btn-danger" onClick={() => handleSave(false)}>Save</button>
                         </div>
                     </div>
                 </div>
