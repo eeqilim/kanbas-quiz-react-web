@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
-import { FaCircleCheck } from "react-icons/fa6";
+import { FaCircleCheck, FaPencil } from "react-icons/fa6";
 import { FaEllipsisV } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
 import { PiProhibit } from "react-icons/pi";
 import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../../store";
