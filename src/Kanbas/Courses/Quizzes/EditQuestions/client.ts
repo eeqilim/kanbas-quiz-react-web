@@ -24,10 +24,10 @@ export const fetchQuestionById = async (qsId?:string) => {
   }
 };
 
-export const createQuestion = async (quizId?:string, questionData?:any) => {
+export const createQuestion = async (qzId?:string, questionData?:any) => {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/api/quizzes/${quizId}/questions`,
+      `${API_BASE_URL}/api/quizzes/${qzId}/questions`,
       questionData
     );
     return response.data;
@@ -37,10 +37,10 @@ export const createQuestion = async (quizId?:string, questionData?:any) => {
   }
 };
 
-export const updateQuestion = async (qsId?:string, questionData?:any) => {
+export const updateQuestion = async (questionData?:any) => {
   try {
     const response = await axios.put(
-      `${API_BASE_URL}/api/questions/${qsId}`,
+      `${API_BASE_URL}/api/questions/${questionData._id}`,
       questionData
     );
     return response.data;
@@ -56,6 +56,42 @@ export const deleteQuestion = async (qsId?:string) => {
     return response.data;
   } catch (error) {
     console.error("Failed to delete question:", error);
+    return null;
+  }
+};
+
+export const createAnswer = async (qsId?:string, answerData?:any) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/api/questions/${qsId}/answers`,
+      answerData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to create answer:", error);
+    return null;
+  }
+};
+
+export const updateAnswer = async (answerData?:any) => {
+  try {
+    const response = await axios.put(
+      `${API_BASE_URL}/api/answers/${answerData._id}`,
+      answerData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to update answer:", error);
+    return null;
+  }
+};
+
+export const deleteAnswer = async (ansId?:string) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/api/answers/${ansId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to delete answer:", error);
     return null;
   }
 };

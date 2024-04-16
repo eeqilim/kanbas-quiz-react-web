@@ -34,23 +34,26 @@ function EditFillInBlanksQuestion() {
   };
 
   const [question, setQuestion] = useState(initialState);
+  const [originalQuestion, setOriginalQuestion] = useState(initialState);
 
   const fetchQuestionData = async () => {
     const questionData = await client.fetchQuestionById(questionId);
     setQuestion(questionData);
+    setOriginalQuestion(questionData);
   };
 
   useEffect(() => {
     fetchQuestionData();
   }, [questionId]);
 
-  const handleCorrectAnswerChange = (e: any) => {
+  const handleCorrectAnswerChange = (e: any) => { question &&
     setQuestion({ ...question, correctAnswer: e.target.value });
   };
 
   const updateQuestionData = async () => {
-    const updatedQuestion = await client.updateQuestion(questionId, question);
+    const updatedQuestion = await client.updateQuestion(question);
     console.log("Question updated successfully:", updatedQuestion);
+    setQuestion(updatedQuestion);
   };
 
   const handleUpdate = () => {
@@ -58,7 +61,7 @@ function EditFillInBlanksQuestion() {
   };
 
   const handleCancel = () => {
-    setQuestion(question);
+    setQuestion(originalQuestion);
   };
 
   return (
@@ -69,9 +72,9 @@ function EditFillInBlanksQuestion() {
           <input
             className="form-control"
             type="text"
-            value={question.title}
+            value={ question ? question.title : (originalQuestion?.title || '')}
             onChange={(e) =>
-              setQuestion({ ...question, title: e.target.value })
+              question && setQuestion({ ...question, title: e.target.value })
             }
             placeholder="Question Title"
           />
@@ -96,9 +99,9 @@ function EditFillInBlanksQuestion() {
           <input
             className="form-control"
             type="number"
-            value={question.points}
+            value={ question ? question.points: (originalQuestion?.points) || '' }
             onChange={(e) =>
-              setQuestion({ ...question, points: parseInt(e.target.value) })
+              question && setQuestion({ ...question, points: parseInt(e.target.value) })
             }
             placeholder="Points"
             style={{ width: "auto" }}
@@ -116,9 +119,9 @@ function EditFillInBlanksQuestion() {
           <ReactQuill
             className="custom-quill form-control"
             id="myCustomQuillEditorQuestion"
-            value={question.questionText}
+            value={ question ? question.questionText: (originalQuestion?.questionText || '')}
             onChange={(value) =>
-              setQuestion({ ...question, questionText: value })
+              question && setQuestion({ ...question, questionText: value })
             }
             placeholder="Enter your question text here..."
           />
@@ -132,9 +135,9 @@ function EditFillInBlanksQuestion() {
           <input
             type="text"
             className="form-control"
-            value={question.correctAnswer}
+            value={question ? question.correctAnswer: (originalQuestion?.correctAnswer || '')}
             onChange={handleCorrectAnswerChange}
-            placeholder={question.correctAnswer}
+            placeholder={question ? question.correctAnswer : (originalQuestion?.correctAnswer || '')}
           />
         </div>
       </div>
