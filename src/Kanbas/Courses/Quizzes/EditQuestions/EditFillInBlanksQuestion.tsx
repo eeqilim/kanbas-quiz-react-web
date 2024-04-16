@@ -53,7 +53,7 @@ function EditFillInBlanksQuestion() {
   const updateQuestionData = async () => {
     const updatedQuestion = await client.updateQuestion(question);
     console.log("Question updated successfully:", updatedQuestion);
-    setQuestion(updatedQuestion);
+    // setQuestion(updatedQuestion);
   };
 
   const handleUpdate = () => {
@@ -74,7 +74,7 @@ function EditFillInBlanksQuestion() {
             type="text"
             value={ question ? question.title : (originalQuestion?.title || '')}
             onChange={(e) =>
-              question && setQuestion({ ...question, title: e.target.value })
+              setQuestion({ ...question, title: e.target.value })
             }
             placeholder="Question Title"
           />
@@ -101,7 +101,7 @@ function EditFillInBlanksQuestion() {
             type="number"
             value={ question ? question.points: (originalQuestion?.points) || '' }
             onChange={(e) =>
-              question && setQuestion({ ...question, points: parseInt(e.target.value) })
+              setQuestion({ ...question, points: parseInt(e.target.value) })
             }
             placeholder="Points"
             style={{ width: "auto" }}
@@ -121,7 +121,7 @@ function EditFillInBlanksQuestion() {
             id="myCustomQuillEditorQuestion"
             value={ question ? question.questionText: (originalQuestion?.questionText || '')}
             onChange={(value) =>
-              question && setQuestion({ ...question, questionText: value })
+              setQuestion({ ...question, questionText: value })
             }
             placeholder="Enter your question text here..."
           />
