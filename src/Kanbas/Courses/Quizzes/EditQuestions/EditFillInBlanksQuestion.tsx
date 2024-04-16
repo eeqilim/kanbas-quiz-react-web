@@ -3,8 +3,12 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../index.css";
 import { Dropdown } from "react-bootstrap";
-// import { Answer, QuestionEditorState } from './index';
 import { FaPlus, FaTrash } from "react-icons/fa";
+import axios from "axios";
+import { useParams } from "react-router";
+import * as client from "./client";
+
+const API_BASE_URL = "http://localhost:4000";
 
 export interface FillInBlanksQuestionType {
   questionId: string;
@@ -17,45 +21,45 @@ export interface FillInBlanksQuestionType {
 }
 
 function EditFillInBlanksQuestion() {
+  const { quizId, questionId } = useParams(); // Extracting parameters from the route
+
   const initialState: FillInBlanksQuestionType = {
-    questionId: "question111",
+    questionId: questionId ?? "",
     title: "",
     points: 1,
     questionText: "",
     correctAnswer: "",
     questionType: "B",
-    quizId: "quiz1",
+    quizId: quizId ?? "",
   };
-  const [question, setQuestion] =
-    useState<FillInBlanksQuestionType>(initialState);
 
-  // Function to handle change in the correct answer
-  const handleCorrectAnswerChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setQuestion((prevState) => ({
-      ...prevState,
-      correctAnswer: e.target.value,
-    }));
+  const [question, setQuestion] = useState(initialState);
+
+  const fetchQuestionData = async () => {
+    const questionData = await client.fetchQuestionById(questionId);
+    setQuestion(questionData);
+  };
+
+  useEffect(() => {
+    fetchQuestionData();
+  }, [questionId]);
+
+  const handleCorrectAnswerChange = (e: any) => {
+    setQuestion({ ...question, correctAnswer: e.target.value });
+  };
+
+  const updateQuestionData = async () => {
+    const updatedQuestion = await client.updateQuestion(questionId, question);
+    console.log("Question updated successfully:", updatedQuestion);
   };
 
   const handleUpdate = () => {
-    // API call to save the current state
-    console.log("Saving data...", question);
-    // Example: axios.post('/api/update-question', question)
-    // .then(response => console.log('Saved successfully'))
-    // .catch(error => console.error('Error saving:', error));
+    updateQuestionData();
   };
 
   const handleCancel = () => {
-    setQuestion(initialState);
+    setQuestion(question);
   };
-
-  // Fetch and set initial data
-  useEffect(() => {
-    // Fetch data from API and set it
-    // setQuestion(fetchedData);
-  }, []);
 
   return (
     <div className="container-fluid me-3 ms-3">
