@@ -1,18 +1,25 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaEllipsisV } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { quizzes } from "../../../Database";
-
-import { useSelector } from "react-redux";
+import { PiProhibit } from "react-icons/pi";
+import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../../store";
+import * as quizClient from "../quizClient";
+import { setQuizItem } from "../quizsReducer";
 
 function QuizDetails() {
-    const { quizId } = useParams();
-
+    const { courseId } = useParams();
     const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
-
-
+    const dispatch = useDispatch();
+    const handleTogglePublishQuiz = async (quizId: string) => {
+        const response = await quizClient.togglePublishQuiz(quizId);
+        if (response.acknowledged) {
+            const updatedQuiz = { ...quiz, published: !quiz.published };
+            dispatch(setQuizItem(updatedQuiz));
+            return updatedQuiz;
+        }
+    };
     const formatDate = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',
@@ -31,16 +38,29 @@ function QuizDetails() {
             <div className="row pt-3">
                 <div className="col text-end">
                     <div className="text-success fs-5 me-1 d-inline">
-                        <button type="button" className="btn btn-success">
-                            <FaCircleCheck className="me-1" /> Published
-                        </button>
+                        {!quiz.published ? (
+                            <button type="button" className="btn btn-success" onClick={() => handleTogglePublishQuiz(quiz._id)}>
+                                <FaCircleCheck className="me-1" /> Published
+                            </button>
+                        ) : (
+                            <button type="button" className="btn border bg-light me-1" onClick={() => handleTogglePublishQuiz(quiz._id)}>
+                                <PiProhibit className="me-1" /> Unpublished
+                            </button>
+                        )}
                     </div>
                     <div className="d-inline">
-                        <a className="btn border bg-light me-1">Perview</a>
+                        <Link className="btn border bg-light me-1"
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Questions`}
+                            onClick={() => { dispatch(setQuizItem(quiz)) }}>Preview</Link>
                     </div>
                     <div className="d-inline">
-                        <a className="btn border bg-light me-1"><FaPencil style={{ transform: "scaleX(-1)" }} /> Edit</a>
+                        <Link className="btn border bg-light me-1"
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Details`}
+                            onClick={() => { dispatch(setQuizItem(quiz)) }}>
+                            <FaPencil style={{ transform: "scaleX(-1)" }} /> Edit
+                        </Link>
                     </div>
+
                     <div className="d-inline">
                         <a className="btn border bg-light me-1"><FaEllipsisV /></a>
                     </div>
@@ -51,7 +71,7 @@ function QuizDetails() {
             <br />
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Quiz Type</b></div>
-                <div className="col-sm-5">{quiz?.item_name}</div>
+                <div className="col-sm-5">{quiz?.quiz_type}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Points</b></div>

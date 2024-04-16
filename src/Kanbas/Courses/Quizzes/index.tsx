@@ -96,11 +96,11 @@ function Quizzes() {
                 <div>
                     <div className="d-inline">
 
-                        <Link 
-                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/Add/Details`} 
+                        <Link
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/Add/Details`}
                             className="btn ms-1 red-button border border-dark"
                             onClick={() => { dispatch(resetQuizItemState()) }}
-                        >    
+                        >
                             <FaPlus />Quiz
                         </Link>
 
@@ -117,7 +117,7 @@ function Quizzes() {
                         <a className="btn" data-bs-toggle="collapse" href="#collapse-Quiz-List">
                             <FaSortDown style={{ verticalAlign: "top" }} />
                         </a>
-                        
+
                         <span className="fw-bold">Assignment Quizzes</span>
                     </div>
 
@@ -127,15 +127,15 @@ function Quizzes() {
                             <li key={quiz._id} className={
                                 `list-group-item ${quiz.available_from_date && new Date(quiz.available_from_date) < new Date() || quiz.published ? 'wd-courses-quizzes-available-published' : ''}`
                             }>
-                                
+
                                 <div className="d-flex align-items-center">
                                     <div className="d-flex align-items-center" style={{ flexShrink: 0 }}>
                                         <HiOutlineRocketLaunch className={`me-3 ms-2 ${quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? "text-muted" : "text-success"}`} />
                                     </div>
                                     <div className="flex-fill">
                                         <div>
-                                            <Link 
-                                                className="fw-bold quizzes-list-link text-dark" 
+                                            <Link
+                                                className="fw-bold quizzes-list-link text-dark"
                                                 to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
                                                 onClick={() => { dispatch(setQuizItem(quiz)) }}
                                             >
@@ -153,10 +153,10 @@ function Quizzes() {
                                             <b>Due</b> {formatDate(quiz.due_date)} at {formatTime(quiz.due_date)} | {quiz.points} pts | {quiz.question_count} Questions
                                         </div>
                                     </div>
-                                    
+
                                     <span className="float-end" style={{ display: "flex", alignItems: "center" }}>
                                         {quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? (
-                                            <PiProhibit />
+                                            <PiProhibit onClick={() => handleTogglePublishQuiz(quiz._id)} />
                                         ) : (
                                             <FaCheckCircle className="text-success" />
                                         )}
@@ -165,19 +165,19 @@ function Quizzes() {
                                             <ul className="dropdown-menu">
                                                 <li>
                                                     <button className="dropdown-item"
-                                                    onClick={() => {
-                                                        setShowDeleteQuizModal(true);
-                                                        dispatch(setQuizItem(quiz));
-                                                    }}>
+                                                        onClick={() => {
+                                                            setShowDeleteQuizModal(true);
+                                                            dispatch(setQuizItem(quiz));
+                                                        }}>
                                                         Delete
                                                     </button>
                                                 </li>
 
                                                 <li>
-                                                    <Link 
-                                                        className="dropdown-item" 
+                                                    <Link
+                                                        className="dropdown-item"
                                                         style={{ "textDecoration": "None", "color": "black" }}
-                                                        to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Details`}
+                                                        to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
                                                         onClick={() => { dispatch(setQuizItem(quiz)) }}
                                                     >
                                                         Edit
@@ -186,13 +186,11 @@ function Quizzes() {
 
                                                 <li>
                                                     <button className="dropdown-item" onClick={() => handleTogglePublishQuiz(quiz._id)}>
-                                                        Publish
+                                                        {quiz?.published ? "Unpublish" : "Publish"}
                                                     </button>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h1>{String(quiz.published)}</h1>
-
                                     </span>
                                 </div>
                             </li>
@@ -204,8 +202,8 @@ function Quizzes() {
             <DeleteQuizModal
                 show={showDeleteQuizModal}
                 onClose={() => setShowDeleteQuizModal(false)}
-                onDelete={ handleDeleteQuiz } />
-    
+                onDelete={handleDeleteQuiz} />
+
         </div >
     );
 }
