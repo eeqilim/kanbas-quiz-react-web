@@ -13,11 +13,13 @@ import QuestionsEditor from "./QuestionsEditor";
 import MultipleChoiceQuestionEditor from "../EditQuestions";
 import EditTrueFalseQuestion from "../EditQuestions/EditTrueFalseQuestion";
 import EditFillInBlanksQuestion from "../EditQuestions/EditFillInBlanksQuestion";
+import { useSelector } from "react-redux";
+import { KanbasState } from "../../../store";
 
 function QuizEditor() {
     const { courseId, quizGroupId, action } = useParams();
     const { pathname } = useLocation();
-    const quizItem = quizzes[0];
+    const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
 
     return (
         <div className="flex-fill me-2 ms-2 mt-2">

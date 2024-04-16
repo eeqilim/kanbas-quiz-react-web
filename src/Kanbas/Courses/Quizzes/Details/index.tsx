@@ -4,10 +4,13 @@ import { FaEllipsisV } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { quizzes } from "../../../Database";
 
+import { useSelector } from "react-redux";
+import { KanbasState } from "../../../store";
+
 function QuizDetails() {
     const { quizId } = useParams();
 
-    const quiz = quizzes.find((quiz) => quiz._id === quizId);
+    const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
 
 
     const formatDate = (dateString: string | number | Date) => {
