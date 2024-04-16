@@ -1,44 +1,33 @@
-import { useParams, Link} from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "./index.css";
 
 import { useState } from "react";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ReactQuill from 'react-quill';
+import { useSelector, useDispatch } from "react-redux";
+import { KanbasState } from "../../../../store";
+import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } from "../../quizsReducer";
+
+
 
 function QuizDetailsEditor() {
     const { courseId } = useParams();
+    const dispatch = useDispatch();
 
-    // testData
-    const today = new Date().toISOString().split('T')[0];
-    const [quizOptions, setQuizOptions] = useState({
-        title: 'Unnamed Quiz',
-        instructions: '',
+    const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz)
 
-        shuffleAnswers: true,
-        timeLimit: 20,
-        multipleAttempts: false,
-        showCorrectAnswers: false,
-        accessCode: '',
-        oneQuestionAtATime: true,
-        webcamRequired: false,
-        lockQuestionsAfterAnswering: false,
-
-        dueDate: today, 
-        availableDate: today, 
-        untilDate: today, 
-      })
+ 
 
     
     const handleOptionChange = (event: any) => {
         const { name, value, checked, type } = event.target;
-        setQuizOptions({
-            ...quizOptions,
+        dispatch(setQuizItem({
+            ...quizItem,
             [name]: type === 'checkbox' ? checked : value
-        });
+        }));
     };
 
-    const [ckeditorData, setckeditorData] = useState('');
+
 
   return (
     <div className="mt-3 ms-3">
@@ -47,20 +36,13 @@ function QuizDetailsEditor() {
             <div className="mb-3">
                 <label htmlFor="quizTitle" className="from-label mb-1">Quiz Title:</label>
                 <div className="col-sm-8">
-                    <input type="text" value={quizOptions.title} className="form-control" id="quizTitle" onChange={(e) => setQuizOptions({ ...quizOptions, title: e.target.value })} />
+                    <input type="text" value={quizItem.item_name} placeholder="Enter Quiz Name" className="form-control" id="quizTitle" onChange={(e) => dispatch(setQuizItem({ ...quizItem, item_name: e.target.value }))} />
                 </div>
             </div>
 
             <div className="mb-3">
                 <label htmlFor="quizInstructions" className="from-label mb-1">Quiz Instructions:</label>
-                <CKEditor 
-                    editor={ClassicEditor} 
-                    data={quizOptions.instructions}
-                    onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setQuizOptions({ ...quizOptions, instructions: data });
-                    }}
-                />
+                <ReactQuill value={quizItem.instructions} onChange={ (value) => dispatch(setQuizItem({ ...quizItem, instructions: value }))} />
             </div>
 
             <div className="mb-3 row align-items-center">
@@ -99,20 +81,20 @@ function QuizDetailsEditor() {
                         <div className="option-item">
                             <input 
                                 type="checkbox" 
-                                name="shuffleAnswers" 
-                                id="shuffleAnswers" 
-                                checked={quizOptions.shuffleAnswers} 
+                                name="shuffle" 
+                                id="shuffle" 
+                                checked={quizItem.shuffle} 
                                 onChange={handleOptionChange}
                             />
-                            <label htmlFor="shuffleAnswers">Shuffle Answers</label>
+                            <label htmlFor="shuffle">Shuffle Answers</label>
                         </div>
 
                         <div className="option-item">
                             <label>Time Limit</label>
                             <input 
                                 type="number" 
-                                name="timeLimit" 
-                                value={quizOptions.timeLimit} 
+                                name="time_limit" 
+                                value={quizItem.time_limit} 
                                 onChange={handleOptionChange}
                             /> Minutes
                         </div>
@@ -121,8 +103,8 @@ function QuizDetailsEditor() {
                                 <label>
                                     <input 
                                         type="checkbox" 
-                                        name="multipleAttempts" 
-                                        checked={quizOptions.multipleAttempts}
+                                        name="multiple_attempts" 
+                                        checked={quizItem.multiple_attempts}
                                         onChange={handleOptionChange}
                                     /> Allow Multiple Attempts
                                 </label>
@@ -134,8 +116,8 @@ function QuizDetailsEditor() {
                                 <label>
                                     <input 
                                         type="checkbox" 
-                                        name="showCorrectAnswers" 
-                                        checked={quizOptions.showCorrectAnswers} 
+                                        name="show_ans" 
+                                        checked={quizItem.show_ans} 
                                         onChange={handleOptionChange}
                                     /> Let Students See Their Quiz Responses (Incorrect Questions Will Be Marked in Student Feedback)
                                 </label>
@@ -148,8 +130,8 @@ function QuizDetailsEditor() {
                                 <label>
                                     <input 
                                         type="checkbox" 
-                                        name="oneQuestionAtATime" 
-                                        checked={quizOptions.oneQuestionAtATime} 
+                                        name="one_question_at_a_time" 
+                                        checked={quizItem.one_question_at_a_time} 
                                         onChange={handleOptionChange}
                                     /> Show one question at a time
                                 </label>
@@ -163,13 +145,13 @@ function QuizDetailsEditor() {
                     </div>
                     <div className="option-item">
                         <div className="checkbox-wrapper">
-                            <label htmlFor="accessCode">Access Code</label>
+                            <label htmlFor="access_code">Access Code</label>
                             <input 
                                 type="text" 
-                                id="accessCode" 
-                                name="accessCode"
+                                id="access_code" 
+                                name="access_code"
                                 placeholder="Enter access code" 
-                                value={quizOptions.accessCode} 
+                                value={quizItem.access_code} 
                                 onChange={handleOptionChange}
                                 className="form-control"
                             />
@@ -181,8 +163,8 @@ function QuizDetailsEditor() {
                             <label>
                                 <input 
                                     type="checkbox" 
-                                    name="webcamRequired" 
-                                    checked={quizOptions.webcamRequired}
+                                    name="webcam_required" 
+                                    checked={quizItem.webcam_required}
                                     onChange={handleOptionChange}
                                 /> 
                                 Webcam Required
@@ -195,8 +177,8 @@ function QuizDetailsEditor() {
                             <label>
                                 <input 
                                     type="checkbox" 
-                                    name="lockQuestionsAfterAnswering" 
-                                    checked={quizOptions.lockQuestionsAfterAnswering}
+                                    name="lock_questions_after_answering" 
+                                    checked={quizItem.lock_questions_after_answering}
                                     onChange={handleOptionChange}
                                 /> 
                                 Lock Questions After Answering
@@ -225,7 +207,7 @@ function QuizDetailsEditor() {
                                     <div className="input-group">
                                         <input 
                                             type="date" id="due_date" className="form-control" 
-                                            value={quizOptions.dueDate} onChange={(e) => {setQuizOptions({...quizOptions, dueDate: e.target.value})}}
+                                            value={quizItem.due_date} onChange={(e) => {dispatch(setQuizItem({...quizItem, due_date: e.target.value}))}}
                                         />
                                     </div>
                                 </div>
@@ -236,7 +218,7 @@ function QuizDetailsEditor() {
                                     <div className="input-group">
                                         <input 
                                             type="date" id="availableFromDate" className="form-control" 
-                                            value={quizOptions.availableDate} onChange={(e) => setQuizOptions({ ...quizOptions, availableDate: e.target.value })}/>
+                                            value={quizItem.available_from_date} onChange={(e) => dispatch(setQuizItem({ ...quizItem, available_from_date: e.target.value }))}/>
                                     </div>
                                 </div>
                                 <div className="col-6">
@@ -244,7 +226,7 @@ function QuizDetailsEditor() {
                                     <div className="input-group">
                                         <input 
                                             type="date" id="availableUntilDate" className="form-control" 
-                                            value={quizOptions.untilDate} onChange={(e) => setQuizOptions({ ...quizOptions, untilDate: e.target.value })}/>
+                                            value={quizItem.available_to_date} onChange={(e) => dispatch(setQuizItem({ ...quizItem, available_to_date: e.target.value }))}/>
                                     </div>
                                 </div>
                             </div>

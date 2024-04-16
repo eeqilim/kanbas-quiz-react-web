@@ -35,7 +35,31 @@ export type assignmentType = {
     total_grade_percentage: number;
     items: assignmentItemType[];
 };
-
+export type quizItemType = {
+    _id: string;
+    course: string;
+    item_name: string;
+    question_count: number;
+    published: boolean;
+    quiz_type: string;
+    points: number;
+    group: string;
+    shuffle: boolean;
+    time_limit: number;
+    multiple_attempts: boolean;
+    responses: string;
+    show_ans: boolean;
+    one_question_at_a_time: boolean;
+    lockdown_browser: boolean;
+    webcam_required: boolean;
+    lock_questions_after_answering: boolean;
+    due_date: string;
+    assign_to: string;
+    available_from_date: string;
+    available_to_date: string;
+    access_code: string;
+    instructions: string;
+};
 
 export interface KanbasState {
     modulesReducer: {
@@ -46,6 +70,10 @@ export interface KanbasState {
         assignments: assignmentType[];
         assignmentGroup: assignmentType;
         assignment: assignmentItemType;
+    };
+    quizsReducer: {
+        quizes: quizItemType[];
+        quiz: quizItemType;
     };
 }
 

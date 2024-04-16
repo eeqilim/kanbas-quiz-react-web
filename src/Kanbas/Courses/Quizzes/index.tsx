@@ -3,9 +3,14 @@ import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { PiProhibit } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { quizzes } from "../../Database";
+
+
+import * as quizClient from "./quizClient";
+import { useDispatch, useSelector } from "react-redux";
+import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } from "./quizsReducer";
+import { KanbasState } from "../../store";
 
 function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void }) {
     return (
@@ -26,7 +31,46 @@ function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: 
 
 function Quizzes() {
     const { courseId } = useParams();
-    const quizList = quizzes?.filter((quiz: any) => quiz.course === courseId) ?? [];
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // Fetch all the quizzes for the course and load it in to the reducer state "quizzes"
+        // Refreshes everytime the courseId changes
+        quizClient.findAllQuizzesForCourse(courseId).then((quizzes) => { dispatch(setQuizzes(quizzes)) });
+
+    }, [courseId])
+
+
+    const quizList = useSelector((state: KanbasState) => state.quizsReducer.quizes);
+    const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
+
+    // Handle the toggle publish quiz action
+    const handleTogglePublishQuiz = async (quizId: string) => {
+        const response = await quizClient.togglePublishQuiz(quizId);
+        if (response.acknowledged) {
+            const newQuizzes = quizList.map((quiz) => {
+                if (quiz._id === quizId) {
+                    return { ...quiz, published: !quiz.published };
+                }
+                return quiz;
+            });
+            dispatch(setQuizzes(newQuizzes));
+        }
+    };
+
+    const handleDeleteQuiz = async () => {
+        const response = await quizClient.deleteQuiz(quizItem._id);
+        if (response.acknowledged) {
+            const newQuizzes = quizList.filter((quiz) => quiz._id !== quizItem._id);
+            dispatch(setQuizzes(newQuizzes));
+        } else {
+            alert("Failed to delete the quiz");
+            return;
+        }
+        setShowDeleteQuizModal(false);
+        dispatch(resetQuizItemState());
+    }
+
     const formatDate = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',
@@ -52,7 +96,13 @@ function Quizzes() {
                 <div>
                     <div className="d-inline">
 
-                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/Add`} className="btn ms-1 red-button border border-dark"><FaPlus />Quiz</Link>
+                        <Link 
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/Add/Details`} 
+                            className="btn ms-1 red-button border border-dark"
+                            onClick={() => { dispatch(resetQuizItemState()) }}
+                        >    
+                            <FaPlus />Quiz
+                        </Link>
 
                     </div>
                     <a className="btn ms-1 ps-1 pe-1 border border-dark bg-light"><FaEllipsisV /></a>
@@ -68,21 +118,27 @@ function Quizzes() {
                             <FaSortDown style={{ verticalAlign: "top" }} />
                         </a>
                         
-                        <span className="fw-bold"> Assignment Quizzes</span>
+                        <span className="fw-bold">Assignment Quizzes</span>
                     </div>
+
                     <div className="p-0 collapse show" id="collapse-Quiz-List">
 
                         {quizList.map((quiz) => (
                             <li key={quiz._id} className={
                                 `list-group-item ${quiz.available_from_date && new Date(quiz.available_from_date) < new Date() || quiz.published ? 'wd-courses-quizzes-available-published' : ''}`
                             }>
+                                
                                 <div className="d-flex align-items-center">
                                     <div className="d-flex align-items-center" style={{ flexShrink: 0 }}>
                                         <HiOutlineRocketLaunch className={`me-3 ms-2 ${quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? "text-muted" : "text-success"}`} />
                                     </div>
                                     <div className="flex-fill">
                                         <div>
-                                            <Link className="fw-bold quizzes-list-link text-dark" to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}>
+                                            <Link 
+                                                className="fw-bold quizzes-list-link text-dark" 
+                                                to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
+                                                onClick={() => { dispatch(setQuizItem(quiz)) }}
+                                            >
                                                 {quiz.item_name}
                                             </Link>
                                         </div>
@@ -97,6 +153,7 @@ function Quizzes() {
                                             <b>Due</b> {formatDate(quiz.due_date)} at {formatTime(quiz.due_date)} | {quiz.points} pts | {quiz.question_count} Questions
                                         </div>
                                     </div>
+                                    
                                     <span className="float-end" style={{ display: "flex", alignItems: "center" }}>
                                         {quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? (
                                             <PiProhibit />
@@ -106,16 +163,35 @@ function Quizzes() {
                                         <div className="dropleft d-inline">
                                             <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
                                             <ul className="dropdown-menu">
-                                                <li><button className="dropdown-item">Delete</button></li>
-                                                <li><button className="dropdown-item">
-                                                    <Link style={{ "textDecoration": "None", "color": "black" }}
-                                                        to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/${quiz._id}`}>
+                                                <li>
+                                                    <button className="dropdown-item"
+                                                    onClick={() => {
+                                                        setShowDeleteQuizModal(true);
+                                                        dispatch(setQuizItem(quiz));
+                                                    }}>
+                                                        Delete
+                                                    </button>
+                                                </li>
+
+                                                <li>
+                                                    <Link 
+                                                        className="dropdown-item" 
+                                                        style={{ "textDecoration": "None", "color": "black" }}
+                                                        to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Details`}
+                                                        onClick={() => { dispatch(setQuizItem(quiz)) }}
+                                                    >
                                                         Edit
                                                     </Link>
-                                                </button></li>
-                                                <li><button className="dropdown-item">Publish</button></li>
+                                                </li>
+
+                                                <li>
+                                                    <button className="dropdown-item" onClick={() => handleTogglePublishQuiz(quiz._id)}>
+                                                        Publish
+                                                    </button>
+                                                </li>
                                             </ul>
                                         </div>
+                                        <h1>{String(quiz.published)}</h1>
 
                                     </span>
                                 </div>
@@ -124,10 +200,12 @@ function Quizzes() {
                     </div>
                 </li>
             </ul>
+
             <DeleteQuizModal
                 show={showDeleteQuizModal}
                 onClose={() => setShowDeleteQuizModal(false)}
-                onDelete={() => { }} />
+                onDelete={ handleDeleteQuiz } />
+    
         </div >
     );
 }
