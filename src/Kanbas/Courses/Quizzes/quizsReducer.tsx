@@ -1,40 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const emptyQuizItem = {
+const emptyQuiz = {
     _id: "", 
-    item_name: "", 
-    question_count: "", 
-    available: "",
-    published: "",
+    course: "",
+    item_name: "Unnamed Quiz",
+    question_count: 0,
+    published: false,
     quiz_type: "",
     points: 0,
-    group: "",
-    shuffle: "",
-    time_limit: "",
-    multiple_attempts: "",
-    response: "",
-    show_ans: "",
-    one_q_per_time: "",
-    lockdown_browser: "",
-    view_results: "",
-    webcam: "",
-    lock_questions: "",
+    group: "Quizzes",
+    shuffle: false,
+    time_limit: 20,
+    multiple_attempts: false,
+    responses: "Always",
+    show_ans: true,
+    one_question_at_a_time: true,
+    lockdown_browser: false,
+    webcam_required: false,
+    lock_questions_after_answering: false,
     due_date: "",
+    assign_to: "Everyone",
     available_from_date: "",
     available_to_date: "",
+    access_code: "",
+    instructions: "",
     }
-const emptyQuizesObj = {
-    _id: "", 
-    course: "", 
-    category: "", 
-    total_grade_percentage: 0, 
-    items: [emptyQuizItem]
-}
+
 
 const initialState = {
-    quizes: [emptyQuizesObj],
-    quizGroup: emptyQuizesObj,
-    quizItem: emptyQuizItem,
+    quizes: [emptyQuiz],
+    quiz: emptyQuiz,
 }
 
 
@@ -42,17 +37,28 @@ const quizesSlice = createSlice( {
     name: "quizes",
     initialState,
     reducers: {
+
+        // reset the quizzes list state
         resetQuizesState: (state) => {
-            state.quizes = [emptyQuizesObj];
+            state.quizes = [emptyQuiz];
         },
-        resetQuizGroupState: (state) => {
-            state.quizGroup = emptyQuizesObj;
-        },
+
+        // reset the single quiz state
         resetQuizItemState: (state) => {
-            state.quizItem = emptyQuizItem;
+            state.quiz = emptyQuiz;
+        },
+
+        // Set the quizzes list 
+        setQuizzes: (state, action) => {
+            state.quizes = action.payload;
+        },
+
+        // set the single quiz state
+        setQuizItem: (state, action) => {
+            state.quiz = action.payload;
         },
     }
 })
 
-export const { } = quizesSlice.actions;
+export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } = quizesSlice.actions;
 export default quizesSlice.reducer;
