@@ -9,10 +9,16 @@ import { KanbasState } from "../../../../store";
 import { useEffect, useState } from "react";
 
 import Collapse from "react-bootstrap/Collapse";
-import { resetQuestionItemState, setQuestionItem } from "../../quizsReducer";
+import { resetQuestionItemState, setQuestionItem, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestions } from "../../quizsReducer";
 import ReactQuill from "react-quill";
 
+import { useParams } from "react-router-dom";
+import * as questionClient from "../../questionClient"; 
+
 import "./index.css";
+
+import MultipleChoiceAnswerEditor from "./MultipleChoiceAnswerEditor";
+import TrueAndFalseQuestionEditor from "./TrueAndFalseQuestionEditor";
 
 interface Props {
   quizType: string;
@@ -31,64 +37,45 @@ function QuizTypeTextRender({ quizType }: Props) {
 }
 
 
-function MultipleChoiceAnswerEditor() {
-  
-  const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
-  const dispatch = useDispatch();
-
-  const addNewAnswer = () => {
-    dispatch(setQuestionItem({ ...questionItemState, possibleAnswers: [...questionItemState.possibleAnswers, ""] }));
-  }
-
-  const updateAnswer = (index: number, newValue: string) => {
-    const newAnswers = [...questionItemState.possibleAnswers];
-    newAnswers[index] = newValue;
-    dispatch(setQuestionItem({ ...questionItemState, possibleAnswers: newAnswers }));
-  }
-  const [correctAnswerIdx, setCorrectAnswerIdx] = useState(0);
-
-  useEffect(() => {
-    if (questionItemState.possibleAnswers.length === 0) {
-      addNewAnswer();
-    } else {
-      setCorrectAnswerIdx(questionItemState.possibleAnswers.indexOf(questionItemState.correctAnswer));      
-    }
-  }, [])
-
-  return (
-    <div className="form-check">
-      
-      { questionItemState.possibleAnswers.map((answer: string, index: number) => (
-        <div className="mb-2">
-          
-          <input className="form-check-input" type="radio" name="flexRadio" id={`flexRadio${index}`} checked={correctAnswerIdx === index} onChange={() => setCorrectAnswerIdx(index)}/>
-          <label className="form-check-label" htmlFor={`flexRadio${index}`}>
-            { correctAnswerIdx === index ? `Correct Answer` : `Possible Answer` }
-          </label>
-          <input type="text" value={answer} onChange={(e) => updateAnswer(index, e.target.value)}/>
-        
-        </div>
-      ))}
-
-      <div className="d-flex justify-content-end">
-        <a onClick={addNewAnswer} className="add-answer-link">+ Add Another Answer</a>
-      </div>
-
-    </div>
-  )
-}
-
 
 
 
 function QuestionsEditor() {
 
   const dispatch = useDispatch();
-  
+  const { action } = useParams();
+
   const questionsState = useSelector((state: KanbasState) => state.quizsReducer.questions);
   const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
+  const correctAnswerIdx = useSelector((state: KanbasState) => state.quizsReducer.correctAnswerIdx);
 
   const [addQuestionFormOpen, setAddQuestionFormOpen] = useState(false);
+
+  
+
+
+  const handleUpdateOrSaveQuestion = () => {
+    if (questionItemState._id === "") {
+      // add question
+      console.log(questionItemState);
+      questionClient.createQuestion(action, questionItemState).then((question) => {
+        dispatch(setQuestions([...questionsState, question]));
+      })
+    } else {
+      // update question
+      console.log("In handleUpdateOrSaveQuestion");
+      console.log(questionItemState);
+      questionClient.updateQuestion(questionItemState).then((status) => {
+        dispatch(setQuestions(questionsState.map((q) => q._id === questionItemState._id ? questionItemState : q)));
+      })
+    }
+  };
+
+  const handleDeleteQuestion = (questionId: string) => {
+    questionClient.deleteQuestion(questionId).then(() => {
+      dispatch(setQuestions(questionsState.filter((question) => question._id !== questionId)));
+    })
+  }
 
   useEffect(() => {
     dispatch(setQuestionItem(questionItemState));
@@ -98,29 +85,27 @@ function QuestionsEditor() {
     <div className="mt-3 ms-3">
       {/* <Preview /> */}
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a role="button" className="btn btn-light"
+          <a role="button" className="btn btn-light me-2"
           onClick={() => {
-            dispatch(resetQuestionItemState());
+            if(questionItemState._id !== "") dispatch(resetQuestionItemState());
             setAddQuestionFormOpen(true);
           }}>
             <FaPlus className="me-1" />
             New Question
           </a>
-          &nbsp;
-          <a role="button" href="#" className="btn btn-light">
+          <a role="button" href="#" className="btn btn-light me-2">
             <FaPlus className="me-1" />
             New Question Group
           </a>
-          &nbsp;
-          <a role="button" href="#" className="btn btn-light">
+          <a role="button" href="#" className="btn btn-light me-2">
             <FaMagnifyingGlass className="me-1" />
             Find Questions
           </a>
-          &nbsp;
+          
         </div>
 
 
-        <Collapse in={addQuestionFormOpen}>
+        <Collapse in={addQuestionFormOpen} unmountOnExit>
           <div className="card mb-2 mt-2">
             <div className="card-header d-flex justify-content-between align-items-center">
               <div className="row align-items-center">
@@ -148,11 +133,18 @@ function QuestionsEditor() {
               <ReactQuill value={questionItemState.questionText} onChange={(value) => {dispatch(setQuestionItem({ ...questionItemState, questionText: value }))}} />
               <br/>
               <h4>Answers:</h4>
+              
               {questionItemState.questionType === "M" ? <MultipleChoiceAnswerEditor /> : null}
+              {questionItemState.questionType === "T" ? <TrueAndFalseQuestionEditor /> : null}
 
               <br/>
-              <a className="btn btn-secondary me-2">Cancel</a>
-              <a className="btn btn-danger">Save Question</a>
+              <a className="btn btn-secondary me-2" onClick={() => {setAddQuestionFormOpen(false)}}>Cancel</a>
+
+              
+              <a className="btn btn-danger" onClick={() => { setAddQuestionFormOpen(false); handleUpdateOrSaveQuestion() }}>
+                {questionItemState._id === "" ? `Add Question` : `Update Question` }
+              </a>
+              
             </div>
           </div>
         </Collapse>
@@ -172,7 +164,7 @@ function QuestionsEditor() {
                   {question.title}
 
                   <button onClick={() => {dispatch(setQuestionItem(question)); setAddQuestionFormOpen(true);}}>Edit</button>
-                  <button>Delete</button>
+                  <button onClick={() => {handleDeleteQuestion(question._id)}}>Delete</button>
               </li>
             ))}
           </ul>

@@ -62,6 +62,7 @@ export type quizItemType = {
 };
 
 export type questionItemType = {
+    _id: string;
     title: string;
     points: number;
     questionText: string;
@@ -86,6 +87,7 @@ export interface KanbasState {
         quiz: quizItemType;
         questions: questionItemType[];
         question: questionItemType;
+        correctAnswerIdx: number;
     };
 }
 
