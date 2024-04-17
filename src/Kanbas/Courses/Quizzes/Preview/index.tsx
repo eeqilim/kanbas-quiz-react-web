@@ -6,8 +6,10 @@ import { SlQuestion } from "react-icons/sl";
 import { useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
 import { FaCaretRight } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 
 function Preview() {
+  const { courseId } = useParams();
   const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
   const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
@@ -156,14 +158,16 @@ function Preview() {
       </div>
 
       <div className="card mt-3 ms-3" style={{ width: "98%" }}>
-        <a
-          href="#"
+        <Link
+          to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
           role="button"
           className="btn btn-light"
-          style={{ textAlign: "left" }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}
         >
-          <FaPencil style={{ transform: "scaleX(-1)" }} /> Keep Editing This Quiz
-        </a>
+          <FaPencil style={{ marginRight: "5px" }} />
+          <span>Keep Editing This Quiz</span>
+        </Link>
+
       </div>
       <br />
 
