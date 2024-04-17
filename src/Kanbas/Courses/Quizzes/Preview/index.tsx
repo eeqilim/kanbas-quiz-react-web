@@ -75,27 +75,47 @@ function Preview() {
                   </p>
                   <hr />
                   <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
-                    <label className="form-check-label" htmlFor="flexRadioDefault1">
-                      True
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault2"
-                      checked
-                    />
-                    <label className="form-check-label" htmlFor="flexRadioDefault2">
-                      False
-                    </label>
+                    {question.questionType === "M" && (
+                      question.possibleAnswers.map((answer, idx) => (
+                        <div key={idx}>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-${idx}`}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-${idx}`}>
+                            {answer}
+                          </label>
+                        </div>
+                      ))
+                    )}
+                    {question.questionType === "T" && (
+                      <>
+                        <div>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-true`}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-true`}>
+                            True
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-false`}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-false`}>
+                            False
+                          </label>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
