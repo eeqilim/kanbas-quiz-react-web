@@ -27,6 +27,7 @@ const emptyQuiz = {
 }
 
 const emptyQuestion = {
+    _id: "",
     title: "",
     points: 0,
     questionText: "",
@@ -45,6 +46,8 @@ const initialState = {
 
     questions: [],
     question: emptyQuestion,
+
+    correctAnswerIdx: 0,
 }
 
 
@@ -94,9 +97,19 @@ const quizesSlice = createSlice({
             state.question = action.payload;
         },
 
+        setCorrectAnswerIdx: (state, action) => {
+            state.correctAnswerIdx = action.payload;
+        },
+
+        resetCorrectAnswerIdx: (state) => {
+            state.correctAnswerIdx = 0;
+        },
+
+    
+
 
     }
 })
 
-export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions } = quizesSlice.actions;
+export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions, setCorrectAnswerIdx, resetCorrectAnswerIdx } = quizesSlice.actions;
 export default quizesSlice.reducer;
