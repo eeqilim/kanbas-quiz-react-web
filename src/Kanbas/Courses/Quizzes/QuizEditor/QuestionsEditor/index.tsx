@@ -209,7 +209,7 @@ function QuestionsEditor() {
             ) : (
               <div>
                 {questionsState.map((question) => (
-                  <div className="d-flex align-items-center justify-content-between list-group-item">
+                  <li key={question._id} className="d-flex align-items-center justify-content-between list-group-item">
                     {question.title}
                     <div className="dropleft d-inline">
                       <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
@@ -228,7 +228,7 @@ function QuestionsEditor() {
                         </li>
                       </ul>
                     </div>
-                  </div>
+                  </li>
                 ))}
               </div>
             )}
