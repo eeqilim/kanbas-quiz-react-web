@@ -6,8 +6,10 @@ import { SlQuestion } from "react-icons/sl";
 import { useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
 import { FaCaretRight } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 
 function Preview() {
+  const { courseId } = useParams();
   const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
   const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
@@ -75,27 +77,63 @@ function Preview() {
                   </p>
                   <hr />
                   <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
-                    <label className="form-check-label" htmlFor="flexRadioDefault1">
-                      True
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault2"
-                      checked
-                    />
-                    <label className="form-check-label" htmlFor="flexRadioDefault2">
-                      False
-                    </label>
+                    {question.questionType === "B" && (
+                      <div>
+                        {question.possibleAnswers.map((answer, idx) => (
+                          <div key={idx} className="d-flex align-items-center mb-3 w-50">
+                            <span style={{ marginRight: "10px" }}>{idx + 1}.</span>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id={`answer-${idx}`}
+                              name={`question-${question._id}`}
+                              placeholder={`Answer for blank ${idx + 1}`}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {question.questionType === "M" && (
+                      question.possibleAnswers.map((answer, idx) => (
+                        <div key={idx}>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-${idx}`}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-${idx}`}>
+                            {answer}
+                          </label>
+                        </div>
+                      ))
+                    )}
+                    {question.questionType === "T" && (
+                      <>
+                        <div>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-true`}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-true`}>
+                            True
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-false`}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-false`}>
+                            False
+                          </label>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -120,14 +158,16 @@ function Preview() {
       </div>
 
       <div className="card mt-3 ms-3" style={{ width: "98%" }}>
-        <a
-          href="#"
+        <Link
+          to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
           role="button"
           className="btn btn-light"
-          style={{ textAlign: "left" }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}
         >
-          <FaPencil style={{ transform: "scaleX(-1)" }} /> Keep Editing This Quiz
-        </a>
+          <FaPencil style={{ marginRight: "5px" }} />
+          <span>Keep Editing This Quiz</span>
+        </Link>
+
       </div>
       <br />
 
