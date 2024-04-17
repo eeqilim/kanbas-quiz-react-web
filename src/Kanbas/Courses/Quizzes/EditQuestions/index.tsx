@@ -4,29 +4,34 @@ import 'react-quill/dist/quill.snow.css';
 import '../index.css';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import { Dropdown } from 'react-bootstrap';
-interface Answer {
-  id: string;
+export interface Answer {
+  answerId: string;
   text: string;
+  questionId: string;
 }
 
-interface QuestionEditorState {
+export interface QuestionEditorState {
+  questionId: string;
   title: string;
   points: number;
   questionText: string;
   possibleAnswers: Answer[];
-  correctAnswer:string;
-  questionType:string;
+  correctAnswer:string;//"true" or "false"
+  questionType:string;//M for multiple choice, T for true/false, B for fill in the blank
+  quizId: string;
 }
 
 export default function MultipleChoiceQuestionEditor() {
   const [state, setState] = useState<QuestionEditorState>({
+    questionId: 'question111',
     title: '',
     points: 1,
     questionText: '',
-    possibleAnswers: [{ id: 'a1', text: 'Example anwser 1' },
-    { id: 'a2', text: 'Example answer 2' }],
+    possibleAnswers: [{ answerId: 'a1', text: 'Example anwser 1', questionId: 'question111'},
+    { answerId: 'a2', text: 'Example answer 2', questionId: 'question111'}],
     correctAnswer:'',
-    questionType:"M",
+    questionType:'M',
+    quizId: 'quiz1',
   });
   
   const handleAnswerChange = (text:any, index:any) => {
@@ -114,7 +119,7 @@ export default function MultipleChoiceQuestionEditor() {
             />
             </div>
         {state.possibleAnswers.map((answer, index) => (
-        <div key={answer.id} className="input-group mb-3">
+        <div key={answer.answerId} className="input-group mb-3">
           <span >
           Possible Answer:
           </span>
@@ -122,8 +127,8 @@ export default function MultipleChoiceQuestionEditor() {
             <input
               type="radio"
               name="correctAnswer"
-              checked={state.correctAnswer === answer.id}
-              onChange={() => handleSelectCorrectAnswer(answer.id)}
+              checked={state.correctAnswer === answer.answerId}
+              onChange={() => handleSelectCorrectAnswer(answer.answerId)}
             />
           </div>
           <input

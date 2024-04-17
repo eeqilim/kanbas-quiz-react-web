@@ -1,53 +1,147 @@
-import { useParams } from "react-router";
-import { quizzes } from "../../../Database";
 import { CAlert } from "@coreui/react";
 import { cilWarning } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
+import { FaPencil } from "react-icons/fa6";
+import { SlQuestion } from "react-icons/sl";
+import { useSelector } from "react-redux";
+import { KanbasState } from "../../../store";
+import { FaCaretRight } from "react-icons/fa";
 
-function Perview(){
-    const { quizId } = useParams();
-    const quiz = quizzes.find((quiz) => quiz._id === quizId);
+function Preview() {
+  const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
+  const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
-    return (
-        <div>
-            <h1>Quiz Name{quiz?.item_name}</h1>
-            <CAlert color="danger" className="d-flex align-items-center">
-                <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
-                <div>This is a preview of the published version of the quiz</div>
-            </CAlert>
-            <h6>Started: {quiz?.available_from_date}</h6>
+  const formatDate = (dateString: string | number | Date) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+  const formatTime = (dateString: string | number | Date) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    });
+  };
 
-            <h2>Quiz Instructions</h2>
-            <hr />
-            <div className="card">
-                <div className="card-header">
-                    Question 1
+  return (
+    <div className="container-fluid" style={{ marginTop: "20px", marginLeft: "25px", marginRight: "20px" }}>
+      <h1>{quiz?.item_name}</h1>
+      <CAlert color="danger" className="d-flex align-items-center">
+        <CIcon
+          icon={cilWarning}
+          className="flex-shrink-0 me-2"
+          width={24}
+          height={24}
+        />
+        <div>This is a preview of the published version of the quiz</div>
+      </CAlert>
+      <div>
+        Started: {formatDate(quiz.available_from_date)} at {formatTime(quiz.available_from_date)}
+      </div>
+
+      <h2>Quiz Instructions</h2>
+      <hr />
+
+      <div>
+        {questionList.length === 0 ? (
+          <div className="card text-muted" style={{ marginBottom: "20px" }}>
+            <div className="text-center">
+              <br />
+              No questions available.
+              <br />
+              Click "Keep Editing This Quiz" button to edit quiz.
+              <br /><br />
+            </div>
+          </div>
+        ) : (
+          <div>
+            {questionList.map((question, index) => (
+              <div key={question._id} className="card" style={{ marginBottom: "20px" }}>
+                <div className="card-header" style={{ fontWeight: "bold", display: "flex", justifyContent: "space-between" }}>
+                  <span>
+                    Question {index + 1}
+                  </span>
+                  <span>
+                    {question.points} pts
+                  </span>
                 </div>
                 <div className="card-body">
-                    {/* <h5 className="card-title">Special title</h5> */}
-                    <p className="card-text">An HTML label element can be associated with an HTML input element by settingtheir id attributes to the same value.</p>
-                    <p className="card-text">The resulting effect is that when you click on the label text, the input elementreceives focus as if you had click on the input element itself.</p>
-                    <hr />
-                    
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                        <label className="form-check-label" htmlFor="flexRadioDefault1">
-                            True
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-                        <label className="form-check-label" htmlFor="flexRadioDefault2">
-                            False
-                        </label>
-                    </div>
-                    <a href="#" className="btn btn-light m-3">Next</a>
+                  <p className="card-text">
+                    {question.title}
+                    <br /><br />
+                    <div dangerouslySetInnerHTML={{ __html: question.questionText }} />
+                  </p>
+                  <hr />
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                    />
+                    <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      True
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                      checked
+                    />
+                    <label className="form-check-label" htmlFor="flexRadioDefault2">
+                      False
+                    </label>
+                  </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-                
-            </div>
+      <div className="mt-3 ms-3 text-end">
+        <a href="#" role="button" className="btn btn-light">
+          Next <FaCaretRight />
+        </a>
+      </div>
+
+      <div className="card mt-3 ms-3" style={{ width: "98%", marginBottom: "10%" }}>
+        <div className="card-body text-end">
+          Quiz saved at {formatTime(new Date())}
+          <a href="#" role="button" className="btn btn-light" style={{ marginLeft: "10px" }}>
+            Submit Quiz
+          </a>
         </div>
-    );
+      </div>
+
+      <div className="card mt-3 ms-3" style={{ width: "98%" }}>
+        <a
+          href="#"
+          role="button"
+          className="btn btn-light"
+          style={{ textAlign: "left" }}
+        >
+          <FaPencil style={{ transform: "scaleX(-1)" }} /> Keep Editing This Quiz
+        </a>
+      </div>
+      <br />
+
+      <div>
+        <h4 className="mt-3 ms-3">Questions</h4>
+        {questionList.map((question, index) => (
+          <div key={question._id} className="mt-1 ms-4 list-group-item">
+            <SlQuestion className="me-1" />
+            <span style={{ color: 'red' }}>Question {index + 1}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default Perview;
+export default Preview;

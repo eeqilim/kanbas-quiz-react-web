@@ -9,8 +9,9 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Quizzes from "./Quizzes";
 import QuizDetails from "./Quizzes/Details";
-import Grades from "./Grades";
+import Preview from "./Quizzes/Preview";
 import QuizEditor from "./Quizzes/QuizEditor";
+import Grades from "./Grades";
 
 import "../../index.css";
 import { courseType } from "../Dashboard";
@@ -114,7 +115,8 @@ function Courses() {
                     <Route path="Assignments" element={<Assignments />} />
                     <Route path="Assignments/:assignmentGroupId/:assignmentId" element={<AssignmentEditor />} />
                     <Route path="Assignments/Add" element={<AssignmentEditor />} />
-                    <Route path="Quizzes/:quizGroupId/:quizId" element={<QuizDetails />} />
+                    <Route path="Quizzes/:quizId" element={<QuizDetails />} />
+                    <Route path="Quizzes/:quizId/Preview" element={<Preview />} />
                     <Route path="Quizzes" element={<Quizzes />} />
                     <Route path="Quizzes/Editor/:action/*" element={<QuizEditor />} />
                     <Route path="Grades" element={<Grades />} />

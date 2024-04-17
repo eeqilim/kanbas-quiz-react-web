@@ -1,15 +1,24 @@
-import { useParams } from "react-router-dom";
-import { FaCircleCheck } from "react-icons/fa6";
+import { Link, useParams } from "react-router-dom";
+import { FaCircleCheck, FaPencil } from "react-icons/fa6";
 import { FaEllipsisV } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
-import { quizzes } from "../../../Database";
+import { PiProhibit } from "react-icons/pi";
+import { useSelector, useDispatch } from "react-redux";
+import { KanbasState } from "../../../store";
+import * as quizClient from "../quizClient";
+import { setQuizItem } from "../quizsReducer";
 
 function QuizDetails() {
-    const { quizId } = useParams();
-
-    const quiz = quizzes.find((quiz) => quiz._id === quizId);
-
-
+    const { courseId } = useParams();
+    const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
+    const dispatch = useDispatch();
+    const handleTogglePublishQuiz = async (quizId: string) => {
+        const response = await quizClient.togglePublishQuiz(quizId);
+        if (response.acknowledged) {
+            const updatedQuiz = { ...quiz, published: !quiz.published };
+            dispatch(setQuizItem(updatedQuiz));
+            return updatedQuiz;
+        }
+    };
     const formatDate = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',
@@ -27,17 +36,30 @@ function QuizDetails() {
         <div className="container-fluid me-3 ms-3">
             <div className="row pt-3">
                 <div className="col text-end">
-                    <div className="text-success fs-5 me-1 d-inline">
-                        <button type="button" className="btn btn-success">
-                            <FaCircleCheck className="me-1" /> Published
-                        </button>
+                    <div className="fs-5 me-1 d-inline">
+                        {!quiz.published ? (
+                            <button type="button" className="btn btn-success" onClick={() => handleTogglePublishQuiz(quiz._id)}>
+                                <FaCircleCheck className="me-1" /> Published
+                            </button>
+                        ) : (
+                            <button type="button" className="btn border bg-light me-1" onClick={() => handleTogglePublishQuiz(quiz._id)}>
+                                <PiProhibit className="me-1" /> Unpublished
+                            </button>
+                        )}
                     </div>
                     <div className="d-inline">
-                        <a className="btn border bg-light me-1">Perview</a>
+                        <Link className="btn border bg-light me-1"
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/Preview`}
+                            onClick={() => { dispatch(setQuizItem(quiz)) }}>Preview</Link>
                     </div>
                     <div className="d-inline">
-                        <a className="btn border bg-light me-1"><FaPencil style={{ transform: "scaleX(-1)" }} /> Edit</a>
+                        <Link className="btn border bg-light me-1"
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Details`}
+                            onClick={() => { dispatch(setQuizItem(quiz)) }}>
+                            <FaPencil style={{ transform: "scaleX(-1)" }} /> Edit
+                        </Link>
                     </div>
+
                     <div className="d-inline">
                         <a className="btn border bg-light me-1"><FaEllipsisV /></a>
                     </div>
@@ -48,7 +70,7 @@ function QuizDetails() {
             <br />
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Quiz Type</b></div>
-                <div className="col-sm-5">{quiz?.item_name}</div>
+                <div className="col-sm-5">{quiz?.quiz_type}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Points</b></div>
@@ -58,43 +80,36 @@ function QuizDetails() {
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Assignment Group</b></div>
                 <div className="col-sm-5">{quiz?.group}</div></div>
             <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Shuffle Answer</b></div>
-                <div className="col-sm-5">{quiz?.shuffle}</div>
+                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Shuffle Answers</b></div>
+                <div className="col-sm-5">{quiz?.shuffle ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Time Limit</b></div>
-                <div className="col-sm-5">{quiz?.time_limit}</div>
+                <div className="col-sm-5">{quiz?.time_limit} Minutes</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Multiple Attempts</b></div>
-                <div className="col-sm-5">{quiz?.multiple_attempts}</div>
+                <div className="col-sm-5">{quiz?.multiple_attempts ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>View Responses</b></div>
-                <div className="col-sm-5">{quiz?.reponses}</div>
+                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Show Correct Answers</b></div>
+                <div className="col-sm-5">{quiz?.show_ans ? "Immediately" : "No"}</div>
             </div>
             <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Show Correct Answer</b></div>
-                <div className="col-sm-5">{quiz?.show_ans}</div></div>
+                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Access Code</b></div>
+                <div className="col-sm-5">{quiz?.access_code}</div>
+            </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>One Question at a Time</b></div>
-                <div className="col-sm-5">{quiz?.one_q_per_time}</div>
-            </div>
-            <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Require Respondus LockDown Browser</b></div>
-                <div className="col-sm-5">{quiz?.lockdown_browser}</div>
-            </div>
-            <div className="mb-3 row">
-                <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Required to View Quiz Results</b></div>
-                <div className="col-sm-5">{quiz?.view_results}</div>
+                <div className="col-sm-5">{quiz?.one_question_at_a_time ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Webcam Required</b></div>
-                <div className="col-sm-5">{quiz?.webcam}</div>
+                <div className="col-sm-5">{quiz?.webcam_required ? "Yes" : "No"}</div>
             </div>
             <div className="mb-3 row">
                 <div className="col-sm-5 text-sm-end mb-2 mb-sm-0"><b>Lock Questions After Answering</b></div>
-                <div className="col-sm-5">{quiz?.lock_questions}</div>
+                <div className="col-sm-5">{quiz?.lock_questions_after_answering ? "Yes" : "No"}</div>
             </div>
             <br />
             <div className="row">
@@ -138,7 +153,7 @@ function QuizDetails() {
                 <br /><br />
                 <hr className="d-none d-md-block" />
             </div>
-        </div>
+        </div >
     );
 }
 

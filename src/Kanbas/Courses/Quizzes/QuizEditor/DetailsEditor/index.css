@@ -1,0 +1,109 @@
+.text-success {
+    color: green;
+}
+
+.top-row-buttons {
+    background-color: gainsboro;
+    border: 1px solid black;
+    
+}
+
+.ck-editor__editable {
+    min-height: 100px;
+}
+
+
+
+.wd-courses-quizzes-edit-assign-card-footer-button {
+    padding: 0px;
+    background-color: gainsboro;
+    border: 0px;
+    text-decoration: none;
+    color: black;
+}
+
+.wd-courses-quizzes-edit-assign-card-input-container {
+    margin-bottom: 16px;
+}
+.wd-courses-quizzess-edit-date-button {
+    background-color: gainsboro;
+    border: 1px solid gainsboro;
+    color: black;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.wd-courses-quizzes-edit-cancel-button {
+    background-color: gainsboro;
+    border: 1px solid gainsboro;
+    color: black;
+}
+
+.add-container {
+    text-align: center; 
+    padding: 2px; 
+}
+  
+.add-button {
+    display: block;
+    width: 100%;
+    background-color: #F5F5F5; /* Light grey background */
+    border: 1px solid #ccc; /* Light grey border */
+    color: black; /* Text color */
+    padding: 8px; /* Top and sbottom padding of 8px, left and right padding of 14px */
+    font-size: 16px; /* Sets the font size */
+    cursor: pointer; /* Changes the mouse cursor to a pointer on hover */
+    border-radius: 4px; /* Rounds the corners of the button */
+}
+  
+.add-button:hover {
+    background-color: #E8E8E8;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.options-group {
+    max-width: 478px;
+    padding: 10px 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;  
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.option-item label {
+    margin-right: 10px;
+}
+
+.option-item input[type="checkbox"] {
+    margin-right: 5px;
+}
+  
+.option-item span {
+    margin-left: 5px;
+}
+
+.checkbox-wrapper {
+    width: 60%;
+    /* display: block; */
+    background-color: #FFF; 
+    border: 1px solid grey; 
+    padding: 8px; 
+    margin-top: 10px; 
+    border-radius: 8px; 
+    box-sizing: border-box;
+}
+
+.lower-container {
+    padding-left: 30%;
+}
