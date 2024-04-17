@@ -36,8 +36,8 @@ function QuizDetailsEditor() {
 
 
     const handleSave = async (publish: boolean) => {
-        const newQuiz = { ...quizItem, published: true };
-        
+        const newQuiz = { ...quizItem, published: publish };
+
         if (publish) {
             dispatch(setQuizItem(newQuiz));
             console.log('Publishing Quiz')
