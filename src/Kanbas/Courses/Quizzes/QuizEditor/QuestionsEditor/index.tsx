@@ -9,7 +9,7 @@ import { KanbasState } from "../../../../store";
 import { useEffect, useState } from "react";
 
 import Collapse from "react-bootstrap/Collapse";
-import { resetQuestionItemState, setQuestionItem, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestions } from "../../quizsReducer";
+import { resetQuestionItemState, setQuestionItem, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestions, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } from "../../quizsReducer";
 import ReactQuill from "react-quill";
 
 import { useParams } from "react-router-dom";
@@ -20,6 +20,7 @@ import { Button, Modal } from "react-bootstrap";
 
 import MultipleChoiceAnswerEditor from "./MultipleChoiceAnswerEditor";
 import TrueAndFalseQuestionEditor from "./TrueAndFalseQuestionEditor";
+import FillInTheBlankAnswerEditor from "./FillInTheBlankAnswerEditor";
 
 interface Props {
   quizType: string;
@@ -110,10 +111,10 @@ function QuestionsEditor() {
   return (
     <div className="mt-3 ms-3">
     
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
           <a role="button" className="btn btn-light me-2"
           onClick={() => {
-            if(questionItemState._id !== "") dispatch(resetQuestionItemState());
+            dispatch(setQuestionToDefaultMultipleChoice())
             setAddQuestionFormOpen(true);
           }}>
             <FaPlus className="me-1" />
@@ -139,7 +140,15 @@ function QuestionsEditor() {
                   <input type="text" className="form-control" value={questionItemState.title} placeholder="Question Title" onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, title: e.target.value }))}}/>
                 </div>
                 <div className="col">
-                  <select className="form-select" value={questionItemState.questionType} onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, questionType: e.target.value }))}}>
+                  <select className="form-select" value={questionItemState.questionType} onChange={(e) => {
+                    if (e.target.value === "M") {
+                      dispatch(setQuestionToDefaultMultipleChoice());
+                    } else if (e.target.value === "T") {
+                      dispatch(setQuestionToDefaultTrueFalse());
+                    } else if (e.target.value === "B") {
+                      dispatch(setQuestionToDefaultFillInTheBlank());
+                    }
+                  }}>
                     <option value="M">Multiple Choice</option>
                     <option value="T">True/False</option>
                     <option value="B">Fill in the Blank</option>
@@ -162,6 +171,7 @@ function QuestionsEditor() {
               
               {questionItemState.questionType === "M" ? <MultipleChoiceAnswerEditor /> : null}
               {questionItemState.questionType === "T" ? <TrueAndFalseQuestionEditor /> : null}
+              {questionItemState.questionType === "B" ? <FillInTheBlankAnswerEditor /> : null}
 
               <br/>
               <a className="btn btn-secondary me-2" onClick={() => {setAddQuestionFormOpen(false)}}>Cancel</a>
