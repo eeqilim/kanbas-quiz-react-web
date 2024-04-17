@@ -9,8 +9,9 @@ import { Button, Modal } from "react-bootstrap";
 
 import * as quizClient from "./quizClient";
 import { useDispatch, useSelector } from "react-redux";
-import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } from "./quizsReducer";
+import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, setQuestionItem, resetQuestionItemState, setQuestions, resetQuestionsState } from "./quizsReducer";
 import { KanbasState } from "../../store";
+
 
 function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void }) {
     return (
@@ -43,6 +44,13 @@ function Quizzes() {
 
     const quizList = useSelector((state: KanbasState) => state.quizsReducer.quizes);
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
+
+
+    const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
+    const questionItem = useSelector((state: KanbasState) => state.quizsReducer.question);
+
+    
+
 
     // Handle the toggle publish quiz action
     const handleTogglePublishQuiz = async (quizId: string) => {

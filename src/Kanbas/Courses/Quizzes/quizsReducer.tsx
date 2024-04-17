@@ -5,7 +5,7 @@ const emptyQuiz = {
     course: "",
     item_name: "Unnamed Quiz",
     question_count: 0,
-    published: true,
+    published: false,
     quiz_type: "Graded Quiz",
     points: 0,
     group: "QUIZZES",
@@ -26,10 +26,25 @@ const emptyQuiz = {
     instructions: "",
     }
 
+const emptyQuestion = {
+    title: "",
+    points: 0,
+    questionText: "",
+    possibleAnswers: [],
+    correctAnswer: "",
+    questionType:"M",
+    quizId: "",
+}
+
+
+
 
 const initialState = {
     quizes: [],
     quiz: emptyQuiz,
+
+    questions: [],
+    question: emptyQuestion,
 }
 
 
@@ -57,8 +72,32 @@ const quizesSlice = createSlice( {
         setQuizItem: (state, action) => {
             state.quiz = action.payload;
         },
+
+
+        // reset the questions list state
+        resetQuestionsState: (state) => {
+            state.questions = [];
+        },
+
+        // reset the single question state
+        resetQuestionItemState: (state) => {
+            state.question = emptyQuestion;
+        },
+
+        // set the questions list
+        setQuestions: (state, action) => {
+            state.questions = action.payload;
+        },
+
+        // set the single question state
+        setQuestionItem: (state, action) => {
+            state.question = action.payload;
+        },
+
+
+
     }
 })
 
-export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } = quizesSlice.actions;
+export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions } = quizesSlice.actions;
 export default quizesSlice.reducer;
