@@ -188,7 +188,7 @@ function Quizzes() {
                                                             <Link
                                                                 className="dropdown-item"
                                                                 style={{ "textDecoration": "None", "color": "black" }}
-                                                                to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}`}
+                                                                to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Details`}
                                                                 onClick={() => { dispatch(setQuizItem(quiz)) }}
                                                             >
                                                                 Edit

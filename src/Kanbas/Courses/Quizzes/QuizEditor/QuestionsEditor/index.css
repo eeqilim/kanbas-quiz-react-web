@@ -1,0 +1,9 @@
+.add-answer-link {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+.add-answer-link:hover {
+    text-decoration: underline;
+}
