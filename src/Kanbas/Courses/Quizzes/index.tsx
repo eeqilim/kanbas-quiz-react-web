@@ -7,8 +7,10 @@ import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import * as quizClient from "./quizClient";
 import { useDispatch, useSelector } from "react-redux";
-import { resetQuizItemState, setQuizzes, setQuizItem } from "./quizsReducer";
+
+import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, setQuestionItem, resetQuestionItemState, setQuestions, resetQuestionsState } from "./quizsReducer";
 import { KanbasState } from "../../store";
+
 
 function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void }) {
     return (
@@ -41,6 +43,8 @@ function Quizzes() {
 
     const quizList = useSelector((state: KanbasState) => state.quizsReducer.quizes);
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
+
+    
 
     // Handle the toggle publish quiz action
     const handleTogglePublishQuiz = async (quizId: string) => {
@@ -184,7 +188,7 @@ function Quizzes() {
                                                             <Link
                                                                 className="dropdown-item"
                                                                 style={{ "textDecoration": "None", "color": "black" }}
-                                                                to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
+                                                                to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}`}
                                                                 onClick={() => { dispatch(setQuizItem(quiz)) }}
                                                             >
                                                                 Edit

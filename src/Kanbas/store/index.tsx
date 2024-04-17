@@ -61,6 +61,16 @@ export type quizItemType = {
     instructions: string;
 };
 
+export type questionItemType = {
+    title: string;
+    points: number;
+    questionText: string;
+    possibleAnswers: string[];
+    correctAnswer: string;
+    questionType: string;
+    quizId: string;
+};
+
 export interface KanbasState {
     modulesReducer: {
         modules: moduleType[];
@@ -74,6 +84,8 @@ export interface KanbasState {
     quizsReducer: {
         quizes: quizItemType[];
         quiz: quizItemType;
+        questions: questionItemType[];
+        question: questionItemType;
     };
 }
 
