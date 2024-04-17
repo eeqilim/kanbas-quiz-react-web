@@ -30,7 +30,7 @@ const emptyQuestion = {
     title: "",
     points: 0,
     questionText: "",
-    possibleAnswers: [],
+    possibleAnswers: [] as string[],
     correctAnswer: "",
     questionType:"M",
     quizId: "",
@@ -93,7 +93,6 @@ const quizesSlice = createSlice( {
         setQuestionItem: (state, action) => {
             state.question = action.payload;
         },
-
 
 
     }

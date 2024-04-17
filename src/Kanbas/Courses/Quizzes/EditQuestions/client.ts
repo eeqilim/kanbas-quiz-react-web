@@ -60,38 +60,38 @@ export const deleteQuestion = async (qsId?:string) => {
   }
 };
 
-export const createAnswer = async (qsId?:string, answerData?:any) => {
-  try {
-    const response = await axios.post(
-      `${API_BASE_URL}/api/questions/${qsId}/answers`,
-      answerData
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Failed to create answer:", error);
-    return null;
-  }
-};
+// export const createAnswer = async (qsId?:string, answerData?:any) => {
+//   try {
+//     const response = await axios.post(
+//       `${API_BASE_URL}/api/questions/${qsId}/answers`,
+//       answerData
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Failed to create answer:", error);
+//     return null;
+//   }
+// };
 
-export const updateAnswer = async (answerData?:any) => {
-  try {
-    const response = await axios.put(
-      `${API_BASE_URL}/api/answers/${answerData._id}`,
-      answerData
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Failed to update answer:", error);
-    return null;
-  }
-};
+// export const updateAnswer = async (answerData?:any) => {
+//   try {
+//     const response = await axios.put(
+//       `${API_BASE_URL}/api/answers/${answerData._id}`,
+//       answerData
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Failed to update answer:", error);
+//     return null;
+//   }
+// };
 
-export const deleteAnswer = async (ansId?:string) => {
-  try {
-    const response = await axios.delete(`${API_BASE_URL}/api/answers/${ansId}`);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to delete answer:", error);
-    return null;
-  }
-};
+// export const deleteAnswer = async (ansId?:string) => {
+//   try {
+//     const response = await axios.delete(`${API_BASE_URL}/api/answers/${ansId}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Failed to delete answer:", error);
+//     return null;
+//   }
+// };

@@ -1,28 +1,17 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
 import "./index.css";
-
-import { useEffect, useState } from "react";
 
 import ReactQuill from 'react-quill';
 import { useSelector, useDispatch } from "react-redux";
-import { KanbasState, quizItemType } from "../../../../store";
-import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } from "../../quizsReducer";
+import { KanbasState } from "../../../../store";
+import { setQuizItem } from "../../quizsReducer";
 
-import * as quizClient from "../../quizClient";
 
 
 function QuizDetailsEditor() {
 
-    // Base on how the URL is defined. If the action == "Add", then we are adding a new quiz.
-    // When Editing an existing quiz, the action would be the quiz _id field. 
-    const { courseId, action } = useParams();
-
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz)
-    const quizzes = useSelector((state: KanbasState) => state.quizsReducer.quizes)
-
 
     // handles some change in the form but not all, Take close look at the onChange events of the fields
     const handleOptionChange = (event: any) => {
@@ -31,60 +20,12 @@ function QuizDetailsEditor() {
             ...quizItem,
             [name]: type === 'checkbox' ? checked : value
         }));
-        console.log(quizItem)
     };
 
 
-    const handleSave = async (publish: boolean) => {
-        let newQuiz = quizItem;  
-
-        console.log(newQuiz);
-
-        if (publish) {
-            newQuiz = { ...newQuiz, published: true }
-            console.log(newQuiz)
-        }
-
-        if (action === "Add") {
-            handleAddQuiz(newQuiz);
-        } else {
-            handleUpdateQuiz(newQuiz);
-        }
-        dispatch(resetQuizItemState());
-        navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
-    };
-
-
-
-    const handleAddQuiz = (quizToBeAdded: quizItemType) => {
-        console.log('Add Quiz Called')
-        
-        quizClient.addQuiz(courseId, quizToBeAdded)
-        .then((newQuiz) => {
-            dispatch(setQuizzes([...quizzes, newQuiz]));
-        })
-    };
-
-    const handleUpdateQuiz = (updatedQuiz: quizItemType) => {
-        console.log('Update Quiz Called')
-
-        quizClient.updateQuiz(quizItem._id, updatedQuiz)
-        .then((status) => {
-            dispatch(setQuizzes(quizzes.map((quiz) => {
-                if (quiz._id === quizItem._id) {
-                    return quizItem;
-                } else {
-                    return quiz;
-                }
-            })));   
-        })
-    };  
 
   return (
     <div className="mt-3 ms-3">
-
-        
-
 
         <form>
             <div className="mb-3">
@@ -297,31 +238,7 @@ function QuizDetailsEditor() {
 
 
 
-            <hr/>
-            <div className="row pb-3">
-                <div className="col">
-                    <div className="form-check d-flex">
-                        <div className="flex-fill ms-2">
-                            <input className="form-check-input" type="checkbox" value="" id="notify-user-content-change"></input>
-                            <label className="form-check-label" htmlFor="notify-user-content-change">
-                                Notify users that this content has changed
-                            </label>
-                        </div>
-                        <div className="me-2">
-                            <Link to={ `/Kanbas/Courses/${courseId}/Quizzes` } className="btn wd-courses-quizzes-edit-cancel-button me-1 border-light">Cancel</Link>
-                            
-                            <button className="btn wd-courses-quizzes-edit-cancel-button me-1 border-light" 
-                            onClick={() => {
-                                handleSave(true);
-                            }}>
-                                Save & Publish
-                            </button>
-                            
-                            <button className="btn btn-danger" onClick={() => handleSave(false)}>Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>   
+            
             
         </form>
         
