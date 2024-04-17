@@ -15,6 +15,7 @@ interface QuestionEditorState {
   questionText: string;
   possibleAnswers: Answer[];
   correctAnswer:string;
+  questionType:string;
 }
 
 export default function MultipleChoiceQuestionEditor() {
@@ -24,8 +25,10 @@ export default function MultipleChoiceQuestionEditor() {
     questionText: '',
     possibleAnswers: [{ id: 'a1', text: 'Example anwser 1' },
     { id: 'a2', text: 'Example answer 2' }],
-    correctAnswer:''
+    correctAnswer:'',
+    questionType:"M",
   });
+  
   const handleAnswerChange = (text:any, index:any) => {
     const newAnswers = [...state.possibleAnswers];
     newAnswers[index].text = text;
