@@ -9,11 +9,12 @@ import { KanbasState } from "../../../../store";
 import { useEffect, useState } from "react";
 
 import Collapse from "react-bootstrap/Collapse";
-import { resetQuestionItemState, setQuestionItem } from "../../quizsReducer";
+import { resetQuestionItemState, setQuestionItem, setQuestions, resetQuestionsState } from "../../quizsReducer";
 import ReactQuill from "react-quill";
 
 import "./index.css";
-
+import { Button, Modal } from "react-bootstrap";
+import * as questionClient from "../../questionClient";
 interface Props {
   quizType: string;
 }
@@ -78,8 +79,22 @@ function MultipleChoiceAnswerEditor() {
   )
 }
 
-
-
+function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void }) {
+  return (
+    <Modal show={show} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirm Deletion</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to delete this question?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => { onClose() }}>Cancel</Button>
+        <Button variant="danger" onClick={() => { onDelete() }}>Delete</Button>
+      </Modal.Footer>
+    </Modal>
+  )
+}
 
 function QuestionsEditor() {
 
@@ -93,6 +108,21 @@ function QuestionsEditor() {
   useEffect(() => {
     dispatch(setQuestionItem(questionItemState));
   }, [questionItemState, dispatch])
+
+  const [showDeleteQuestionModal, setShowDeleteQuestionModal] = useState(false);
+
+  const handleDeleteQuestion = async () => {
+    const response = await questionClient.deleteQuestion(questionItemState._id);
+    if (response.acknowledged) {
+      const newQuestions = questionsState.filter((question) => question._id !== questionItemState._id);
+      dispatch(setQuestions(newQuestions));
+    } else {
+      alert("Failed to delete the quiz");
+      return;
+    }
+    setShowDeleteQuestionModal(false);
+    dispatch(resetQuestionItemState());
+  }
 
   return (
     <div className="mt-3 ms-3">
@@ -156,7 +186,7 @@ function QuestionsEditor() {
           </div>
         </div>
       </Collapse>
-      
+
       <br />
 
       <div className="list-group wd-courses-quizzes">
@@ -185,7 +215,13 @@ function QuestionsEditor() {
                       <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
                       <ul className="dropdown-menu">
                         <li>
-                          <button className="dropdown-item">Delete</button>
+                          <button className="dropdown-item"
+                            onClick={() => {
+                              setShowDeleteQuestionModal(true);
+                              dispatch(setQuestionItem(question));
+                            }}>
+                            Delete
+                          </button>
                         </li>
                         <li>
                           <button className="dropdown-item" onClick={() => { dispatch(setQuestionItem(question)); setAddQuestionFormOpen(true); }}>Edit</button>
@@ -199,6 +235,10 @@ function QuestionsEditor() {
           </div>
         </li>
       </div>
+      <DeleteQuizModal
+        show={showDeleteQuestionModal}
+        onClose={() => setShowDeleteQuestionModal(false)}
+        onDelete={handleDeleteQuestion} />
     </div>
   );
 }
