@@ -59,14 +59,19 @@ function Preview() {
           <div>
             {questionList.map((question, index) => (
               <div key={question._id} className="card" style={{ marginBottom: "20px" }}>
-                <div className="card-header" style={{ fontWeight: "bold" }}>
-                  Question {index + 1}
+                <div className="card-header" style={{ fontWeight: "bold", display: "flex", justifyContent: "space-between" }}>
+                  <span>
+                    Question {index + 1}
+                  </span>
+                  <span>
+                    {question.points} pts
+                  </span>
                 </div>
                 <div className="card-body">
                   <p className="card-text">
                     {question.title}
                     <br /><br />
-                    {question.questionText}
+                    <div dangerouslySetInnerHTML={{ __html: question.questionText }} />
                   </p>
                   <hr />
                   <div className="form-check">
