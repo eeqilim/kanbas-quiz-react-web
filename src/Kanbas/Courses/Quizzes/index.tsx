@@ -44,7 +44,7 @@ function Quizzes() {
     const quizList = useSelector((state: KanbasState) => state.quizsReducer.quizes);
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
 
-    
+
 
     // Handle the toggle publish quiz action
     const handleTogglePublishQuiz = async (quizId: string) => {
@@ -141,7 +141,7 @@ function Quizzes() {
 
                                         <div className="d-flex align-items-center">
                                             <div className="d-flex align-items-center" style={{ flexShrink: 0 }}>
-                                                <HiOutlineRocketLaunch className={`me-3 ms-2 ${quiz.available_from_date && new Date(quiz.available_from_date) > new Date() && !quiz.published ? "text-muted" : "text-success"}`} />
+                                                <HiOutlineRocketLaunch className={`me-3 ms-2 ${!quiz.published ? "text-muted" : "text-success"}`} />
                                             </div>
                                             <div className="flex-fill">
                                                 <div>
