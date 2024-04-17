@@ -75,6 +75,22 @@ function Preview() {
                   </p>
                   <hr />
                   <div className="form-check">
+                    {question.questionType === "B" && (
+                      <div>
+                        {question.possibleAnswers.map((answer, idx) => (
+                          <div key={idx} className="d-flex align-items-center mb-3 w-50">
+                            <span style={{ marginRight: "10px" }}>{idx + 1}.</span>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id={`answer-${idx}`}
+                              name={`question-${question._id}`}
+                              placeholder={`Answer for blank ${idx + 1}`}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     {question.questionType === "M" && (
                       question.possibleAnswers.map((answer, idx) => (
                         <div key={idx}>
