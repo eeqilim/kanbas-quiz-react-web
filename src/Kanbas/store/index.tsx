@@ -62,6 +62,7 @@ export type quizItemType = {
 };
 
 export type questionItemType = {
+    _id: string;
     title: string;
     points: number;
     questionText: string;

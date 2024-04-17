@@ -36,7 +36,7 @@ function QuizDetails() {
         <div className="container-fluid me-3 ms-3">
             <div className="row pt-3">
                 <div className="col text-end">
-                    <div className="text-success fs-5 me-1 d-inline">
+                    <div className="fs-5 me-1 d-inline">
                         {!quiz.published ? (
                             <button type="button" className="btn btn-success" onClick={() => handleTogglePublishQuiz(quiz._id)}>
                                 <FaCircleCheck className="me-1" /> Published
@@ -49,7 +49,7 @@ function QuizDetails() {
                     </div>
                     <div className="d-inline">
                         <Link className="btn border bg-light me-1"
-                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Questions`}
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/Preview`}
                             onClick={() => { dispatch(setQuizItem(quiz)) }}>Preview</Link>
                     </div>
                     <div className="d-inline">

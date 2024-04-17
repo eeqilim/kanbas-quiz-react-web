@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const emptyQuiz = {
-    _id: "", 
+    _id: "",
     course: "",
     item_name: "Unnamed Quiz",
     question_count: 0,
@@ -24,7 +24,7 @@ const emptyQuiz = {
     available_to_date: new Date().toISOString(),
     access_code: "",
     instructions: "",
-    }
+}
 
 const emptyQuestion = {
     title: "",
@@ -32,7 +32,7 @@ const emptyQuestion = {
     questionText: "",
     possibleAnswers: [] as string[],
     correctAnswer: "",
-    questionType:"M",
+    questionType: "M",
     quizId: "",
 }
 
@@ -48,7 +48,7 @@ const initialState = {
 }
 
 
-const quizesSlice = createSlice( {
+const quizesSlice = createSlice({
     name: "quizes",
     initialState,
     reducers: {

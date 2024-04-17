@@ -1,4 +1,4 @@
-import { FaPlus } from "react-icons/fa";
+import { FaEllipsisV, FaPlus, FaSortDown } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Preview from "../../Preview"; //test1
@@ -9,11 +9,12 @@ import { KanbasState } from "../../../../store";
 import { useEffect, useState } from "react";
 
 import Collapse from "react-bootstrap/Collapse";
-import { resetQuestionItemState, setQuestionItem } from "../../quizsReducer";
+import { resetQuestionItemState, setQuestionItem, setQuestions, resetQuestionsState } from "../../quizsReducer";
 import ReactQuill from "react-quill";
 
 import "./index.css";
-
+import { Button, Modal } from "react-bootstrap";
+import * as questionClient from "../../questionClient";
 interface Props {
   quizType: string;
 }
@@ -32,7 +33,7 @@ function QuizTypeTextRender({ quizType }: Props) {
 
 
 function MultipleChoiceAnswerEditor() {
-  
+
   const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
   const dispatch = useDispatch();
 
@@ -51,22 +52,22 @@ function MultipleChoiceAnswerEditor() {
     if (questionItemState.possibleAnswers.length === 0) {
       addNewAnswer();
     } else {
-      setCorrectAnswerIdx(questionItemState.possibleAnswers.indexOf(questionItemState.correctAnswer));      
+      setCorrectAnswerIdx(questionItemState.possibleAnswers.indexOf(questionItemState.correctAnswer));
     }
   }, [])
 
   return (
     <div className="form-check">
-      
-      { questionItemState.possibleAnswers.map((answer: string, index: number) => (
+
+      {questionItemState.possibleAnswers.map((answer: string, index: number) => (
         <div className="mb-2">
-          
-          <input className="form-check-input" type="radio" name="flexRadio" id={`flexRadio${index}`} checked={correctAnswerIdx === index} onChange={() => setCorrectAnswerIdx(index)}/>
+
+          <input className="form-check-input" type="radio" name="flexRadio" id={`flexRadio${index}`} checked={correctAnswerIdx === index} onChange={() => setCorrectAnswerIdx(index)} />
           <label className="form-check-label" htmlFor={`flexRadio${index}`}>
-            { correctAnswerIdx === index ? `Correct Answer` : `Possible Answer` }
+            {correctAnswerIdx === index ? `Correct Answer` : `Possible Answer`}
           </label>
-          <input type="text" value={answer} onChange={(e) => updateAnswer(index, e.target.value)}/>
-        
+          <input type="text" value={answer} onChange={(e) => updateAnswer(index, e.target.value)} />
+
         </div>
       ))}
 
@@ -78,13 +79,27 @@ function MultipleChoiceAnswerEditor() {
   )
 }
 
-
-
+function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void }) {
+  return (
+    <Modal show={show} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirm Deletion</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to delete this question?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => { onClose() }}>Cancel</Button>
+        <Button variant="danger" onClick={() => { onDelete() }}>Delete</Button>
+      </Modal.Footer>
+    </Modal>
+  )
+}
 
 function QuestionsEditor() {
 
   const dispatch = useDispatch();
-  
+
   const questionsState = useSelector((state: KanbasState) => state.quizsReducer.questions);
   const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
 
@@ -94,95 +109,136 @@ function QuestionsEditor() {
     dispatch(setQuestionItem(questionItemState));
   }, [questionItemState, dispatch])
 
+  const [showDeleteQuestionModal, setShowDeleteQuestionModal] = useState(false);
+
+  const handleDeleteQuestion = async () => {
+    const response = await questionClient.deleteQuestion(questionItemState._id);
+    if (response.acknowledged) {
+      const newQuestions = questionsState.filter((question) => question._id !== questionItemState._id);
+      dispatch(setQuestions(newQuestions));
+    } else {
+      alert("Failed to delete the quiz");
+      return;
+    }
+    setShowDeleteQuestionModal(false);
+    dispatch(resetQuestionItemState());
+  }
+
   return (
     <div className="mt-3 ms-3">
       {/* <Preview /> */}
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a role="button" className="btn btn-light"
+      <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a role="button" className="btn btn-light"
           onClick={() => {
             dispatch(resetQuestionItemState());
             setAddQuestionFormOpen(true);
           }}>
-            <FaPlus className="me-1" />
-            New Question
-          </a>
-          &nbsp;
-          <a role="button" href="#" className="btn btn-light">
-            <FaPlus className="me-1" />
-            New Question Group
-          </a>
-          &nbsp;
-          <a role="button" href="#" className="btn btn-light">
-            <FaMagnifyingGlass className="me-1" />
-            Find Questions
-          </a>
-          &nbsp;
-        </div>
+          <FaPlus className="me-1" />
+          New Question
+        </a>
+        &nbsp;
+        <a role="button" href="#" className="btn btn-light">
+          <FaPlus className="me-1" />
+          New Question Group
+        </a>
+        &nbsp;
+        <a role="button" href="#" className="btn btn-light">
+          <FaMagnifyingGlass className="me-1" />
+          Find Questions
+        </a>
+        &nbsp;
+      </div>
 
 
-        <Collapse in={addQuestionFormOpen}>
-          <div className="card mb-2 mt-2">
-            <div className="card-header d-flex justify-content-between align-items-center">
-              <div className="row align-items-center">
-                <div className="col">
-                  <input type="text" className="form-control" value={questionItemState.title} placeholder="Question Title" onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, title: e.target.value }))}}/>
-                </div>
-                <div className="col">
-                  <select className="form-select" value={questionItemState.questionType} onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, questionType: e.target.value }))}}>
-                    <option value="M">Multiple Choice</option>
-                    <option value="T">True/False</option>
-                    <option value="B">Fill in the Blank</option>
-                  </select>
-                </div>
+      <Collapse in={addQuestionFormOpen}>
+        <div className="card mb-2 mt-2">
+          <div className="card-header d-flex justify-content-between align-items-center">
+            <div className="row align-items-center">
+              <div className="col">
+                <input type="text" className="form-control" value={questionItemState.title} placeholder="Question Title" onChange={(e) => { dispatch(setQuestionItem({ ...questionItemState, title: e.target.value })) }} />
               </div>
-              <div className="d-flex align-items-center">
-                <label htmlFor="questionPoints" className="form-label mt-2">pts:</label>
-                <input type="number" className="form-control" id="questionPoints" value={questionItemState.points} onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, points: e.target.value }))}}/>
+              <div className="col">
+                <select className="form-select" value={questionItemState.questionType} onChange={(e) => { dispatch(setQuestionItem({ ...questionItemState, questionType: e.target.value })) }}>
+                  <option value="M">Multiple Choice</option>
+                  <option value="T">True/False</option>
+                  <option value="B">Fill in the Blank</option>
+                </select>
               </div>
             </div>
-
-            <div className="card-body">
-              <QuizTypeTextRender quizType={questionItemState.questionType} />
-              
-              <h4>Question:</h4>
-              <ReactQuill value={questionItemState.questionText} onChange={(value) => {dispatch(setQuestionItem({ ...questionItemState, questionText: value }))}} />
-              <br/>
-              <h4>Answers:</h4>
-              {questionItemState.questionType === "M" ? <MultipleChoiceAnswerEditor /> : null}
-
-              <br/>
-              <a className="btn btn-secondary me-2">Cancel</a>
-              <a className="btn btn-danger">Save Question</a>
+            <div className="d-flex align-items-center">
+              <label htmlFor="questionPoints" className="form-label mt-2">pts:</label>
+              <input type="number" className="form-control" id="questionPoints" value={questionItemState.points} onChange={(e) => { dispatch(setQuestionItem({ ...questionItemState, points: e.target.value })) }} />
             </div>
           </div>
-        </Collapse>
 
-
-
-      
-        <div className="card m-3" style={{ width: "95%" }}>
           <div className="card-body">
-            {/* TODO: to displays list of questions for this quiz. List is initially empty */}
-            To displays list of questions for this quiz. List is initially empty
+            <QuizTypeTextRender quizType={questionItemState.questionType} />
+
+            <h4>Question:</h4>
+            <ReactQuill value={questionItemState.questionText} onChange={(value) => { dispatch(setQuestionItem({ ...questionItemState, questionText: value })) }} />
+            <br />
+            <h4>Answers:</h4>
+            {questionItemState.questionType === "M" ? <MultipleChoiceAnswerEditor /> : null}
+
+            <br />
+            <a className="btn btn-secondary me-2">Cancel</a>
+            <a className="btn btn-danger">Save Question</a>
           </div>
-
-          <ul>
-            {questionsState.map((question) => (
-              <li key={question.title}>
-                  {question.title}
-
-                  <button onClick={() => {dispatch(setQuestionItem(question)); setAddQuestionFormOpen(true);}}>Edit</button>
-                  <button>Delete</button>
-              </li>
-            ))}
-          </ul>
-
         </div>
+      </Collapse>
 
-        
+      <br />
 
-        
-
+      <div className="list-group wd-courses-quizzes">
+        <li className="list-group-item">
+          <div>
+            <a className="btn" data-bs-toggle="collapse" href="#collapse-Quiz-List">
+              <FaSortDown style={{ verticalAlign: "top" }} />
+            </a>
+            <span className="fw-bold">Quiz Questions</span>
+          </div>
+          <div className="p-0 collapse show" id="collapse-Quiz-List">
+            {questionsState.length === 0 ? (
+              <div className="wd-courses-no-quizzes list-group-item text-muted ">
+                <br />
+                No Questions Available.
+                <br />
+                Click + Question button to add question.
+                <br /><br />
+              </div>
+            ) : (
+              <div>
+                {questionsState.map((question) => (
+                  <li key={question._id} className="d-flex align-items-center justify-content-between list-group-item">
+                    {question.title}
+                    <div className="dropleft d-inline">
+                      <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <button className="dropdown-item"
+                            onClick={() => {
+                              setShowDeleteQuestionModal(true);
+                              dispatch(setQuestionItem(question));
+                            }}>
+                            Delete
+                          </button>
+                        </li>
+                        <li>
+                          <button className="dropdown-item" onClick={() => { dispatch(setQuestionItem(question)); setAddQuestionFormOpen(true); }}>Edit</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                ))}
+              </div>
+            )}
+          </div>
+        </li>
+      </div>
+      <DeleteQuizModal
+        show={showDeleteQuestionModal}
+        onClose={() => setShowDeleteQuestionModal(false)}
+        onDelete={handleDeleteQuestion} />
     </div>
   );
 }
