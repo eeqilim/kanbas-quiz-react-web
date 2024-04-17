@@ -28,3 +28,14 @@ export const togglePublishQuiz = async (quizId) => {
     const response = await axios.put(`${QUIZZES_API}/${quizId}/publish`);
     return response.data;
 }
+
+
+export const updateQuiz = async (quizId, quiz) => {
+    const response = await axios.put(`${QUIZZES_API}/${quizId}`, quiz);
+    return response.data;
+}
+
+export const addQuiz = async (courseId, quiz) => {
+    const response = await axios.post(`${QUIZZES_API}/${courseId}`, quiz);
+    return response.data;
+}

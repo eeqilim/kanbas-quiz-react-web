@@ -6,9 +6,9 @@ const emptyQuiz = {
     item_name: "Unnamed Quiz",
     question_count: 0,
     published: false,
-    quiz_type: "",
+    quiz_type: "Graded Quiz",
     points: 0,
-    group: "Quizzes",
+    group: "QUIZZES",
     shuffle: false,
     time_limit: 20,
     multiple_attempts: false,
@@ -18,18 +18,33 @@ const emptyQuiz = {
     lockdown_browser: false,
     webcam_required: false,
     lock_questions_after_answering: false,
-    due_date: "",
+    due_date: new Date().toISOString(),
     assign_to: "Everyone",
-    available_from_date: "",
-    available_to_date: "",
+    available_from_date: new Date().toISOString(),
+    available_to_date: new Date().toISOString(),
     access_code: "",
     instructions: "",
     }
 
+const emptyQuestion = {
+    title: "",
+    points: 0,
+    questionText: "",
+    possibleAnswers: [],
+    correctAnswer: "",
+    questionType:"M",
+    quizId: "",
+}
+
+
+
 
 const initialState = {
-    quizes: [emptyQuiz],
+    quizes: [],
     quiz: emptyQuiz,
+
+    questions: [],
+    question: emptyQuestion,
 }
 
 
@@ -40,7 +55,7 @@ const quizesSlice = createSlice( {
 
         // reset the quizzes list state
         resetQuizesState: (state) => {
-            state.quizes = [emptyQuiz];
+            state.quizes = [];
         },
 
         // reset the single quiz state
@@ -57,8 +72,32 @@ const quizesSlice = createSlice( {
         setQuizItem: (state, action) => {
             state.quiz = action.payload;
         },
+
+
+        // reset the questions list state
+        resetQuestionsState: (state) => {
+            state.questions = [];
+        },
+
+        // reset the single question state
+        resetQuestionItemState: (state) => {
+            state.question = emptyQuestion;
+        },
+
+        // set the questions list
+        setQuestions: (state, action) => {
+            state.questions = action.payload;
+        },
+
+        // set the single question state
+        setQuestionItem: (state, action) => {
+            state.question = action.payload;
+        },
+
+
+
     }
 })
 
-export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } = quizesSlice.actions;
+export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions } = quizesSlice.actions;
 export default quizesSlice.reducer;
