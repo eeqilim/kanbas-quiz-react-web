@@ -97,6 +97,33 @@ const quizesSlice = createSlice({
             state.question = action.payload;
         },
 
+        setQuestionToDefaultMultipleChoice: (state) => {
+            state.question = {
+                ...state.question,
+                questionType: "M",
+                possibleAnswers: [""],
+                correctAnswer: "",
+            }
+        },
+
+        setQuestionToDefaultTrueFalse: (state) => {
+            state.question = {
+                ...state.question,
+                questionType: "T",
+                possibleAnswers: ["True", "False"],
+                correctAnswer: "True",
+            }
+        },
+
+        setQuestionToDefaultFillInTheBlank: (state) => {
+            state.question = {
+                ...state.question,
+                questionType: "B",
+                possibleAnswers: [""],
+                correctAnswer: "",
+            }
+        },
+
         setCorrectAnswerIdx: (state, action) => {
             state.correctAnswerIdx = action.payload;
         },
@@ -111,5 +138,5 @@ const quizesSlice = createSlice({
     }
 })
 
-export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions, setCorrectAnswerIdx, resetCorrectAnswerIdx } = quizesSlice.actions;
+export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } = quizesSlice.actions;
 export default quizesSlice.reducer;

@@ -12,11 +12,10 @@ function TrueAndFalseQuestionEditor() {
     const quizItemState = useSelector((state: KanbasState) => state.quizsReducer.quiz);
     const dispatch = useDispatch();
 
-
+    
 
     return (
         <>
-        <h1>T/F Editor</h1>
 
         <div className="form-check mb-2">
             <input className="form-check-input" type="radio" name="true" id="true-option" 

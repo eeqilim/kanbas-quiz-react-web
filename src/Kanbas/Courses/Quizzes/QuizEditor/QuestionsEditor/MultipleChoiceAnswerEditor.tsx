@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../../store";
-import { setQuestionItem, setCorrectAnswerIdx } from "../../quizsReducer";
+import { setQuestionItem, setCorrectAnswerIdx, setQuestionToDefaultMultipleChoice } from "../../quizsReducer";
 
 import "./index.css";
 
@@ -32,10 +32,10 @@ function MultipleChoiceAnswerEditor() {
     }
   
     useEffect(() => {
-      if (questionItemState._id === "" && questionItemState.possibleAnswers.length === 0) {
-        addNewAnswer();
+      if (questionItemState._id === "") {
+        dispatch(setQuestionToDefaultMultipleChoice())
       }
-    }, [questionItemState._id])
+    }, [questionItemState, dispatch])
   
     return (
       <div className="form-check">
