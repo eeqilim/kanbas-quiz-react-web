@@ -141,7 +141,7 @@ function Quizzes() {
 
                                         <div className="d-flex align-items-center">
                                             <div className="d-flex align-items-center" style={{ flexShrink: 0 }}>
-                                                <HiOutlineRocketLaunch className={`me-3 ms-2 ${!quiz.published ? "text-muted" : "text-success"}`} />
+                                                <HiOutlineRocketLaunch className={`me-3 ms-2 ${quiz.available_from_date && !quiz.published ? "text-muted" : "text-success"}`} />
                                             </div>
                                             <div className="flex-fill">
                                                 <div>

@@ -49,7 +49,7 @@ function QuizDetails() {
                     </div>
                     <div className="d-inline">
                         <Link className="btn border bg-light me-1"
-                            to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}/Questions`}
+                            to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}/Preview`}
                             onClick={() => { dispatch(setQuizItem(quiz)) }}>Preview</Link>
                     </div>
                     <div className="d-inline">
