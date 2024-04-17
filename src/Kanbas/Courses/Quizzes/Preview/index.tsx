@@ -8,16 +8,29 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { Answer, QuestionEditorState } from "../EditQuestions";
 import QuestionsEditor from "../QuizEditor/QuestionsEditor";
+import { useSelector } from "react-redux";
+import { KanbasState } from "../../../store";
+import { FaCaretRight } from "react-icons/fa";
 
-function Perview() {
-  const { quizId } = useParams();
-  const quiz = quizzes.find((quiz) => quiz._id === quizId);
-  // assuming that the one quiz has mulitple questions, array of questions
-  // const questions = quiz?.questions ?? [];
+function Preview() {
+  const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
+  const formatDate = (dateString: string | number | Date) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+  const formatTime = (dateString: string | number | Date) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    });
+  };
 
   return (
-    <div>
-      <h1>Quiz Name{quiz?.item_name}</h1>
+    <div className="container-fluid" style={{ marginTop: "20px", marginLeft: "25px", marginRight: "25px" }}>
+      <h1>{quiz?.item_name}</h1>
       <CAlert color="danger" className="d-flex align-items-center">
         <CIcon
           icon={cilWarning}
@@ -27,11 +40,13 @@ function Perview() {
         />
         <div>This is a preview of the published version of the quiz</div>
       </CAlert>
-      <h6>Started: {quiz?.available_from_date}</h6>
-
-      <h2>Quiz Instructions</h2>
-      <hr />
       <div>
+        Started: {formatDate(quiz.available_from_date)} at {formatTime(quiz.available_from_date)}
+      </div>
+
+      <div>
+        <h2>Quiz Instructions</h2>
+        <hr />
         <div className="card">
           <div className="card-header" style={{ fontWeight: "bold" }}>
             Question 1
@@ -77,15 +92,15 @@ function Perview() {
 
         <div className="mt-3 ms-3 text-end">
           <a href="#" role="button" className="btn btn-light">
-            Next
+            Next <FaCaretRight />
           </a>
         </div>
 
         <div className="card mt-3 ms-3" style={{ width: "98%" }}>
           <div className="card-body text-end">
             {/* TODO: to displays list of questions for this quiz. List is initially empty */}
-            Quiz saved at {new Date().toLocaleTimeString()}
-            <a href="#" role="button" className="btn btn-light">
+            Quiz saved at {formatTime(new Date())}
+            <a href="#" role="button" className="btn btn-light" style={{ marginLeft: "10px" }}>
               Submit Quiz
             </a>
           </div>
@@ -124,4 +139,4 @@ function Perview() {
   );
 }
 
-export default Perview;
+export default Preview;

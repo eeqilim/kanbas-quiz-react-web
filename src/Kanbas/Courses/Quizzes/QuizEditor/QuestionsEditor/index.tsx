@@ -1,4 +1,4 @@
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaSortDown, FaEllipsisV } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Preview from "../../Preview"; //test1
@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import * as questionClient from "../../questionClient"; 
 
 import "./index.css";
+import { Button, Modal } from "react-bootstrap";
 
 import MultipleChoiceAnswerEditor from "./MultipleChoiceAnswerEditor";
 import TrueAndFalseQuestionEditor from "./TrueAndFalseQuestionEditor";
@@ -37,6 +38,22 @@ function QuizTypeTextRender({ quizType }: Props) {
 }
 
 
+function DeleteQuizModal({ show, onClose, onDelete }: { show: boolean, onClose: () => void, onDelete: () => void }) {
+  return (
+    <Modal show={show} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirm Deletion</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to delete this question?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => { onClose() }}>Cancel</Button>
+        <Button variant="danger" onClick={() => { onDelete() }}>Delete</Button>
+      </Modal.Footer>
+    </Modal>
+  )
+}
 
 
 
@@ -51,7 +68,7 @@ function QuestionsEditor() {
 
   const [addQuestionFormOpen, setAddQuestionFormOpen] = useState(false);
 
-  
+  const [showDeleteQuestionModal, setShowDeleteQuestionModal] = useState(false);
 
 
   const handleUpdateOrSaveQuestion = () => {
@@ -71,10 +88,19 @@ function QuestionsEditor() {
     }
   };
 
-  const handleDeleteQuestion = (questionId: string) => {
-    questionClient.deleteQuestion(questionId).then(() => {
-      dispatch(setQuestions(questionsState.filter((question) => question._id !== questionId)));
-    })
+
+
+  const handleDeleteQuestion = async () => {
+    const response = await questionClient.deleteQuestion(questionItemState._id);
+    if (response.acknowledged) {
+      const newQuestions = questionsState.filter((question) => question._id !== questionItemState._id);
+      dispatch(setQuestions(newQuestions));
+    } else {
+      alert("Failed to delete the quiz");
+      return;
+    }
+    setShowDeleteQuestionModal(false);
+    dispatch(resetQuestionItemState());
   }
 
   useEffect(() => {
@@ -83,7 +109,7 @@ function QuestionsEditor() {
 
   return (
     <div className="mt-3 ms-3">
-      {/* <Preview /> */}
+    
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
           <a role="button" className="btn btn-light me-2"
           onClick={() => {
@@ -151,28 +177,59 @@ function QuestionsEditor() {
 
 
 
-      
-        <div className="card m-3" style={{ width: "95%" }}>
-          <div className="card-body">
-            {/* TODO: to displays list of questions for this quiz. List is initially empty */}
-            To displays list of questions for this quiz. List is initially empty
-          </div>
+        <div className="list-group wd-courses-quizzes">
+          <li className="list-group-item">
+            <div>
+              <a className="btn" data-bs-toggle="collapse" href="#collapse-Quiz-List">
+                <FaSortDown style={{ verticalAlign: "top" }} />
+              </a>
+              <span className="fw-bold">Quiz Questions</span>
+            </div>
+              
+            <div className="p-0 collapse show" id="collapse-Quiz-List">
 
-          <ul>
-            {questionsState.map((question) => (
-              <li key={question.title}>
-                  {question.title}
-
-                  <button onClick={() => {dispatch(setQuestionItem(question)); setAddQuestionFormOpen(true);}}>Edit</button>
-                  <button onClick={() => {handleDeleteQuestion(question._id)}}>Delete</button>
-              </li>
-            ))}
-          </ul>
-
+              {questionsState.length === 0 ? (
+                <div className="wd-courses-no-quizzes list-group-item text-muted ">
+                  <br />
+                  No Questions Available.
+                  <br />
+                  Click + Question button to add question.
+                  <br /><br />
+                </div>
+              ) : (
+                <div>
+                  {questionsState.map((question) => (
+                    <li key={question._id} className="d-flex align-items-center justify-content-between list-group-item">
+                      {question.title}
+                      <div className="dropleft d-inline">
+                        <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>
+                        <ul className="dropdown-menu">
+                          <li>
+                            <button className="dropdown-item"
+                              onClick={() => {
+                                setShowDeleteQuestionModal(true);
+                                dispatch(setQuestionItem(question));
+                              }}>
+                              Delete
+                            </button>
+                          </li>
+                          <li>
+                            <button className="dropdown-item" onClick={() => { dispatch(setQuestionItem(question)); setAddQuestionFormOpen(true); }}>Edit</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  ))}
+                </div>
+              )}
+            </div>
+          </li>
         </div>
-
-        
-
+                    
+        <DeleteQuizModal
+        show={showDeleteQuestionModal}
+        onClose={() => setShowDeleteQuestionModal(false)}
+        onDelete={handleDeleteQuestion} />
         
 
     </div>
