@@ -87,7 +87,6 @@ export interface KanbasState {
         quiz: quizItemType;
         questions: questionItemType[];
         question: questionItemType;
-        correctAnswerIdx: number;
     };
 }
 

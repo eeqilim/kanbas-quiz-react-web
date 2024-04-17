@@ -9,7 +9,7 @@ import { KanbasState } from "../../../../store";
 import { useEffect, useState } from "react";
 
 import Collapse from "react-bootstrap/Collapse";
-import { resetQuestionItemState, setQuestionItem, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestions, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } from "../../quizsReducer";
+import { resetQuestionItemState, setQuestionItem, setQuestions, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } from "../../quizsReducer";
 import ReactQuill from "react-quill";
 
 import { useParams } from "react-router-dom";
@@ -65,7 +65,7 @@ function QuestionsEditor() {
 
   const questionsState = useSelector((state: KanbasState) => state.quizsReducer.questions);
   const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
-  const correctAnswerIdx = useSelector((state: KanbasState) => state.quizsReducer.correctAnswerIdx);
+
 
   const [addQuestionFormOpen, setAddQuestionFormOpen] = useState(false);
 
