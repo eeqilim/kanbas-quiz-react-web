@@ -44,12 +44,7 @@ function Quizzes() {
     const quizList = useSelector((state: KanbasState) => state.quizsReducer.quizes);
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
 
-
-    const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
-    const questionItem = useSelector((state: KanbasState) => state.quizsReducer.question);
-
     
-
 
     // Handle the toggle publish quiz action
     const handleTogglePublishQuiz = async (quizId: string) => {
@@ -193,7 +188,7 @@ function Quizzes() {
                                                             <Link
                                                                 className="dropdown-item"
                                                                 style={{ "textDecoration": "None", "color": "black" }}
-                                                                to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
+                                                                to={`/Kanbas/Courses/${courseId}/Quizzes/Editor/${quiz._id}`}
                                                                 onClick={() => { dispatch(setQuizItem(quiz)) }}
                                                             >
                                                                 Edit

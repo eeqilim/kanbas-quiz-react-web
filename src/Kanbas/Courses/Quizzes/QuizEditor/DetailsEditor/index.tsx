@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import ReactQuill from 'react-quill';
 import { useSelector, useDispatch } from "react-redux";
-import { KanbasState } from "../../../../store";
+import { KanbasState, quizItemType } from "../../../../store";
 import { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem } from "../../quizsReducer";
 
 import * as quizClient from "../../quizClient";
@@ -36,18 +36,19 @@ function QuizDetailsEditor() {
 
 
     const handleSave = async (publish: boolean) => {
-        const newQuiz = { ...quizItem, published: publish };
+        let newQuiz = quizItem;  
+
+        console.log(newQuiz);
 
         if (publish) {
-            dispatch(setQuizItem(newQuiz));
-            console.log('Publishing Quiz')
-            console.log(quizItem)
+            newQuiz = { ...newQuiz, published: true }
+            console.log(newQuiz)
         }
 
         if (action === "Add") {
-            handleAddQuiz();
+            handleAddQuiz(newQuiz);
         } else {
-            handleUpdateQuiz();
+            handleUpdateQuiz(newQuiz);
         }
         dispatch(resetQuizItemState());
         navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
@@ -55,19 +56,19 @@ function QuizDetailsEditor() {
 
 
 
-    const handleAddQuiz = () => {
+    const handleAddQuiz = (quizToBeAdded: quizItemType) => {
         console.log('Add Quiz Called')
         
-        quizClient.addQuiz(courseId, quizItem)
+        quizClient.addQuiz(courseId, quizToBeAdded)
         .then((newQuiz) => {
             dispatch(setQuizzes([...quizzes, newQuiz]));
         })
     };
 
-    const handleUpdateQuiz = () => {
+    const handleUpdateQuiz = (updatedQuiz: quizItemType) => {
         console.log('Update Quiz Called')
 
-        quizClient.updateQuiz(quizItem._id, quizItem)
+        quizClient.updateQuiz(quizItem._id, updatedQuiz)
         .then((status) => {
             dispatch(setQuizzes(quizzes.map((quiz) => {
                 if (quiz._id === quizItem._id) {
