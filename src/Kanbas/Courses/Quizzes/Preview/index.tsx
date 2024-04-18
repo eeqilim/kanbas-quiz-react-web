@@ -7,9 +7,13 @@ import { useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
 import { FaCaretRight } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import * as questionClient from "../questionClient";  
+import { setQuestions } from "../quizsReducer";
 
 function Preview() {
-  const { courseId } = useParams();
+  const { courseId, quizId } = useParams();
   const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
   const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
@@ -26,6 +30,13 @@ function Preview() {
       hour12: true
     });
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    questionClient.fetchQuestionsByQuizId(quizId).then((questions) => {
+      dispatch(setQuestions(questions));
+  })}, [quizId]);
 
   return (
     <div className="container-fluid" style={{ marginTop: "20px", marginLeft: "25px", marginRight: "20px" }}>

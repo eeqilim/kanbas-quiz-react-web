@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../../store";
-import { setQuestionItem, setCorrectAnswerIdx, setQuestionToDefaultMultipleChoice } from "../../quizsReducer";
+import { setQuestionItem, setQuestionToDefaultMultipleChoice } from "../../quizsReducer";
 
 import "./index.css";
 
 function MultipleChoiceAnswerEditor() {
   
     const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
-    const correctAnswerIdx = useSelector((state: KanbasState) => state.quizsReducer.correctAnswerIdx);
+    
     const quizItemState = useSelector((state: KanbasState) => state.quizsReducer.quiz);
     const dispatch = useDispatch();
   
@@ -30,12 +30,20 @@ function MultipleChoiceAnswerEditor() {
     const setCorrectAnswer = (index: number) => {
       dispatch(setQuestionItem({ ...questionItemState, correctAnswer: questionItemState.possibleAnswers[index] }));
     }
-  
+    
+    const [correctAnswerIdx, setCorrectAnswerIdx] = useState(0);
+
+
     useEffect(() => {
       if (questionItemState._id === "") {
         dispatch(setQuestionToDefaultMultipleChoice())
       }
     }, [questionItemState, dispatch])
+
+    useEffect(() => {
+        const idx = questionItemState.possibleAnswers.findIndex((answer) => answer === questionItemState.correctAnswer);
+        setCorrectAnswerIdx(idx);
+    }, [])
   
     return (
       <div className="form-check">
@@ -45,7 +53,7 @@ function MultipleChoiceAnswerEditor() {
             
             <input className="form-check-input" type="radio" name="flexRadio" id={`flexRadio${index}`} 
             checked={correctAnswerIdx === index} 
-            onChange={() => { dispatch(setCorrectAnswerIdx(index)); setCorrectAnswer(index) }}/>
+            onChange={() => { setCorrectAnswerIdx(index); setCorrectAnswer(index) }}/>
   
             <label className="form-check-label" htmlFor={`flexRadio${index}`}>
               { correctAnswerIdx === index ? `Correct Answer` : `Possible Answer` }

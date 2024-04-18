@@ -9,7 +9,7 @@ import { KanbasState } from "../../../../store";
 import { useEffect, useState } from "react";
 
 import Collapse from "react-bootstrap/Collapse";
-import { resetQuestionItemState, setQuestionItem, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestions, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } from "../../quizsReducer";
+import { resetQuestionItemState, setQuestionItem, setQuestions, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } from "../../quizsReducer";
 import ReactQuill from "react-quill";
 
 import { useParams } from "react-router-dom";
@@ -65,7 +65,7 @@ function QuestionsEditor() {
 
   const questionsState = useSelector((state: KanbasState) => state.quizsReducer.questions);
   const questionItemState = useSelector((state: KanbasState) => state.quizsReducer.question);
-  const correctAnswerIdx = useSelector((state: KanbasState) => state.quizsReducer.correctAnswerIdx);
+
 
   const [addQuestionFormOpen, setAddQuestionFormOpen] = useState(false);
 
@@ -114,7 +114,8 @@ function QuestionsEditor() {
         <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
           <a role="button" className="btn btn-light me-2"
           onClick={() => {
-            dispatch(setQuestionToDefaultMultipleChoice())
+            dispatch(resetQuestionItemState());
+            dispatch(setQuestionToDefaultMultipleChoice());
             setAddQuestionFormOpen(true);
           }}>
             <FaPlus className="me-1" />
