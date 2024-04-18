@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import * as questionClient from "../questionClient";  
 import { setQuestions } from "../quizsReducer";
+import { useNavigate } from "react-router-dom";
 
 function Preview() {
   const { courseId, quizId } = useParams();
@@ -31,12 +32,30 @@ function Preview() {
     });
   };
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     questionClient.fetchQuestionsByQuizId(quizId).then((questions) => {
       dispatch(setQuestions(questions));
   })}, [quizId]);
+
+
+  const handleAnswerChange = (index: number, answer: string) => {
+    const updatedQuestions = [...questionList];
+    updatedQuestions[index] = { ...updatedQuestions[index], previewAnswer: answer };
+    dispatch(setQuestions(updatedQuestions));
+  }
+
+  const handleSubmit = () => {
+    console.log("Submit quiz");
+
+    questionList.forEach((question) => {
+      questionClient.updateQuestion(question);
+    });
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/${quizId}`);
+  }
+
 
   return (
     <div className="container-fluid" style={{ marginTop: "20px", marginLeft: "25px", marginRight: "20px" }}>
@@ -90,18 +109,9 @@ function Preview() {
                   <div className="form-check">
                     {question.questionType === "B" && (
                       <div>
-                        {question.possibleAnswers.map((answer, idx) => (
-                          <div key={idx} className="d-flex align-items-center mb-3 w-50">
-                            <span style={{ marginRight: "10px" }}>{idx + 1}.</span>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id={`answer-${idx}`}
-                              name={`question-${question._id}`}
-                              placeholder={`Answer for blank ${idx + 1}`}
-                            />
-                          </div>
-                        ))}
+                        <div className="d-flex align-items-center mb-3 w-50">
+                          <input type="text" className="form-control" placeholder="Enter your answer" value={question.previewAnswer} onChange={(e) => handleAnswerChange(index, e.target.value)} />
+                        </div>
                       </div>
                     )}
                     {question.questionType === "M" && (
@@ -112,6 +122,8 @@ function Preview() {
                             type="radio"
                             name={`question-${question._id}`}
                             id={`answer-${idx}`}
+                            checked={question.previewAnswer === answer}
+                            onChange={() => handleAnswerChange(index, answer)}
                           />
                           <label className="form-check-label" htmlFor={`answer-${idx}`}>
                             {answer}
@@ -127,6 +139,8 @@ function Preview() {
                             type="radio"
                             name={`question-${question._id}`}
                             id={`answer-true`}
+                            checked={question.previewAnswer === "True"}
+                            onChange={() => handleAnswerChange(index, "True")}
                           />
                           <label className="form-check-label" htmlFor={`answer-true`}>
                             True
@@ -138,6 +152,8 @@ function Preview() {
                             type="radio"
                             name={`question-${question._id}`}
                             id={`answer-false`}
+                            checked={question.previewAnswer === "False"}
+                            onChange={() => handleAnswerChange(index, "False")}
                           />
                           <label className="form-check-label" htmlFor={`answer-false`}>
                             False
@@ -162,7 +178,8 @@ function Preview() {
       <div className="card mt-3 ms-3" style={{ width: "98%", marginBottom: "10%" }}>
         <div className="card-body text-end">
           Quiz saved at {formatTime(new Date())}
-          <a href="#" role="button" className="btn btn-light" style={{ marginLeft: "10px" }}>
+          <a role="button" className="btn btn-light" style={{ marginLeft: "10px" }}
+          onClick={handleSubmit}>
             Submit Quiz
           </a>
         </div>
