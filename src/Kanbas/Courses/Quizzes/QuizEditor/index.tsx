@@ -28,23 +28,33 @@ function QuizEditor() {
 
     const { pathname } = useLocation();
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
-
+    const questions = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
+    useEffect(() => {
+        dispatch(setQuestions(questions));
+    }, [questions])
 
 
     const handleSave = async (publish: boolean) => {
         let newQuiz = quizItem;  
 
-        console.log(newQuiz);
-
         if (publish) {
             newQuiz = { ...newQuiz, published: true }
             console.log(newQuiz)
         }
+
+        let questionCount = 0;
+        let totalPoints = 0;
+        questions.forEach((question) => {
+            questionCount++;
+            totalPoints += question.points;
+            console.log(typeof question.points)
+        });
+
+        newQuiz = { ...newQuiz, question_count: questionCount, points: totalPoints }
 
         if (action === "Add") {
             handleAddQuiz(newQuiz);
@@ -54,16 +64,28 @@ function QuizEditor() {
         dispatch(resetQuizItemState());
         navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
     };
-    const handleAddQuiz = (quizToBeAdded: quizItemType) => {
+
+
+    const handleAddQuiz = async (quizToBeAdded: quizItemType) => {
         console.log('Add Quiz Called')
+
+        const newQuiz = await quizClient.addQuiz(courseId, quizToBeAdded);
         
-        quizClient.addQuiz(courseId, quizToBeAdded)
-        .then((newQuiz) => {
-            dispatch(setQuizzes([...quizzes, newQuiz]));
-        })
+        dispatch(setQuizzes([...quizzes, newQuiz]));
+
+        console.log("New Quiz ID: " + newQuiz._id)
+
+        questions.forEach((question) => {
+            questionClient.createQuestion(newQuiz._id, question)
+                .then((newQuestion) => {
+                    dispatch(setQuestions([...questions, newQuestion]));
+                })
+        });
+        
     };
     const handleUpdateQuiz = (updatedQuiz: quizItemType) => {
         console.log('Update Quiz Called')
+        
 
         quizClient.updateQuiz(quizItem._id, updatedQuiz)
         .then((status) => {
@@ -91,6 +113,8 @@ function QuizEditor() {
 
     return (
         <div className="flex-fill me-2 ms-2 mt-2">
+
+
 
             {/* Top Level Points, Publish statis and other top level settings */}
             <div className="d-flex justify-content-end mb-0">

@@ -30,6 +30,7 @@ export const createQuestion = async (qzId, questionData) => {
       `${API_BASE_URL}/api/quizzes/${qzId}/questions`,
       questionData
     );
+    console.log("response.data", response.data)
     return response.data;
   } catch (error) {
     console.error("Failed to create question:", error);

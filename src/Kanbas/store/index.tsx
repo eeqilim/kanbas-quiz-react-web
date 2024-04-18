@@ -70,6 +70,7 @@ export type questionItemType = {
     correctAnswer: string;
     questionType: string;
     quizId: string;
+    previewAnswer: string;
 };
 
 export interface KanbasState {
@@ -87,7 +88,6 @@ export interface KanbasState {
         quiz: quizItemType;
         questions: questionItemType[];
         question: questionItemType;
-        correctAnswerIdx: number;
     };
 }
 

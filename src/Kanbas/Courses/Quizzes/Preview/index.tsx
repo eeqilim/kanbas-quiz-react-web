@@ -6,8 +6,15 @@ import { SlQuestion } from "react-icons/sl";
 import { useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
 import { FaCaretRight } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import * as questionClient from "../questionClient";  
+import { setQuestions } from "../quizsReducer";
+import { useNavigate } from "react-router-dom";
 
 function Preview() {
+  const { courseId, quizId } = useParams();
   const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
   const questionList = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
@@ -24,6 +31,31 @@ function Preview() {
       hour12: true
     });
   };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    questionClient.fetchQuestionsByQuizId(quizId).then((questions) => {
+      dispatch(setQuestions(questions));
+  })}, [quizId]);
+
+
+  const handleAnswerChange = (index: number, answer: string) => {
+    const updatedQuestions = [...questionList];
+    updatedQuestions[index] = { ...updatedQuestions[index], previewAnswer: answer };
+    dispatch(setQuestions(updatedQuestions));
+  }
+
+  const handleSubmit = () => {
+    console.log("Submit quiz");
+
+    questionList.forEach((question) => {
+      questionClient.updateQuestion(question);
+    });
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/${quizId}`);
+  }
+
 
   return (
     <div className="container-fluid" style={{ marginTop: "20px", marginLeft: "25px", marginRight: "20px" }}>
@@ -75,27 +107,60 @@ function Preview() {
                   </p>
                   <hr />
                   <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
-                    <label className="form-check-label" htmlFor="flexRadioDefault1">
-                      True
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault2"
-                      checked
-                    />
-                    <label className="form-check-label" htmlFor="flexRadioDefault2">
-                      False
-                    </label>
+                    {question.questionType === "B" && (
+                      <div>
+                        <div className="d-flex align-items-center mb-3 w-50">
+                          <input type="text" className="form-control" placeholder="Enter your answer" value={question.previewAnswer} onChange={(e) => handleAnswerChange(index, e.target.value)} />
+                        </div>
+                      </div>
+                    )}
+                    {question.questionType === "M" && (
+                      question.possibleAnswers.map((answer, idx) => (
+                        <div key={idx}>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-${idx}`}
+                            checked={question.previewAnswer === answer}
+                            onChange={() => handleAnswerChange(index, answer)}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-${idx}`}>
+                            {answer}
+                          </label>
+                        </div>
+                      ))
+                    )}
+                    {question.questionType === "T" && (
+                      <>
+                        <div>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-true`}
+                            checked={question.previewAnswer === "True"}
+                            onChange={() => handleAnswerChange(index, "True")}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-true`}>
+                            True
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name={`question-${question._id}`}
+                            id={`answer-false`}
+                            checked={question.previewAnswer === "False"}
+                            onChange={() => handleAnswerChange(index, "False")}
+                          />
+                          <label className="form-check-label" htmlFor={`answer-false`}>
+                            False
+                          </label>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -113,21 +178,24 @@ function Preview() {
       <div className="card mt-3 ms-3" style={{ width: "98%", marginBottom: "10%" }}>
         <div className="card-body text-end">
           Quiz saved at {formatTime(new Date())}
-          <a href="#" role="button" className="btn btn-light" style={{ marginLeft: "10px" }}>
+          <a role="button" className="btn btn-light" style={{ marginLeft: "10px" }}
+          onClick={handleSubmit}>
             Submit Quiz
           </a>
         </div>
       </div>
 
       <div className="card mt-3 ms-3" style={{ width: "98%" }}>
-        <a
-          href="#"
+        <Link
+          to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
           role="button"
           className="btn btn-light"
-          style={{ textAlign: "left" }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}
         >
-          <FaPencil style={{ transform: "scaleX(-1)" }} /> Keep Editing This Quiz
-        </a>
+          <FaPencil style={{ marginRight: "5px" }} />
+          <span>Keep Editing This Quiz</span>
+        </Link>
+
       </div>
       <br />
 

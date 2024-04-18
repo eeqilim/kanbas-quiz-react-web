@@ -28,13 +28,14 @@ const emptyQuiz = {
 
 const emptyQuestion = {
     _id: "",
-    title: "",
+    title: "Unnamed Question",
     points: 0,
     questionText: "",
     possibleAnswers: [] as string[],
     correctAnswer: "",
     questionType: "M",
     quizId: "",
+    previewAnswer: "",
 }
 
 
@@ -47,7 +48,6 @@ const initialState = {
     questions: [],
     question: emptyQuestion,
 
-    correctAnswerIdx: 0,
 }
 
 
@@ -100,37 +100,30 @@ const quizesSlice = createSlice({
         setQuestionToDefaultMultipleChoice: (state) => {
             state.question = {
                 ...state.question,
-                questionType: "M",
-                possibleAnswers: [""],
+                possibleAnswers: [""] as string[],
                 correctAnswer: "",
+                questionType: "M",
             }
         },
 
         setQuestionToDefaultTrueFalse: (state) => {
             state.question = {
                 ...state.question,
-                questionType: "T",
-                possibleAnswers: ["True", "False"],
+                possibleAnswers: ["True", "False"] as string[],
                 correctAnswer: "True",
+                questionType: "T",
             }
         },
 
         setQuestionToDefaultFillInTheBlank: (state) => {
             state.question = {
                 ...state.question,
-                questionType: "B",
-                possibleAnswers: [""],
+                possibleAnswers: [""] as string[],
                 correctAnswer: "",
+                questionType: "B",
             }
         },
 
-        setCorrectAnswerIdx: (state, action) => {
-            state.correctAnswerIdx = action.payload;
-        },
-
-        resetCorrectAnswerIdx: (state) => {
-            state.correctAnswerIdx = 0;
-        },
 
     
 
@@ -138,5 +131,5 @@ const quizesSlice = createSlice({
     }
 })
 
-export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions, setCorrectAnswerIdx, resetCorrectAnswerIdx, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } = quizesSlice.actions;
+export const { resetQuizesState, resetQuizItemState, setQuizzes, setQuizItem, resetQuestionsState, resetQuestionItemState, setQuestionItem, setQuestions, setQuestionToDefaultMultipleChoice, setQuestionToDefaultFillInTheBlank, setQuestionToDefaultTrueFalse } = quizesSlice.actions;
 export default quizesSlice.reducer;
