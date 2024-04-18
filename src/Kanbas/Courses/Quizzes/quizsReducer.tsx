@@ -28,7 +28,7 @@ const emptyQuiz = {
 
 const emptyQuestion = {
     _id: "",
-    title: "",
+    title: "Unnamed Question",
     points: 0,
     questionText: "",
     possibleAnswers: [] as string[],
@@ -98,40 +98,28 @@ const quizesSlice = createSlice({
 
         setQuestionToDefaultMultipleChoice: (state) => {
             state.question = {
-                _id: "",
-                title: "",
-                points: 0,
-                questionText: "",
+                ...state.question,
                 possibleAnswers: [""] as string[],
                 correctAnswer: "",
                 questionType: "M",
-                quizId: "",
             }
         },
 
         setQuestionToDefaultTrueFalse: (state) => {
             state.question = {
-                _id: "",
-                title: "",
-                points: 0,
-                questionText: "",
+                ...state.question,
                 possibleAnswers: ["True", "False"] as string[],
                 correctAnswer: "True",
-                questionType: "M",
-                quizId: "",
+                questionType: "T",
             }
         },
 
         setQuestionToDefaultFillInTheBlank: (state) => {
             state.question = {
-                _id: "",
-                title: "",
-                points: 0,
-                questionText: "",
+                ...state.question,
                 possibleAnswers: [""] as string[],
                 correctAnswer: "",
-                questionType: "M",
-                quizId: "",
+                questionType: "B",
             }
         },
 

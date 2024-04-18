@@ -114,7 +114,8 @@ function QuestionsEditor() {
         <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
           <a role="button" className="btn btn-light me-2"
           onClick={() => {
-            dispatch(setQuestionToDefaultMultipleChoice())
+            dispatch(resetQuestionItemState());
+            dispatch(setQuestionToDefaultMultipleChoice());
             setAddQuestionFormOpen(true);
           }}>
             <FaPlus className="me-1" />

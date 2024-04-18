@@ -28,23 +28,32 @@ function QuizEditor() {
 
     const { pathname } = useLocation();
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
-
+    const questions = useSelector((state: KanbasState) => state.quizsReducer.questions);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
+    useEffect(() => {
+        dispatch(setQuestions(questions));
+    }, [questions])
 
 
     const handleSave = async (publish: boolean) => {
         let newQuiz = quizItem;  
 
-        console.log(newQuiz);
-
         if (publish) {
             newQuiz = { ...newQuiz, published: true }
             console.log(newQuiz)
         }
+
+        let questionCount = 0;
+        let totalPoints = 0;
+        questions.forEach((question) => {
+            questionCount++;
+            totalPoints += question.points;
+        });
+
+        newQuiz = { ...newQuiz, question_count: questionCount, points: totalPoints }
 
         if (action === "Add") {
             handleAddQuiz(newQuiz);
@@ -54,6 +63,8 @@ function QuizEditor() {
         dispatch(resetQuizItemState());
         navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
     };
+
+
     const handleAddQuiz = (quizToBeAdded: quizItemType) => {
         console.log('Add Quiz Called')
         
@@ -64,6 +75,7 @@ function QuizEditor() {
     };
     const handleUpdateQuiz = (updatedQuiz: quizItemType) => {
         console.log('Update Quiz Called')
+        
 
         quizClient.updateQuiz(quizItem._id, updatedQuiz)
         .then((status) => {
@@ -91,6 +103,14 @@ function QuizEditor() {
 
     return (
         <div className="flex-fill me-2 ms-2 mt-2">
+
+            {/* Testing Data */}
+            <div>
+                {questions.map((question, index) => 
+                    <p key={index}>{question.title}</p>
+                )}
+            </div>
+
 
             {/* Top Level Points, Publish statis and other top level settings */}
             <div className="d-flex justify-content-end mb-0">
