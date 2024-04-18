@@ -77,7 +77,8 @@ function QuestionsEditor() {
       console.log("action === Add in handleUpdateOrSaveQuestion")
       if (questionItemState._id === "") {
         console.log("add question in handleUpdateOrSaveQuestion")
-        dispatch(setQuestions([...questionsState, questionItemState]));
+        const newQuestion = { ...questionItemState, _id: questionsState.length };
+        dispatch(setQuestions([...questionsState, newQuestion]));
       } else {
         console.log("update question in handleUpdateOrSaveQuestion")
         dispatch(setQuestions(questionsState.map((q) => q._id === questionItemState._id ? questionItemState : q)));
