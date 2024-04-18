@@ -73,19 +73,31 @@ function QuestionsEditor() {
 
 
   const handleUpdateOrSaveQuestion = () => {
-    if (questionItemState._id === "") {
-      // add question
-      console.log(questionItemState);
-      questionClient.createQuestion(action, questionItemState).then((question) => {
-        dispatch(setQuestions([...questionsState, question]));
-      })
-    } else {
-      // update question
-      console.log("In handleUpdateOrSaveQuestion");
-      console.log(questionItemState);
-      questionClient.updateQuestion(questionItemState).then((status) => {
+    if (action === "Add") {
+      console.log("action === Add in handleUpdateOrSaveQuestion")
+      if (questionItemState._id === "") {
+        console.log("add question in handleUpdateOrSaveQuestion")
+        dispatch(setQuestions([...questionsState, questionItemState]));
+      } else {
+        console.log("update question in handleUpdateOrSaveQuestion")
         dispatch(setQuestions(questionsState.map((q) => q._id === questionItemState._id ? questionItemState : q)));
-      })
+      }
+    } else {
+      console.log("action === quizId in handleUpdateOrSaveQuestion")
+      if (questionItemState._id === "") {
+        // add question
+        console.log(questionItemState);
+        questionClient.createQuestion(action, questionItemState).then((question) => {
+          dispatch(setQuestions([...questionsState, question]));
+        })
+      } else {
+        // update question
+        console.log("In handleUpdateOrSaveQuestion");
+        console.log(questionItemState);
+        questionClient.updateQuestion(questionItemState).then((status) => {
+          dispatch(setQuestions(questionsState.map((q) => q._id === questionItemState._id ? questionItemState : q)));
+        })
+      }
     }
   };
 
@@ -158,7 +170,7 @@ function QuestionsEditor() {
               </div>
               <div className="d-flex align-items-center">
                 <label htmlFor="questionPoints" className="form-label mt-2">pts:</label>
-                <input type="number" className="form-control" id="questionPoints" value={questionItemState.points} onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, points: e.target.value }))}}/>
+                <input type="number" className="form-control" id="questionPoints" value={questionItemState.points} onChange={(e) => {dispatch(setQuestionItem({ ...questionItemState, points: parseInt(e.target.value) }))}}/>
               </div>
             </div>
 
@@ -209,8 +221,8 @@ function QuestionsEditor() {
                 </div>
               ) : (
                 <div>
-                  {questionsState.map((question) => (
-                    <li key={question._id} className="d-flex align-items-center justify-content-between list-group-item">
+                  {questionsState.map((question, index) => (
+                    <li key={index} className="d-flex align-items-center justify-content-between list-group-item">
                       {question.title}
                       <div className="dropleft d-inline">
                         <a className="btn wd-courses-quizzes-icon-link" type="button" data-bs-toggle="dropdown" aria-expanded="false"><FaEllipsisV /></a>

@@ -51,6 +51,7 @@ function QuizEditor() {
         questions.forEach((question) => {
             questionCount++;
             totalPoints += question.points;
+            console.log(typeof question.points)
         });
 
         newQuiz = { ...newQuiz, question_count: questionCount, points: totalPoints }
@@ -65,13 +66,22 @@ function QuizEditor() {
     };
 
 
-    const handleAddQuiz = (quizToBeAdded: quizItemType) => {
+    const handleAddQuiz = async (quizToBeAdded: quizItemType) => {
         console.log('Add Quiz Called')
+
+        const newQuiz = await quizClient.addQuiz(courseId, quizToBeAdded);
         
-        quizClient.addQuiz(courseId, quizToBeAdded)
-        .then((newQuiz) => {
-            dispatch(setQuizzes([...quizzes, newQuiz]));
-        })
+        dispatch(setQuizzes([...quizzes, newQuiz]));
+
+        console.log("New Quiz ID: " + newQuiz._id)
+
+        questions.forEach((question) => {
+            questionClient.createQuestion(newQuiz._id, question)
+                .then((newQuestion) => {
+                    dispatch(setQuestions([...questions, newQuestion]));
+                })
+        });
+        
     };
     const handleUpdateQuiz = (updatedQuiz: quizItemType) => {
         console.log('Update Quiz Called')
@@ -104,12 +114,6 @@ function QuizEditor() {
     return (
         <div className="flex-fill me-2 ms-2 mt-2">
 
-            {/* Testing Data */}
-            <div>
-                {questions.map((question, index) => 
-                    <p key={index}>{question.title}</p>
-                )}
-            </div>
 
 
             {/* Top Level Points, Publish statis and other top level settings */}

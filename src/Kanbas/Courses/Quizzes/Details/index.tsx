@@ -37,7 +37,7 @@ function QuizDetails() {
             <div className="row pt-3">
                 <div className="col text-end">
                     <div className="fs-5 me-1 d-inline">
-                        {!quiz.published ? (
+                        {quiz.published ? (
                             <button type="button" className="btn btn-success" onClick={() => handleTogglePublishQuiz(quiz._id)}>
                                 <FaCircleCheck className="me-1" /> Published
                             </button>

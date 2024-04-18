@@ -35,6 +35,7 @@ const emptyQuestion = {
     correctAnswer: "",
     questionType: "M",
     quizId: "",
+    previewAnswer: "",
 }
 
 

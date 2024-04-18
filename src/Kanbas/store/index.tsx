@@ -70,6 +70,7 @@ export type questionItemType = {
     correctAnswer: string;
     questionType: string;
     quizId: string;
+    previewAnswer: string;
 };
 
 export interface KanbasState {
