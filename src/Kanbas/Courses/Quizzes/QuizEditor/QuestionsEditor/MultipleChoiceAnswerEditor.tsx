@@ -43,7 +43,7 @@ function MultipleChoiceAnswerEditor() {
     useEffect(() => {
         const idx = questionItemState.possibleAnswers.findIndex((answer) => answer === questionItemState.correctAnswer);
         setCorrectAnswerIdx(idx);
-    }, [])
+    }, [questionItemState])
   
     return (
       <div className="form-check">
