@@ -9,7 +9,7 @@ const emptyQuiz = {
     quiz_type: "Graded Quiz",
     points: 0,
     group: "QUIZZES",
-    shuffle: false,
+    shuffle: true,
     time_limit: 20,
     multiple_attempts: false,
     responses: "Always",

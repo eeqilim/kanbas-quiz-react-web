@@ -62,7 +62,13 @@ function QuizEditor() {
             handleUpdateQuiz(newQuiz);
         }
         dispatch(resetQuizItemState());
-        navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+
+        if (publish) {
+            navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+        } else {
+            navigate(`/Kanbas/Courses/${courseId}/Quizzes/${newQuiz._id}`);
+        }
+       
     };
 
 

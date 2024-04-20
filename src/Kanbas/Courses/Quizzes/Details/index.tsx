@@ -6,9 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { KanbasState } from "../../../store";
 import * as quizClient from "../quizClient";
 import { setQuizItem } from "../quizsReducer";
+import { useEffect } from "react";
 
 function QuizDetails() {
-    const { courseId } = useParams();
+    const { courseId, quizId } = useParams();
     const quiz = useSelector((state: KanbasState) => state.quizsReducer.quiz)
     const dispatch = useDispatch();
     const handleTogglePublishQuiz = async (quizId: string) => {
@@ -32,6 +33,14 @@ function QuizDetails() {
             hour12: true
         });
     };
+    
+    useEffect(() => {
+        quizClient.findQuiz(quizId).then((quiz) => {
+            dispatch(setQuizItem(quiz));
+        });
+    }, [quizId]);
+
+
     return (
         <div className="container-fluid me-3 ms-3">
             <div className="row pt-3">

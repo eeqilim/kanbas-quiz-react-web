@@ -87,10 +87,12 @@ function QuizDetailsEditor() {
                         </div>
 
                         <div className="option-item">
-                            <label>Time Limit</label>
+                            <input type="checkbox" name="time-limit" id="time-limit" className="me-1" />
+                            <label htmlFor="time_limit">Time Limit</label>
                             <input 
                                 type="number" 
                                 name="time_limit" 
+                                id="time_limit"
                                 value={quizItem.time_limit} 
                                 onChange={handleOptionChange}
                             /> Minutes
