@@ -158,9 +158,12 @@ function Quizzes() {
                                                         <span><b>Not available until </b>
                                                             {formatDate(quiz.available_from_date)} at {formatTime(quiz.available_from_date)} | </span>
                                                     ) : (
-                                                        quiz.available_to_date && new Date(quiz.available_to_date) <= new Date() && (
+                                                        quiz.available_to_date && new Date(quiz.available_to_date) <= new Date() ? (
                                                             <span><b>Closed</b> | </span>
-                                                        ))}
+                                                        ) : (
+                                                            <span><b>Available until</b> {formatDate(quiz.available_to_date)} at {formatTime(quiz.available_to_date)} | </span>
+                                                        )
+                                                    )}
                                                     <b>Due</b> {formatDate(quiz.due_date)} at {formatTime(quiz.due_date)} | {quiz.points} pts | {quiz.question_count} Questions
                                                 </div>
                                             </div>
