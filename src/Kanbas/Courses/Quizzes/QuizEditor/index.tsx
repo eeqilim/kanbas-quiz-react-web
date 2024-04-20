@@ -2,7 +2,6 @@ import { useParams, useNavigate, Routes, Route, Link, useLocation } from "react-
 import { CiCircleCheck, CiCircleRemove } from "react-icons/ci";
 import { FaEllipsisV } from "react-icons/fa";
 
-import { quizzes } from "../../../Database";
 import QuizDetails from "../Details";
 import QuizDetailsEditor from "./DetailsEditor";
 import QuizQuestions from "./QuestionsEditor";
@@ -29,6 +28,7 @@ function QuizEditor() {
     const { pathname } = useLocation();
     const quizItem = useSelector((state: KanbasState) => state.quizsReducer.quiz);
     const questions = useSelector((state: KanbasState) => state.quizsReducer.questions);
+    const quizzes = useSelector((state: KanbasState) => state.quizsReducer.quizes);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -55,9 +55,9 @@ function QuizEditor() {
         });
 
         newQuiz = { ...newQuiz, question_count: questionCount, points: totalPoints }
-
+        
         if (action === "Add") {
-            handleAddQuiz(newQuiz);
+            newQuiz = await handleAddQuiz(newQuiz);
         } else {
             handleUpdateQuiz(newQuiz);
         }
@@ -68,7 +68,7 @@ function QuizEditor() {
         } else {
             navigate(`/Kanbas/Courses/${courseId}/Quizzes/${newQuiz._id}`);
         }
-       
+        
     };
 
 
@@ -87,8 +87,10 @@ function QuizEditor() {
                     dispatch(setQuestions([...questions, newQuestion]));
                 })
         });
-        
+        return newQuiz;
     };
+
+
     const handleUpdateQuiz = (updatedQuiz: quizItemType) => {
         console.log('Update Quiz Called')
         
