@@ -24,16 +24,17 @@ function QuizDetails() {
         return new Date(dateString).toLocaleString('en-US', {
             month: 'short',
             day: 'numeric',
+            timeZone: 'UTC'
         });
     };
     const formatTime = (dateString: string | number | Date) => {
         return new Date(dateString).toLocaleString('en-US', {
             hour: 'numeric',
             minute: 'numeric',
-            hour12: true
+            hour12: true,
         });
     };
-    
+
     useEffect(() => {
         quizClient.findQuiz(quizId).then((quiz) => {
             dispatch(setQuizItem(quiz));
