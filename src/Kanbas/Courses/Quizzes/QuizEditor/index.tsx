@@ -59,7 +59,7 @@ function QuizEditor() {
         if (action === "Add") {
             newQuiz = await handleAddQuiz(newQuiz);
         } else {
-            handleUpdateQuiz(newQuiz);
+            await handleUpdateQuiz(newQuiz);
         }
         dispatch(resetQuizItemState());
 
@@ -105,6 +105,7 @@ function QuizEditor() {
                 }
             })));   
         })
+        dispatch(setQuizItem(updatedQuiz));
     };  
 
 
