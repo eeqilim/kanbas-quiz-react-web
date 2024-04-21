@@ -49,6 +49,12 @@ function Preview() {
     }
   };
 
+  const handleQuestionClick = (index: number) => {
+    if (currentQuestionIndex !== index) {
+      setCurrentQuestionIndex(index);
+    }
+  }
+
   const formatDate = (dateString: string | number | Date) => {
     return new Date(dateString).toLocaleString('en-US', {
       month: 'short',
@@ -85,98 +91,91 @@ function Preview() {
       <h2>Quiz Instructions</h2>
       <hr />
 
-      <div>
-        {questionList.length === 0 ? (
-          <div className="card text-muted" style={{ marginBottom: "20px" }}>
-            <div className="text-center">
-              <br />
-              No questions available.
-              <br />
-              Click "Keep Editing This Quiz" button to edit quiz.
+      {questionList.length === 0 ? (
+        <div className="card text-muted" style={{ marginBottom: "20px" }}>
+          <div className="text-center">
+            <br />
+            No questions available.
+            <br />
+            Click "Keep Editing This Quiz" button to edit quiz.
+            <br /><br />
+          </div>
+        </div>
+      ) : (
+        <div key={currentQuestion._id} className="card" style={{ marginBottom: "20px" }}>
+          <div className="card-header" style={{ fontWeight: "bold", display: "flex", justifyContent: "space-between" }}>
+            <span>
+              Question {currentQuestionIndex + 1}
+            </span>
+            <span>
+              {currentQuestion.points} pts
+            </span>
+          </div>
+          <div className="card-body">
+            <p className="card-text">
+              {currentQuestion.title}
               <br /><br />
-            </div>
-          </div>
-        ) : (
-          <div>
-
-            <div key={currentQuestion._id} className="card" style={{ marginBottom: "20px" }}>
-              <div className="card-header" style={{ fontWeight: "bold", display: "flex", justifyContent: "space-between" }}>
-                <span>
-                  Question {currentQuestionIndex + 1}
-                </span>
-                <span>
-                  {currentQuestion.points} pts
-                </span>
-              </div>
-              <div className="card-body">
-                <p className="card-text">
-                  {currentQuestion.title}
-                  <br /><br />
-                  <div dangerouslySetInnerHTML={{ __html: currentQuestion.questionText }} />
-                </p>
-                <hr />
-                <div className="form-check">
-                  {currentQuestion.questionType === "B" && (
-                    <div>
-                      <div className="d-flex align-items-center mb-3 w-50">
-                        <input type="text" className="form-control" placeholder="Enter your answer" value={currentQuestion.previewAnswer}
-                          onChange={(e) => handleAnswerChange(e.target.value)} />
-                      </div>
-                    </div>
-                  )}
-                  {currentQuestion.questionType === "M" && (
-                    currentQuestion.possibleAnswers.map((answer, idx) => (
-                      <div key={idx}>
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name={`question-${currentQuestion._id}`}
-                          id={`answer-${idx}`}
-                          checked={currentQuestion.previewAnswer === answer}
-                          onChange={() => handleAnswerChange(answer)}
-                        />
-                        <label className="form-check-label" htmlFor={`answer-${idx}`}>
-                          {answer}
-                        </label>
-                      </div>
-                    ))
-                  )}
-                  {currentQuestion.questionType === "T" && (
-                    <>
-                      <div>
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name={`question-${currentQuestion._id}`}
-                          id={`answer-true`}
-                          checked={currentQuestion.previewAnswer === "True"}
-                          onChange={() => handleAnswerChange("True")}
-                        />
-                        <label className="form-check-label" htmlFor={`answer-true`}>
-                          True
-                        </label>
-                      </div>
-                      <div>
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name={`question-${currentQuestion._id}`}
-                          id={`answer-false`}
-                          checked={currentQuestion.previewAnswer === "False"}
-                          onChange={() => handleAnswerChange("False")}
-                        />
-                        <label className="form-check-label" htmlFor={`answer-false`}>
-                          False
-                        </label>
-                      </div>
-                    </>
-                  )}
+              <div dangerouslySetInnerHTML={{ __html: currentQuestion.questionText }} />
+            </p>
+            <hr />
+            <div className="form-check">
+              {currentQuestion.questionType === "B" && (
+                <div className="d-flex align-items-center mb-3 w-50">
+                  <input type="text" className="form-control" placeholder="Enter your answer" value={currentQuestion.previewAnswer}
+                    onChange={(e) => handleAnswerChange(e.target.value)} />
                 </div>
-              </div>
+              )}
+              {currentQuestion.questionType === "M" && (
+                currentQuestion.possibleAnswers.map((answer, idx) => (
+                  <div key={idx}>
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name={`question-${currentQuestion._id}`}
+                      id={`answer-${idx}`}
+                      checked={currentQuestion.previewAnswer === answer}
+                      onChange={() => handleAnswerChange(answer)}
+                    />
+                    <label className="form-check-label" htmlFor={`answer-${idx}`}>
+                      {answer}
+                    </label>
+                  </div>
+                ))
+              )}
+              {currentQuestion.questionType === "T" && (
+                <>
+                  <div>
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name={`question-${currentQuestion._id}`}
+                      id={`answer-true`}
+                      checked={currentQuestion.previewAnswer === "True"}
+                      onChange={() => handleAnswerChange("True")}
+                    />
+                    <label className="form-check-label" htmlFor={`answer-true`}>
+                      True
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name={`question-${currentQuestion._id}`}
+                      id={`answer-false`}
+                      checked={currentQuestion.previewAnswer === "False"}
+                      onChange={() => handleAnswerChange("False")}
+                    />
+                    <label className="form-check-label" htmlFor={`answer-false`}>
+                      False
+                    </label>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="mt-3 ms-3 text-end">
         {currentQuestionIndex < questionList.length - 1 ? (
@@ -186,7 +185,7 @@ function Preview() {
         ) : ""}
       </div>
 
-      <div className="card mt-3 ms-3" style={{ width: "98%", marginBottom: "10%" }}>
+      <div className="card mt-3" style={{ marginBottom: "10%" }}>
         <div className="card-body text-end">
           Quiz saved at {formatTime(new Date())}
           <a role="button" className="btn btn-light" style={{ marginLeft: "10px" }}
@@ -196,7 +195,7 @@ function Preview() {
         </div>
       </div>
 
-      <div className="card mt-3 ms-3" style={{ width: "98%" }}>
+      <div className="card mt-3">
         <Link
           to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}
           role="button"
@@ -211,9 +210,9 @@ function Preview() {
       <br />
 
       <div>
-        <h4 className="mt-3 ms-3">Questions</h4>
+        <h4 className="mt-3">Questions</h4>
         {questionList.map((question, index) => (
-          <div key={question._id} className="mt-1 ms-4 list-group-item">
+          <div key={question._id} className="mt-1 ms-4 list-group-item" onClick={() => handleQuestionClick(index)}>
             <SlQuestion className="me-1" />
             {index !== currentQuestionIndex ? (
               <span style={{ color: 'firebrick' }}>Question {index + 1}</span>
